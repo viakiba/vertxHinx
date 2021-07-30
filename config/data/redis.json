@@ -1,0 +1,11 @@
+{
+  "comment": "maxPoolSize 池上的最大连接数（默认6）,maxPoolWaiting  队列上获取连接的最大等待处理程序（默认24）, poolCleanerInterval 接清除的时间间隔默认为-1不清除，poolRecycleTimeout  池上保持打开连接等待然后关闭的超时 15s",
+  "redisClientType" : "STANDALONE",
+  "connectionString" : "redis://127.0.0.1:6379/1",
+  "masterName": "MASTER",
+  "role": "MASTER",
+  "maxPoolSize": 6,
+  "maxPoolWaiting": 24,
+  "poolCleanerInterval": -1,
+  "poolRecycleTimeout": 15
+}

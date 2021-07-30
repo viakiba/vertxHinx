@@ -1,0 +1,36 @@
+syntax = "proto2";
+option optimize_for = SPEED;
+
+import "options.proto";
+
+option java_package = "com.ohayoo.whitebird.generate.message";
+option java_outer_classname = "CommonMessage";
+
+enum ErrorCode{
+    NULL = 0;        // 无服务可用
+    NoLogicServer = 1;        // 无服务可用
+    SessionLoginInvalid = 2;  // session登录失效
+    PrototypeDataError = 3;   // 策划表数据错误
+    ServerException = 4;      // 服务器异常错误
+    MsgNotFoundException = 5;      // 消息未注册
+}
+
+// 错误回复
+message PBErrorDown {
+    option (msgId) = 10000;
+    optional int32 commandId = 1;   //返回请求的指令
+    optional int32 errorCode = 2;
+    optional string message = 3;
+}
+
+message PBGmCmdUp{
+    option  (msgId) = 10001;
+    optional int32 cmd = 1; //1:给钱(ModifyCurrency)
+    optional string param = 2;
+
+}
+
+message PBGmCmdDown{
+    option  (msgId) = 10002;
+    optional bool result = 1;// true(成功) false(失败)
+}

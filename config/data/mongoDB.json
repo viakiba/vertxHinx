@@ -1,0 +1,19 @@
+{
+  "comment" : "https://vertx.io/docs/vertx-mongo-client/java/#_configuring_the_client",
+  "serverSelectionTimeoutMS" : 1000,
+  "maxPoolSize" : 50,
+  "minPoolSize" : 1,
+  "maxIdleTimeMS" : 10000,
+  "maxLifeTimeMS" : 10000,
+  "waitQueueTimeoutMS" : 10000,
+  "maintenanceFrequencyMS" : 2000,
+  "connectTimeoutMS" : 2000,
+  "socketTimeoutMS"  : 5000,
+  "sendBufferSize"    : 8192,
+  "receiveBufferSize" : 8192,
+  "heartbeatFrequencyMS"    : 1000,
+  "minHeartbeatFrequencyMS" :  500,
+  "connection_string": "mongodb://localhost:27017",
+  "db_name": "heromaster",
+  "useObjectId": true
+}

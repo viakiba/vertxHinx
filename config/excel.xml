@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<scripts
+		templatesName = "ClassBean.ftl"
+		templatesPath = "src\main\resources\"
+		excelRootPath = "src\main\resources\"
+		genBeanPath = "src\main\resources\"
+		packageName = "com.ohayoo.heromaster.excel.model"
+		afterReadDoPackage = "com.ohayoo.heromaster.excel.AfterReadDo"
+		convertPackage = "com.ohayoo.heromaster.excel.convert.*"
+		firstColsData = "1"
+>
+	<file name="DataExcel.xlsx">
+		<sheet class="com.ohayoo.common.excel.model.DataExcel" genOver="0"/>
+	</file>
+</scripts>
