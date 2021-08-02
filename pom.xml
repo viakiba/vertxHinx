@@ -59,16 +59,35 @@
             <artifactId>vertx-core</artifactId>
             <version>${vertx.version}</version>
         </dependency>
-
+        <!--  web 实现 -->
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web</artifactId>
             <version>${vertx.version}</version>
         </dependency>
-
+        <!-- 客户端实现 -->
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web-client</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+        <!-- zookeeper集群 / 服务发现 -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-zookeeper</artifactId>
+            <version>${vertx.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- metrics  -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-dropwizard-metrics</artifactId>
             <version>${vertx.version}</version>
         </dependency>
 
@@ -137,10 +156,21 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- 消息序列化与反序列化 -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-grpc</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+
+        <!-- protobuf message -->
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
+            <version>3.17.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java-util</artifactId>
             <version>3.17.3</version>
         </dependency>
 
@@ -163,4 +193,54 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>0.6.1</version>
+                <configuration>
+                    <protocArtifact>com.google.protobuf:protoc:3.2.0:exe:${os.detected.classifier}</protocArtifact>
+                    <pluginId>grpc-java</pluginId>
+                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${vertx.version}:exe:${os.detected.classifier}</pluginArtifact>
+                    <protocPlugins>
+                        <protocPlugin>
+                            <id>vertx-grpc-protoc-plugin</id>
+                            <groupId>io.vertx</groupId>
+                            <artifactId>vertx-grpc-protoc-plugin</artifactId>
+                            <version>${vertx.version}</version>
+                            <mainClass>io.vertx.grpc.protoc.plugin.VertxGrpcGenerator</mainClass>
+                        </protocPlugin>
+                    </protocPlugins>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <configuration>
+                            <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                            <clearOutputDirectory>false</clearOutputDirectory>
+                        </configuration>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>compile-custom</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <goals>
+                            <goal>test-compile</goal>
+                            <goal>test-compile-custom</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.4.1.Final</version>
+            </extension>
+        </extensions>
+    </build>
 </project>

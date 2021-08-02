@@ -1,0 +1,1 @@
+protoc.exe --plugin=protoc-gen-grpc-java=protocGenGrpcJava1.39.0-64.exe --grpc-java_out=../../src/main/java *.proto

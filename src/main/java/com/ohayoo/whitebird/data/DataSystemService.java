@@ -21,19 +21,19 @@ public class DataSystemService implements SystemServiceImpl {
             switch (serverConfig.getDataType()[i]){
                 case rxHibernate:
                     idbService = new RxHibernateService();
-                    idbService.init();
                     break;
                 case mongoDB:
                     idbService = new MongoDBService();
-                    idbService.init();
                     break;
                 case redis:
                     idbService = new RedisService();
-                    idbService.init();
                     break;
                 default:
                     throw new RuntimeException(" 数据持久服务 初始化失败！");
             }
+        }
+        if(idbService != null) {
+            idbService.init();
         }
     }
 

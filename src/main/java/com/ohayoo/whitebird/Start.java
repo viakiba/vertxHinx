@@ -4,9 +4,19 @@ import com.ohayoo.whitebird.boot.GlobalContext;
 import com.ohayoo.whitebird.config.ServerSystemConfig;
 import com.ohayoo.whitebird.data.DataSystemService;
 import com.ohayoo.whitebird.excel.ExcelSystemService;
+import com.ohayoo.whitebird.grpc.GrpcSystemService;
 import com.ohayoo.whitebird.message.MsgSystemService;
 import com.ohayoo.whitebird.network.NetSystemService;
 import com.ohayoo.whitebird.player.PlayerSystemService;
+import io.vertx.core.Promise;
+import io.vertx.core.json.JsonObject;
+import io.vertx.core.spi.cluster.ClusterManager;
+import io.vertx.core.spi.cluster.NodeInfo;
+import io.vertx.ext.dropwizard.MetricsService;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author huangpeng.12@bytedance.com
@@ -14,7 +24,7 @@ import com.ohayoo.whitebird.player.PlayerSystemService;
  */
 public class Start {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //初始化 服务基础配置
         ServerSystemConfig serverSystemConfig = new ServerSystemConfig();
         GlobalContext.addSystemService(serverSystemConfig);
@@ -39,6 +49,10 @@ public class Start {
         PlayerSystemService playerSystemService = new PlayerSystemService();
         GlobalContext.addSystemService(playerSystemService);
         playerSystemService.start();
+        // GRPC
+        GrpcSystemService grpcSystemService = new GrpcSystemService();
+        GlobalContext.addSystemService(grpcSystemService);
+        grpcSystemService.start();
         //初始化 网络服务
         NetSystemService netSystemService = new NetSystemService();
         GlobalContext.addSystemService(netSystemService);

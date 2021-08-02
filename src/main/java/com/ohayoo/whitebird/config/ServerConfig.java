@@ -1,8 +1,6 @@
 package com.ohayoo.whitebird.config;
 
-import com.ohayoo.whitebird.enums.DataType;
-import com.ohayoo.whitebird.enums.MessageType;
-import com.ohayoo.whitebird.enums.NetType;
+import com.ohayoo.whitebird.enums.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,13 +13,18 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class ServerConfig {
-//  Vertx core option
+//  Vertx core 配置
     private int vertxBlockedThreadCheckInterval ;
     private int vertxEventLoopPoolSize ;
     private long vertxEventLoopExecuteTime ;
     private int vertxInternalBlockingPoolSize ;
     private int vertxWorkerPoolSize ;
     private long vertxMaxWorkerExecuteTime ;
+//  集群
+    private VertxClusterType vertxClusterType;
+//  指标服务
+    private boolean metricClock ;
+    private String[] metricMeasured ;
 //  excel config
     private String excelConfigPath;
     private String excelResourcePath;
@@ -40,9 +43,7 @@ public class ServerConfig {
      https://vertx.io/docs/vertx-redis-client/java/#_connecting_to_redis
      */
     private String[] dataOptionPath ;
-
 //    TCP读写模式 true 小端 false 大端
     private boolean byteOrder;
-
     private MessageType msgType;
 }
