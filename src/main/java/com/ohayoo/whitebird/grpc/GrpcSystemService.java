@@ -33,7 +33,7 @@ public class GrpcSystemService implements SystemServiceImpl {
             }
         };
 
-        VertxServerBuilder vertxServer = VertxServerBuilder.forAddress(vertx, "10.79.19.67", 8080);
+        VertxServerBuilder vertxServer = VertxServerBuilder.forAddress(vertx, "0.0.0.0", GlobalContext.serverConfig().getGrpcPort());
         vertxServer.addService(helloServiceImplBase);
 
         VertxServer rpcServer = vertxServer.build();

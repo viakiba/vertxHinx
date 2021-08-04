@@ -36,14 +36,11 @@ public class ServerConfig {
     private List<Integer> noDataExecuteMsgId;
 //  数据库配置
     private DataType[] dataType ;
-    /**
-     https://vertx.io/docs/vertx-mongo-client/java/#_configuring_the_client
-     https://vertx.io/docs/vertx-pg-client/java/#_configuration
-     https://vertx.io/docs/vertx-mongo-client/java/#_configuring_the_client
-     https://vertx.io/docs/vertx-redis-client/java/#_connecting_to_redis
-     */
+    //https://vertx.io/docs/vertx-mongo-client/java/#_configuring_the_client   https://vertx.io/docs/vertx-pg-client/java/#_configuration   https://vertx.io/docs/vertx-mongo-client/java/#_configuring_the_client   https://vertx.io/docs/vertx-redis-client/java/#_connecting_to_redis
     private String[] dataOptionPath ;
-//    TCP读写模式 true 小端 false 大端
+//  TCP读写模式 true 小端 false 大端
     private boolean byteOrder;
     private MessageType msgType;
+//  GRPC监听端口
+    private int grpcPort;
 }

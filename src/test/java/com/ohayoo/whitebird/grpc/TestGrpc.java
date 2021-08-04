@@ -26,11 +26,10 @@ public class TestGrpc extends TestBase {
     public static void main(String[] args) {
         ManagedChannel channel;
         channel = VertxChannelBuilder
-                .forAddress(GlobalContext.getVertx(), "10.79.19.67", 8080)
+                .forAddress(GlobalContext.getVertx(), "127.0.0.1", GlobalContext.serverConfig().getGrpcPort())
                 .usePlaintext()
                 .build();
-
-// Get a stub to use for interacting with the remote service
+        // Get a stub to use for interacting with the remote service
         HelloServiceGrpc.HelloServiceStub stub = HelloServiceGrpc.newStub(channel);
         HelloRequest request = HelloRequest.newBuilder().setName("Julien").build();
         GlobalContext.getVertx().setPeriodic(10000,h ->{
