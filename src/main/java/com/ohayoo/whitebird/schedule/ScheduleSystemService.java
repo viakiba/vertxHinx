@@ -1,16 +1,18 @@
 package com.ohayoo.whitebird.schedule;
 
+import com.ohayoo.whitebird.boot.SystemServiceImpl;
 import com.ohayoo.whitebird.compoent.TimeUtil;
 
+import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-class ScheduleService implements IScheduleService {
+public class ScheduleSystemService implements IScheduleService, SystemServiceImpl {
 
-    public static ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+    public ScheduledExecutorService scheduledExecutorService ;
 
     @Override
     public ScheduleTask scheduleOnce(ScheduleTask scheduleTask, Date d) {
@@ -41,4 +43,15 @@ class ScheduleService implements IScheduleService {
     }
 
 
+    @Override
+    public void start() throws IOException {
+        scheduledExecutorService =  Executors.newScheduledThreadPool(1);
+    }
+
+    @Override
+    public void stop() {
+        if(scheduledExecutorService != null){
+            scheduledExecutorService.shutdown();
+        }
+    }
 }

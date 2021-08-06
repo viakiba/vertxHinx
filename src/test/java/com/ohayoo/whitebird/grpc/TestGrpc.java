@@ -9,21 +9,16 @@ import com.ohayoo.whitebird.generate.grpc.HelloServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.stub.StreamObserver;
 import io.vertx.grpc.VertxChannelBuilder;
+import org.testng.annotations.Test;
 
 /**
  * @author huangpeng.12@bytedance.com
  * @createTime 2021-08-02
  */
-public class TestGrpc extends TestBase {
+public class TestGrpc {
 
-    static {
-        ServerSystemConfig serverSystemConfig = new ServerSystemConfig();
-        GlobalContext.addSystemService(serverSystemConfig);
-        serverSystemConfig.start();
-        GlobalContext.initVertx();
-    }
-
-    public static void main(String[] args) {
+    @Test
+    public void test() {
         ManagedChannel channel;
         channel = VertxChannelBuilder
                 .forAddress(GlobalContext.getVertx(), "127.0.0.1", GlobalContext.serverConfig().getGrpcPort())
@@ -45,7 +40,6 @@ public class TestGrpc extends TestBase {
                 public void onError(Throwable throwable) {
                     System.out.println("Coult not reach server " + throwable.getMessage());
                 }
-
                 @Override
                 public void onCompleted() {
                     System.out.println("Got the server response: " + helloReply.getMessage());

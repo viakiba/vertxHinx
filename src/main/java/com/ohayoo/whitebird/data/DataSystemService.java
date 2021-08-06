@@ -37,6 +37,11 @@ public class DataSystemService implements SystemServiceImpl {
         }
     }
 
+    @Override
+    public void stop() {
+        idbService.stop();
+    }
+
     public <T> T getIdbService() {
         return (T) idbService;
     }

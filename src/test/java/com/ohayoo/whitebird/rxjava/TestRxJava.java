@@ -1,12 +1,15 @@
 package com.ohayoo.whitebird.rxjava;
 
-import io.reactivex.rxjava3.core.Observable;
+import org.testng.annotations.Test;
 
 /**
  * @author huangpeng.12@bytedance.com
  * @createTime 2021-07-28
  */
 public class TestRxJava {
-    public static void main(String[] args) {
+
+    @Test
+    public void testRxJava_1() {
+
     }
 }

@@ -21,21 +21,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @createTime 2021-07-27
  */
 public class TestHttpClient {
-    public static Vertx vertx;
 
-    static {
-        ServerSystemConfig serverSystemConfig = new ServerSystemConfig();
-        GlobalContext.addSystemService(serverSystemConfig);
-        serverSystemConfig.start();
-        VertxOptions vertxOptions = new VertxOptions();
-        vertxOptions.setWorkerPoolSize(10);
-        vertxOptions.setEventLoopPoolSize(10);
-        vertx = Vertx.vertx(vertxOptions);
-
-    }
-    public static void main(String[] args) {
+    public  void test() {
+        Vertx vertx = Vertx.vertx();
         AtomicInteger atomicInteger = new AtomicInteger(0);
-
         WebClientOptions options = new WebClientOptions()
                 .setUserAgent("My-App/1.2.3")
                 ;

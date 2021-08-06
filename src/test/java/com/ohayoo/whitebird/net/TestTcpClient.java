@@ -18,12 +18,6 @@ import java.nio.charset.StandardCharsets;
 public class TestTcpClient {
     public static Vertx vertx = Vertx.vertx();
 
-    static {
-        ServerSystemConfig serverSystemConfig = new ServerSystemConfig();
-        GlobalContext.addSystemService(serverSystemConfig);
-        serverSystemConfig.start();
-
-    }
     public static void main(String[] args) {
         NetClient netClient = vertx.createNetClient();
         netClient.connect(8080,"127.0.0.1",x ->{

@@ -22,18 +22,21 @@ public class JsonMsgHandler implements MsgHandler{
 
     @Override
     public void init() {
+        String[] bizServicePkgPath = GlobalContext.serverConfig().getBizServicePkgPath();
         msgJsonMap = new ConcurrentHashMap<>();
-        Set<Class<?>> glazes= getClzFromPkg(GlobalContext.serverConfig().getBizServicePkgPath(), BizServiceAnnotate.class);
-        try {
-            for (Class<?> c:glazes) {
-                Object bizService = c.getDeclaredConstructor().newInstance();
-                BaseService bizServiceBase = (BaseService) bizService;
-                msgJsonMap.putAll(bizServiceBase.getJsonMessageRecognize());
-                bizServiceMap.put(bizServiceBase.getClass(),bizServiceBase);
+        for(String path : bizServicePkgPath) {
+            Set<Class<?>> glazes = getClzFromPkg(path, BizServiceAnnotate.class);
+            try {
+                for (Class<?> c : glazes) {
+                    Object bizService = c.getDeclaredConstructor().newInstance();
+                    BaseService bizServiceBase = (BaseService) bizService;
+                    msgJsonMap.putAll(bizServiceBase.getJsonMessageRecognize());
+                    bizServiceMap.put(bizServiceBase.getClass(), bizServiceBase);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new RuntimeException("biz service init fail");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("biz service init fail");
         }
     }
 

@@ -36,10 +36,4 @@ public class NetSystemService implements SystemServiceImpl {
             }
         }
     }
-
-    @Override
-    public void stop() {
-
-    }
-
 }

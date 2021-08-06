@@ -14,7 +14,6 @@ import static javax.persistence.Persistence.createEntityManagerFactory;
 @Slf4j
 public class TestRxHibernateClient extends TestBase {
 
-    //https://github.com/hibernate/hibernate-reactive/tree/main/examples/session-example
     public static void main(String[] args) throws Exception {
         Stage.SessionFactory factory =
                 createEntityManagerFactory( "mysql" )

@@ -13,14 +13,9 @@ import io.vertx.core.http.WebSocket;
  * @author huangpeng.12@bytedance.com
  * @createTime 2021-07-27
  */
-public class TestWebSocketClient extends TestBase {
-    public static Vertx vertx ;
-
-    static {
-        init();
-        vertx = GlobalContext.getVertx();
-    }
+public class TestWebSocketClient{
     public static void main(String[] args) {
+        Vertx vertx = Vertx.vertx();
         for (int i = 0; i < 30; i++) {
             HttpClient client = vertx.createHttpClient(new HttpClientOptions()
                     .setDefaultHost("127.0.0.1")

@@ -2,12 +2,12 @@ package com.ohayoo.whitebird.cluster;
 
 import com.ohayoo.whitebird.base.TestBase;
 import com.ohayoo.whitebird.boot.GlobalContext;
-import com.ohayoo.whitebird.config.ServerSystemConfig;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.spi.cluster.ClusterManager;
 import io.vertx.core.spi.cluster.NodeInfo;
 import io.vertx.rxjava3.core.Vertx;
+import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -17,16 +17,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @createTime 2021-08-02
  */
 public class TestNode extends TestBase {
-    public static Vertx vertx;
-
-    static {
-        ServerSystemConfig serverSystemConfig = new ServerSystemConfig();
-        GlobalContext.addSystemService(serverSystemConfig);
-        serverSystemConfig.start();
-        GlobalContext.initVertx();
-    }
-
-    public static void main(String[] args) {
+    @Test
+    public void testUpdateNodeInfo() {
         AtomicInteger atomicInteger = new AtomicInteger(1);
         GlobalContext.getVertx().setPeriodic(1000, h ->{
             ClusterManager clusterManager = GlobalContext.getClusterManager();

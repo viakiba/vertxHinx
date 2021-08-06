@@ -1,6 +1,7 @@
 package com.ohayoo.whitebird.network.verticle;
 
 import com.ohayoo.whitebird.boot.GlobalContext;
+import com.ohayoo.whitebird.compoent.LocalIpUtil;
 import com.ohayoo.whitebird.enums.NetType;
 import com.ohayoo.whitebird.player.PlayerSystemService;
 import com.ohayoo.whitebird.player.enums.AttributeEnum;
@@ -47,7 +48,7 @@ public class UdpServerVerticle extends AbstractVerticle implements BaseServerVer
         JsonObject jsonObject = new JsonObject(configJson(NetType.udp));
         DatagramSocketOptions options = new DatagramSocketOptions(jsonObject);
         DatagramSocket socket = vertx.createDatagramSocket(options);
-        socket.listen(jsonObject.getInteger("port",8080),jsonObject.getString("host","127.0.0.1"),asyncResult -> this.handler(asyncResult ,socket));
+        socket.listen(jsonObject.getInteger("port",8080),jsonObject.getString("host", LocalIpUtil.get10BeginIp()),asyncResult -> this.handler(asyncResult ,socket));
         log.info("UdpServer Init Success");
     }
 

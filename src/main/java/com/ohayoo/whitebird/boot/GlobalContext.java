@@ -1,11 +1,9 @@
 package com.ohayoo.whitebird.boot;
 
+import com.ohayoo.whitebird.compoent.LocalIpUtil;
 import com.ohayoo.whitebird.config.ServerConfig;
 import com.ohayoo.whitebird.config.ServerSystemConfig;
-import io.vertx.core.Future;
-import io.vertx.core.Promise;
-import io.vertx.core.Vertx;
-import io.vertx.core.VertxOptions;
+import io.vertx.core.*;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.spi.cluster.ClusterManager;
 import io.vertx.core.spi.cluster.NodeInfo;
@@ -31,7 +29,7 @@ public class GlobalContext {
     public static Map<Class,SystemServiceImpl> systemServiceMap = new ConcurrentHashMap<>();
     public static List<SystemServiceImpl> systemServices = new ArrayList<>();
 
-    public static void initVertx(){
+    public static void initVertx(Handler<Void> handler){
         ServerConfig serverConfig = GlobalContext.serverConfig();
         VertxOptions vertxOptions = new VertxOptions();
         vertxOptions.setBlockedThreadCheckInterval(serverConfig.getVertxBlockedThreadCheckInterval());
@@ -40,33 +38,35 @@ public class GlobalContext {
         vertxOptions.setInternalBlockingPoolSize(serverConfig.getVertxInternalBlockingPoolSize());
         vertxOptions.setWorkerPoolSize(serverConfig.getVertxWorkerPoolSize());
         vertxOptions.setMaxWorkerExecuteTime(serverConfig.getVertxMaxWorkerExecuteTime());
-
         if(serverConfig.isMetricClock()){
             DropwizardMetricsOptions dropwizardMetricsOptions = new DropwizardMetricsOptions();
             dropwizardMetricsOptions.setEnabled(true);
             vertxOptions.setMetricsOptions(dropwizardMetricsOptions);
         }
-
         if(serverConfig.getVertxClusterType()!=null){
             clusterManager = new ZookeeperClusterManager();
             vertxOptions.setClusterManager(clusterManager);
-            NodeInfo nodeInfo = new NodeInfo("11111",8080,new JsonObject());
-            JsonObject metadata = nodeInfo.metadata();
-            metadata.put("111",1);
             Future<Vertx> vertxFuture = Vertx.clusteredVertx(vertxOptions);
-            long l = System.currentTimeMillis();
-            while (!vertxFuture.isComplete()){
-                if(System.currentTimeMillis() -l > 20000) {
-                    log.debug("等待连接到 集群!");
+            vertxFuture.onComplete(h ->{
+                NodeInfo nodeInfo = new NodeInfo(
+                        LocalIpUtil.get10BeginIp(),
+                        serverConfig.getGrpcPort(),
+                        new JsonObject());
+                //可以以一个频率设置 NodeInfo 并执行下面的  setNodeInfo 方法，可以向zk同步数据
+                //NodeInfo nodeInfo = clusterManager.getNodeInfo();
+                clusterManager.setNodeInfo(nodeInfo, Promise.promise());
+                vertx = vertxFuture.result();
+                if(serverConfig.isMetricClock()){
+                    metricsService = MetricsService.create(vertx);
                 }
-            }
-            clusterManager.setNodeInfo(nodeInfo, Promise.promise());
-            vertx = vertxFuture.result();
+                handler.handle(null);
+            });
         }else{
             vertx = Vertx.vertx(vertxOptions);
-        }
-        if(serverConfig.isMetricClock()){
-            metricsService = MetricsService.create(vertx);
+            if(serverConfig.isMetricClock()){
+                metricsService = MetricsService.create(vertx);
+            }
+            handler.handle(null);
         }
     }
 
@@ -81,6 +81,7 @@ public class GlobalContext {
     public static ServerSystemConfig serverSystemConfig(){
         return (ServerSystemConfig) systemServiceMap.get(ServerSystemConfig.class);
     }
+
     public static ServerConfig serverConfig(){
         return ((ServerSystemConfig) systemServiceMap.get(ServerSystemConfig.class)).getServerConfig();
     }

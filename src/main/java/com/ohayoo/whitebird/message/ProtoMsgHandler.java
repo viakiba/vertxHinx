@@ -25,17 +25,20 @@ public class ProtoMsgHandler implements MsgHandler{
     @Override
     public void init() {
         msgProtoMap = new ConcurrentHashMap<>();
-        Set<Class<?>> glazes= getClzFromPkg(GlobalContext.serverConfig().getBizServicePkgPath(), BizServiceAnnotate.class);
-        try {
-            for (Class<?> c:glazes) {
-                Object bizService = c.getDeclaredConstructor().newInstance();
-                BaseService bizServiceBase = (BaseService) bizService;
-                msgProtoMap.putAll(bizServiceBase.getProtoMessageRecognize());
-                bizServiceMap.put(bizServiceBase.getClass(),bizServiceBase);
+        String[] bizServicePkgPath = GlobalContext.serverConfig().getBizServicePkgPath();
+        for (String path : bizServicePkgPath) {
+            Set<Class<?>> glazes = getClzFromPkg(path, BizServiceAnnotate.class);
+            try {
+                for (Class<?> c : glazes) {
+                    Object bizService = c.getDeclaredConstructor().newInstance();
+                    BaseService bizServiceBase = (BaseService) bizService;
+                    msgProtoMap.putAll(bizServiceBase.getProtoMessageRecognize());
+                    bizServiceMap.put(bizServiceBase.getClass(), bizServiceBase);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new RuntimeException("biz service init fail");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("biz service init fail");
         }
     }
 

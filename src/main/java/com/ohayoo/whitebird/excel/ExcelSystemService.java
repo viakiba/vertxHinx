@@ -36,11 +36,6 @@ public class ExcelSystemService implements SystemServiceImpl {
         }
     }
 
-    @Override
-    public void stop() {
-
-    }
-
     /**
      * 代码生成执行  添加如下vm参数 注意修改路径 生成的代码注意实现 getIdKey 方法
      *  -Dgen.config.configPath=config\excelConfig\excel.xml -Dgen.config.projectRootPath=D:\Code\heromaster_server\

@@ -10,6 +10,7 @@ import io.vertx.core.datagram.DatagramSocket;
 import io.vertx.core.datagram.DatagramSocketOptions;
 import io.vertx.core.net.NetClient;
 import io.vertx.core.net.NetSocket;
+import org.testng.annotations.Test;
 
 import java.nio.charset.StandardCharsets;
 
@@ -18,15 +19,9 @@ import java.nio.charset.StandardCharsets;
  * @createTime 2021-07-27
  */
 public class TestUdpClient {
-    public static Vertx vertx = Vertx.vertx();
-
-    static {
-        ServerSystemConfig serverSystemConfig = new ServerSystemConfig();
-        GlobalContext.addSystemService(serverSystemConfig);
-        serverSystemConfig.start();
-
-    }
-    public static void main(String[] args) {
+    @Test
+    public void test() {
+        Vertx vertx = Vertx.vertx();
         DatagramSocket socket = vertx.createDatagramSocket(new DatagramSocketOptions());
         vertx.setPeriodic(1000,h ->{
             Buffer buffer = Buffer.buffer();

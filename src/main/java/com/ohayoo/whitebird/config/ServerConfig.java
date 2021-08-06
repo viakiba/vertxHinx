@@ -32,7 +32,7 @@ public class ServerConfig {
     private NetType[] netType;
     private String[] netConfig;
 //  service 处理类所在包路径
-    private String bizServicePkgPath;
+    private String[] bizServicePkgPath;
     private List<Integer> noDataExecuteMsgId;
 //  数据库配置
     private DataType[] dataType ;
@@ -43,4 +43,5 @@ public class ServerConfig {
     private MessageType msgType;
 //  GRPC监听端口
     private int grpcPort;
+    private String[] grpcServicePkgPath;
 }
