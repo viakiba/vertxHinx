@@ -1,13 +1,12 @@
 package com.ohayoo.whitebird.net;
 
 import cn.hutool.core.lang.Tuple;
-import com.ohayoo.whitebird.boot.GlobalContext;
-import com.ohayoo.whitebird.config.ServerSystemConfig;
 import com.ohayoo.whitebird.player.PlayerSystemService;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.net.NetClient;
 import io.vertx.core.net.NetSocket;
+import org.testng.annotations.Test;
 
 import java.nio.charset.StandardCharsets;
 
@@ -16,9 +15,10 @@ import java.nio.charset.StandardCharsets;
  * @createTime 2021-07-27
  */
 public class TestTcpClient {
-    public static Vertx vertx = Vertx.vertx();
 
-    public static void main(String[] args) {
+    @Test
+    public void test0() {
+        Vertx vertx = Vertx.vertx();
         NetClient netClient = vertx.createNetClient();
         netClient.connect(8080,"127.0.0.1",x ->{
             NetSocket result = x.result();

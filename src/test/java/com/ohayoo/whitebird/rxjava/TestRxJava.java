@@ -12,4 +12,5 @@ public class TestRxJava {
     public void testRxJava_1() {
 
     }
+
 }

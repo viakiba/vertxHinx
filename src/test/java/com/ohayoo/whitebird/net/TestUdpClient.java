@@ -1,18 +1,10 @@
 package com.ohayoo.whitebird.net;
 
-import cn.hutool.core.lang.Tuple;
-import com.ohayoo.whitebird.boot.GlobalContext;
-import com.ohayoo.whitebird.config.ServerSystemConfig;
-import com.ohayoo.whitebird.player.PlayerSystemService;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.datagram.DatagramSocket;
 import io.vertx.core.datagram.DatagramSocketOptions;
-import io.vertx.core.net.NetClient;
-import io.vertx.core.net.NetSocket;
 import org.testng.annotations.Test;
-
-import java.nio.charset.StandardCharsets;
 
 /**
  * @author huangpeng.12@bytedance.com
@@ -20,7 +12,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class TestUdpClient {
     @Test
-    public void test() {
+    public void test0() {
         Vertx vertx = Vertx.vertx();
         DatagramSocket socket = vertx.createDatagramSocket(new DatagramSocketOptions());
         vertx.setPeriodic(1000,h ->{

@@ -1,17 +1,12 @@
 package com.ohayoo.whitebird.net;
 
-import com.ohayoo.whitebird.boot.GlobalContext;
-import com.ohayoo.whitebird.config.ServerSystemConfig;
-import io.vertx.core.VertxOptions;
-import io.vertx.core.http.HttpClient;
-import io.vertx.core.http.RequestOptions;
 import io.vertx.ext.web.client.WebClientOptions;
 import io.vertx.rxjava3.core.Vertx;
 import io.vertx.rxjava3.core.buffer.Buffer;
 import io.vertx.rxjava3.ext.web.client.HttpRequest;
 import io.vertx.rxjava3.ext.web.client.WebClient;
+import org.testng.annotations.Test;
 
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,7 +17,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class TestHttpClient {
 
-    public  void test() {
+    @Test
+    public  void test0() {
         Vertx vertx = Vertx.vertx();
         AtomicInteger atomicInteger = new AtomicInteger(0);
         WebClientOptions options = new WebClientOptions()

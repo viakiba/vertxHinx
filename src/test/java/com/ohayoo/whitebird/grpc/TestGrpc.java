@@ -1,8 +1,6 @@
 package com.ohayoo.whitebird.grpc;
 
-import com.ohayoo.whitebird.base.TestBase;
 import com.ohayoo.whitebird.boot.GlobalContext;
-import com.ohayoo.whitebird.config.ServerSystemConfig;
 import com.ohayoo.whitebird.generate.grpc.HelloReply;
 import com.ohayoo.whitebird.generate.grpc.HelloRequest;
 import com.ohayoo.whitebird.generate.grpc.HelloServiceGrpc;

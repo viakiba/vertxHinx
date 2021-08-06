@@ -4,6 +4,7 @@ import com.ohayoo.whitebird.base.TestBase;
 import com.ohayoo.whitebird.data.model.GameData;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.reactive.stage.Stage;
+import org.testng.annotations.Test;
 
 import static javax.persistence.Persistence.createEntityManagerFactory;
 
@@ -14,7 +15,8 @@ import static javax.persistence.Persistence.createEntityManagerFactory;
 @Slf4j
 public class TestRxHibernateClient extends TestBase {
 
-    public static void main(String[] args) throws Exception {
+    @Test
+    public void test0() throws Exception {
         Stage.SessionFactory factory =
                 createEntityManagerFactory( "mysql" )
                         .unwrap(Stage.SessionFactory.class);
@@ -46,7 +48,4 @@ public class TestRxHibernateClient extends TestBase {
             factory.close();
         }
     }
-
-
-
 }

@@ -1,20 +1,19 @@
 package com.ohayoo.whitebird.net;
 
-import com.ohayoo.whitebird.base.TestBase;
-import com.ohayoo.whitebird.boot.GlobalContext;
-import com.ohayoo.whitebird.config.ServerSystemConfig;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpClient;
 import io.vertx.core.http.HttpClientOptions;
 import io.vertx.core.http.WebSocket;
+import org.testng.annotations.Test;
 
 /**
  * @author huangpeng.12@bytedance.com
  * @createTime 2021-07-27
  */
 public class TestWebSocketClient{
-    public static void main(String[] args) {
+    @Test
+    public void test0() {
         Vertx vertx = Vertx.vertx();
         for (int i = 0; i < 30; i++) {
             HttpClient client = vertx.createHttpClient(new HttpClientOptions()
