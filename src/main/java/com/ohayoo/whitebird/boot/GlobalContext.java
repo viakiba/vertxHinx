@@ -31,6 +31,7 @@ public class GlobalContext {
 
     public static void initVertx(Handler<Void> handler){
         ServerConfig serverConfig = GlobalContext.serverConfig();
+        //vertx 基础参数
         VertxOptions vertxOptions = new VertxOptions();
         vertxOptions.setBlockedThreadCheckInterval(serverConfig.getVertxBlockedThreadCheckInterval());
         vertxOptions.setEventLoopPoolSize(serverConfig.getVertxEventLoopPoolSize());
@@ -38,20 +39,24 @@ public class GlobalContext {
         vertxOptions.setInternalBlockingPoolSize(serverConfig.getVertxInternalBlockingPoolSize());
         vertxOptions.setWorkerPoolSize(serverConfig.getVertxWorkerPoolSize());
         vertxOptions.setMaxWorkerExecuteTime(serverConfig.getVertxMaxWorkerExecuteTime());
+
         if(serverConfig.isMetricClock()){
+            //如果打开指标监控 则初始化指标参数
             DropwizardMetricsOptions dropwizardMetricsOptions = new DropwizardMetricsOptions();
             dropwizardMetricsOptions.setEnabled(true);
             vertxOptions.setMetricsOptions(dropwizardMetricsOptions);
         }
         if(serverConfig.getVertxClusterType()!=null){
+            //启用 ZK 集群
             clusterManager = new ZookeeperClusterManager();
             vertxOptions.setClusterManager(clusterManager);
             Future<Vertx> vertxFuture = Vertx.clusteredVertx(vertxOptions);
             vertxFuture.onComplete(h ->{
+                JsonObject nodeInfoAtt = new JsonObject();
                 NodeInfo nodeInfo = new NodeInfo(
                         LocalIpUtil.get10BeginIp(),
                         serverConfig.getGrpcPort(),
-                        new JsonObject());
+                        nodeInfoAtt);
                 //可以以一个频率设置 NodeInfo 并执行下面的  setNodeInfo 方法，可以向zk同步数据
                 //NodeInfo nodeInfo = clusterManager.getNodeInfo();
                 clusterManager.setNodeInfo(nodeInfo, Promise.promise());
@@ -76,10 +81,6 @@ public class GlobalContext {
 
     public static <T> T getSystemService(Class clazz){
         return (T) systemServiceMap.get(clazz);
-    }
-
-    public static ServerSystemConfig serverSystemConfig(){
-        return (ServerSystemConfig) systemServiceMap.get(ServerSystemConfig.class);
     }
 
     public static ServerConfig serverConfig(){
