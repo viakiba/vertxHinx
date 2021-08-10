@@ -1,0 +1,13 @@
+# export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin&&cd /software/bx&&./start-test.sh stop&&echo stopBxOver&&rm -rf /software/bx/* &&sleep 3s&&wget -q $PROCESS_ENV_url&&unzip -q *&&cd /software/bx/&&chmod 777 -R /software/bx&&./start-test.sh start&&echo startBxOver
+export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
+cd /software/bx
+./start-test.sh stop
+echo stopBxOver
+rm -rf /software/bx/*
+sleep 3s
+wget -q $PROCESS_ENV_url
+unzip -q *
+cd /software/bx/
+chmod 777 -R /software/bx
+./start-test.sh start
+echo startBxOver
