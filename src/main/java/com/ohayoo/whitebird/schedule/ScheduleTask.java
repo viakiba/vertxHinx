@@ -6,7 +6,7 @@ import java.lang.Exception;
 import java.util.concurrent.ScheduledFuture;
 
 @Slf4j
-abstract class ScheduleTask implements Runnable {
+public abstract class ScheduleTask implements Runnable {
 
     public static int TASK_STATE_INITIALIZED = 0; // 消息初始化
     public static int TASK_STATE_WAITING = 1; // 消息投递完成
