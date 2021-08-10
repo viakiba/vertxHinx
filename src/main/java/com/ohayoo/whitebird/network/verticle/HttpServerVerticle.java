@@ -31,9 +31,16 @@ public class HttpServerVerticle extends AbstractVerticle implements BaseServerVe
             HttpServerRequest request = ctx.request();
             handler(request);
         });
+        initGmHandler(router);
         server.requestHandler(router);
         server.listen();
         log.info("Http Init Success");
+    }
+
+    private void initGmHandler(Router router) {
+        // https://vertx.io/docs/vertx-web/java/#_routing_by_exact_path
+        // https://vertx.io/docs/vertx-web/java/#_authentication_authorization
+        // 参考
     }
 
     private void handler(HttpServerRequest req) {
