@@ -12,17 +12,22 @@ import org.testng.annotations.Test;
  */
 public class TestUdpClient {
     @Test
-    public void test0() {
+    public void test0() throws InterruptedException {
         Vertx vertx = Vertx.vertx();
         DatagramSocket socket = vertx.createDatagramSocket(new DatagramSocketOptions());
         vertx.setPeriodic(1000,h ->{
             Buffer buffer = Buffer.buffer();
             buffer.appendString("111111");
             // Send a Buffer
-            socket.send(buffer, 8081, "10.79.19.67", asyncResult -> {
+            socket.send(buffer, 8081, "10.79.19.90", asyncResult -> {
                 System.out.println("Send succeeded? " + asyncResult.succeeded());
             });
         });
-
+        socket.handler(x ->{
+            Buffer data = x.data();
+            String string = data.getString(0, data.length());
+            System.out.println("收到"+string);
+        });
+        Thread.sleep(10000);
     }
 }

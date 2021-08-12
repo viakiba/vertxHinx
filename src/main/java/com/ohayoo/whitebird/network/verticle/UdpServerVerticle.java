@@ -21,10 +21,12 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.net.NetServer;
 import io.vertx.core.net.NetServerOptions;
 import io.vertx.core.net.NetSocket;
+import io.vertx.core.net.SocketAddress;
 import io.vertx.core.net.impl.NetSocketInternal;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.ByteOrder;
+import java.util.Random;
 
 /**
  * @author huangpeng.12@bytedance.com
@@ -57,6 +59,8 @@ public class UdpServerVerticle extends AbstractVerticle implements BaseServerVer
             log.error("Listen failed" + datagramSocketAsyncResult.cause());
         }
         socket.handler(packet -> {
+            SocketAddress sender = packet.sender();
+            socket.send("xxx"+ (new Random()).nextInt(19000),sender.port(),sender.host());
             Buffer data = packet.data();
             String string = data.getString(0, data.length());
             System.out.println(string);
