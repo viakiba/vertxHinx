@@ -29,6 +29,10 @@ public class GrpcSystemService implements SystemServiceImpl {
 
     @Override
     public void start() throws IOException {
+        int grpcPort = GlobalContext.serverConfig().getGrpcPort();
+        if(grpcPort == 0){
+            return;
+        }
         Vertx vertx = GlobalContext.getVertx();
         VertxServerBuilder vertxServer = VertxServerBuilder.forAddress(vertx, LocalIpUtil.get10BeginIp(), GlobalContext.serverConfig().getGrpcPort());
         addGrpcService(vertxServer);
@@ -38,6 +42,9 @@ public class GrpcSystemService implements SystemServiceImpl {
 
     private void addGrpcService(VertxServerBuilder vertxServer) {
         String[] bizServicePkgPath = GlobalContext.serverConfig().getGrpcServicePkgPath();
+        if(bizServicePkgPath == null){
+            return;
+        }
         for(String path : bizServicePkgPath) {
             Set<Class<?>> glazes = getClzFromPkg(path, GrpcServiceAnnotate.class);
             try {

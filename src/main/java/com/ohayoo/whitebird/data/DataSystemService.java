@@ -6,6 +6,7 @@ import com.ohayoo.whitebird.config.ServerConfig;
 import com.ohayoo.whitebird.data.client.MongoDBService;
 import com.ohayoo.whitebird.data.client.RxHibernateService;
 import com.ohayoo.whitebird.data.client.RedisService;
+import com.ohayoo.whitebird.enums.DataType;
 
 /**
  * @author huangpeng.12@bytedance.com
@@ -17,8 +18,12 @@ public class DataSystemService implements SystemServiceImpl {
     @Override
     public void start() {
         ServerConfig serverConfig = GlobalContext.serverConfig();
-        for (int i = 0; i < serverConfig.getDataType().length; i++) {
-            switch (serverConfig.getDataType()[i]){
+        DataType[] dataType = serverConfig.getDataType();
+        if(dataType == null){
+            return;
+        }
+        for (int i = 0; i < dataType.length; i++) {
+            switch (dataType[i]){
                 case rxHibernate:
                     idbService = new RxHibernateService();
                     break;

@@ -41,6 +41,7 @@ public class HttpServerVerticle extends AbstractVerticle implements BaseServerVe
         // https://vertx.io/docs/vertx-web/java/#_routing_by_exact_path
         // https://vertx.io/docs/vertx-web/java/#_authentication_authorization
         // 参考
+        router.route("/").handler(x->{x.request().response().end("test");});
     }
 
     private void handler(HttpServerRequest req) {
