@@ -1,5 +1,9 @@
 package com.ohayoo.whitebird;
 
+//import com.bytedance.env.core.ArchApplicationEnvironmentConfiguration;
+//import com.bytedance.tcc.ArchTccGeneralConfiguration;
+//import com.bytedance.tcc.TccGeneralClient;
+//import com.bytedance.tcc.TccGeneralClientFactory;
 import com.ohayoo.whitebird.boot.GlobalContext;
 import com.ohayoo.whitebird.config.ServerSystemConfig;
 import com.ohayoo.whitebird.data.DataSystemService;
