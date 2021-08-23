@@ -1,37 +1,65 @@
 #!/bin/sh
-JAVA="java -jar -server -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -javaagent:/software/lib/hotfix.jar -XX:SurvivorRatio=8 -XX:MaxGCPauseMillis=100 -XX:ParallelGCThreads=8 -XX:G1NewSizePercent=60 -XX:G1MaxNewSizePercent=90 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/software/bx/logs/battle_dump -Xms7168m -Xmx7168m -Xss512k -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m -Dspring.profiles.active=prod-profile -Dfile.encoding=UTF-8"
-#jar包名称  别名
-PROGRAM="hinx-1.0.jar hinx"
-if [ $1 == "start" ]
-  then   
-   echo $PROGRAM  "starting !"
-  nohup $JAVA $PROGRAM >/dev/null 2>&1 &
-  echo "For details, please check the project log!"
-elif [ $1 == "stop" ]
-  then
-  echo $PROGRAM  "stopping !"
-  #查看是否存在这个进程，返回结果是数字，
-  pcount=`ps -ef | grep "$PROGRAM" | grep -v "grep" | wc -l`
-  if [ $pcount -gt 0 ]; then  #返回的数字不小于0 说明存在进程
-        #获取进程ID 并 杀掉进程
-    pid=`ps -ef | grep "$PROGRAM" | grep -v "grep" | awk '{ print $2; }'`
-    kill $pid
-  else
-    echo "$PROGRAM" not running;
-  fi
-elif [ $1 == "restart" ]
-  then
-  echo $PROGRAM  "restart !"
-  pcount=`ps -ef | grep "$PROGRAM" | grep -v "grep" | wc -l`
-  if [ $pcount -gt 0 ]; then  #返回的数字不小于0 说明存在进程
-        #获取进程ID 并 杀掉进程
-    pid=`ps -ef | grep "$PROGRAM" | grep -v "grep" | awk '{ print $2; }'`
-    kill $pid
-    sleep 1
-  fi
-   nohup $JAVA $PROGRAM >/dev/null 2>&1 & 
-  echo "For details, please check the project log!"
-else
-  echo "Please make sure the positon variable is [start] [stop]."
-fi
-exit 0
+tradePortalPID=0
+
+COMMON_CONFIG="\"-Dconfig=config/server.properties\" \"-Dvertx.zookeeper.config=./config/cluster/zookeeper.json\""
+ENCODE_CONFIG="\"-Dfile.encoding=UTF8\""
+GC_CONFIG="-XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:SurvivorRatio=8 -XX:MaxGCPauseMillis=100 -XX:ParallelGCThreads=8 -XX:G1NewSizePercent=60 -XX:G1MaxNewSizePercent=90 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/software/bx/logs/battle_dump"
+MEMORY_CONFIG=" -Xms256m -Xmx256m -Xss512k -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
+JAVA="java -cp \"hinx-1.0-SNAPSHOT.jar;libs/*\" -server "
+# -javaagent:/software/lib/hotfix.jar
+APP_MAIN="com.ohayoo.whitebird.Start"
+
+getTradeProtalPID(){
+    javaps=`$JAVA_HOME/bin/jps -l | grep $APP_MAIN`
+    if [ -n "$javaps" ]; then
+        tradePortalPID=`echo $javaps | awk '{print $1}'`
+    else
+        tradePortalPID=0
+    fi
+}
+
+start(){
+    getTradeProtalPID
+    echo "==============================================================================================="
+    if [ $tradePortalPID -ne 0 ]; then
+        echo "$APP_MAIN already started(PID=$tradePortalPID)"
+        echo "==============================================================================================="
+    else
+        echo -n "Starting $APP_MAIN"
+        nohup $JAVA $COMMON_CONFIG $ENCODE_CONFIG $GC_CONFIG $MEMORY_CONFIG $APP_MAIN >/dev/null 2>&1 &
+        getTradeProtalPID
+        if [ $tradePortalPID -ne 0 ]; then
+            echo "(PID=$tradePortalPID)...[Success]"
+            echo "==============================================================================================="
+        else
+            echo "[Failed]"
+            echo "==============================================================================================="
+        fi
+    fi
+}
+
+status(){
+    getTradeProtalPID
+    echo "==============================================================================================="
+    if [ $tradePortalPID -ne 0 ]; then
+        echo "$APP_MAIN PID=$tradePortalPID started"
+        echo "==============================================================================================="
+    else
+        echo "$APP_MAIN don't start "
+    fi
+}
+
+stop(){
+    getTradeProtalPID
+    echo "==============================================================================================="
+    if [ $tradePortalPID -ne 0 ]; then
+        echo "$APP_MAIN PID=$tradePortalPID"
+        kill -9 $tradePortalPID
+        echo "==============================================================================================="
+    else
+        echo "$APP_MAIN don't start "
+    fi
+}
+
+echo "./xxx.sh start | status | stop"
+$1

@@ -1,4 +1,6 @@
 mvn clean package -DskipTests
 mkdir output
 cp -r ./config ./output/
-cp ./target/hinx-1.0-SNAPSHOT.jar ./output/
+cp -r ./target/libs ./output/
+cp ./target/*.jar ./output/
+cp ./docs/shell/*.sh ./output/

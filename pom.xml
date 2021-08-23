@@ -47,6 +47,8 @@
     </developers>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <vertx.version>4.1.2</vertx.version>
@@ -83,14 +85,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <!-- metrics  -->
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-dropwizard-metrics</artifactId>
             <version>${vertx.version}</version>
         </dependency>
-
         <!-- Reactive PostgreSQL Client 是 PostgreSQL 的客户端，具有简单的 API，专注于可扩展性和低开销。客户端是反应式且非阻塞的，允许使用单个线程处理多个数据库连接。-->
         <dependency>
             <groupId>io.vertx</groupId>
@@ -115,14 +115,12 @@
             <artifactId>vertx-mysql-client</artifactId>
             <version>${vertx.version}</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.hibernate.reactive/hibernate-reactive-core -->
         <dependency>
             <groupId>org.hibernate.reactive</groupId>
             <artifactId>hibernate-reactive-core</artifactId>
             <version>1.0.0.CR8</version>
         </dependency>
-
         <!--  RxJava3   -->
         <dependency>
             <groupId>io.vertx</groupId>
@@ -135,7 +133,6 @@
             <artifactId>guava</artifactId>
             <version>30.1.1-jre</version>
         </dependency>
-
         <!--jackson -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -147,7 +144,6 @@
             <artifactId>jackson-core</artifactId>
             <version>2.12.4</version>
         </dependency>
-
         <!--    编译增强工具    -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -155,13 +151,11 @@
             <version>1.18.20</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-grpc</artifactId>
             <version>${vertx.version}</version>
         </dependency>
-
         <!-- protobuf message -->
         <dependency>
             <groupId>com.google.protobuf</groupId>
@@ -173,7 +167,6 @@
             <artifactId>protobuf-java-util</artifactId>
             <version>3.17.3</version>
         </dependency>
-
         <!--   excel读表基础组件  文档见代码库   -->
         <dependency>
             <groupId>com.ohayoo.whitebird</groupId>
@@ -192,24 +185,39 @@
             <artifactId>common-game-cloud</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
+                <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <attach>true</attach>
+                    <archive>
+                        <manifest>
+                            <addClasspath>false</addClasspath>
+                            <classpathPrefix>libs/</classpathPrefix>
+                            <mainClass>
+                                com.ohayoo.whitebird.Start
+                            </mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>compile</phase>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>copy-dependencies</goal>
                         </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/libs</outputDirectory>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

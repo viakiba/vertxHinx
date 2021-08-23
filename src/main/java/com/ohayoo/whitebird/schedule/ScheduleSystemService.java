@@ -17,7 +17,7 @@ public class ScheduleSystemService implements IScheduleService, SystemServiceImp
     @Override
     public ScheduleTask scheduleOnce(ScheduleTask scheduleTask, Date d) {
         scheduleTask.setState(ScheduleTask.TASK_STATE_WAITING);
-        var schedule = scheduledExecutorService.schedule(
+        ScheduledFuture schedule = scheduledExecutorService.schedule(
             scheduleTask, d.getTime() - TimeUtil.currentSystemTime(),
             TimeUnit.MILLISECONDS
         );
@@ -28,7 +28,7 @@ public class ScheduleSystemService implements IScheduleService, SystemServiceImp
     @Override
     public ScheduleTask scheduleOnce(ScheduleTask scheduleTask, long delay) {
         scheduleTask.setState(ScheduleTask.TASK_STATE_WAITING);
-        var schedule = scheduledExecutorService.schedule(scheduleTask, delay, TimeUnit.MILLISECONDS);
+        ScheduledFuture schedule = scheduledExecutorService.schedule(scheduleTask, delay, TimeUnit.MILLISECONDS);
         scheduleTask.setFuture(schedule);
         return scheduleTask;
     }
