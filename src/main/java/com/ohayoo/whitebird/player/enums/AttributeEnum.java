@@ -8,5 +8,6 @@ public enum AttributeEnum {
     data,
     link,
     key,
+    id,
 
 }
