@@ -48,7 +48,7 @@ public class HttpServerVerticle extends AbstractVerticle implements BaseServerVe
             req.bodyHandler(buffer -> {
                 PlayerSystemService systemService = GlobalContext.getSystemService(PlayerSystemService.class);
                 HttpPlayer httpPlayer = new HttpPlayer();
-                httpPlayer.setAttribute(AttributeEnum.link.name(),req);
+                httpPlayer.setAttribute(AttributeEnum.link,req);
                 systemService.httpHandle(req,buffer,httpPlayer);
             });
     }

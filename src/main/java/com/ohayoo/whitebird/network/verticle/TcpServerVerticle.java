@@ -45,7 +45,7 @@ public class TcpServerVerticle extends AbstractVerticle implements BaseServerVer
 
         LengthFieldBasedFrameDecoder decoder ;
         if(GlobalContext.serverConfig().isByteOrder()) {
-            decoder = new LengthFieldBasedFrameDecoder(ByteOrder.LITTLE_ENDIAN, Integer.MAX_VALUE,
+            decoder = new LengthFieldBasedFrameDecoder(ByteOrder.LITTLE_ENDIAN, 262144,
                     0, 4, -4, 0, true) {
                 /**
                  * 小端  最大长度不限
@@ -103,7 +103,7 @@ public class TcpServerVerticle extends AbstractVerticle implements BaseServerVer
         TcpPlayer tcpPlayer = new TcpPlayer();
         netSocket.handler(buffer -> {
             PlayerSystemService systemService = GlobalContext.getSystemService(PlayerSystemService.class);
-            tcpPlayer.setAttribute(AttributeEnum.link.name(),netSocket);
+            tcpPlayer.setAttribute(AttributeEnum.link,netSocket);
             systemService.tcpHandle(buffer, tcpPlayer);
         });
 
@@ -112,7 +112,7 @@ public class TcpServerVerticle extends AbstractVerticle implements BaseServerVer
         });
 
         netSocket.exceptionHandler(e -> {
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+            e.printStackTrace();
         });
 
     }

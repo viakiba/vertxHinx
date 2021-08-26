@@ -1,6 +1,7 @@
 package com.ohayoo.whitebird.player.model;
 
 import com.google.protobuf.Message;
+import com.ohayoo.whitebird.player.enums.AttributeEnum;
 
 /**
  * @author huangpeng.12@bytedance.com
@@ -8,9 +9,9 @@ import com.google.protobuf.Message;
  */
 public interface IPlayer {
 
-    void setAttribute(String key, Object attach);
+    void setAttribute(AttributeEnum key, Object attach);
 
-    <T>T getAttribute(String key);
+    <T>T getAttribute(AttributeEnum key);
 
     void send(Object msg,int msgId);
 

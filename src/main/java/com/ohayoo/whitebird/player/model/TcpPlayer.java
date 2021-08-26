@@ -20,27 +20,21 @@ import static com.ohayoo.whitebird.player.PlayerSystemService.writeMessageInfo;
  */
 @Slf4j
 public class TcpPlayer implements IPlayer {
-    private Map<String , Object> attribute = new ConcurrentHashMap<>(8);
+    private Map<AttributeEnum , Object> attribute = new ConcurrentHashMap<>(8);
 
     @Override
-    public void setAttribute(String key, Object attach) {
-        if(StringUtils.isEmpty(key)){
-            log.error("key is empty!");
-        }
+    public void setAttribute(AttributeEnum key, Object attach) {
         attribute.put(key,attach);
     }
 
     @Override
-    public <T> T getAttribute(String key) {
-        if(StringUtils.isEmpty(key)){
-            log.error("key is empty!");
-        }
+    public <T> T getAttribute(AttributeEnum key) {
         return (T)attribute.get(key);
     }
 
     @Override
     public void send(Object msg,int msgId) {
-        NetSocket socket = getAttribute(AttributeEnum.link.name());
+        NetSocket socket = getAttribute(AttributeEnum.link);
         Buffer buffer = Buffer.buffer();
         if(msg instanceof Message){
             writeMessageInfo(buffer,((Message) msg).toByteArray(),msgId);

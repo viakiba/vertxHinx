@@ -10,6 +10,8 @@ import io.vertx.core.spi.cluster.NodeInfo;
 import io.vertx.ext.dropwizard.DropwizardMetricsOptions;
 import io.vertx.ext.dropwizard.MetricsService;
 import io.vertx.spi.cluster.zookeeper.ZookeeperClusterManager;
+import kotlinx.coroutines.ExecutorCoroutineDispatcher;
+import kotlinx.coroutines.ThreadPoolDispatcher;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

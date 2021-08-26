@@ -15,27 +15,21 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class HttpPlayer implements IPlayer{
 
-    private Map<String , Object> attribute = new ConcurrentHashMap<>(8);
+    private Map<AttributeEnum , Object> attribute = new ConcurrentHashMap<>(8);
 
     @Override
-    public void setAttribute(String key, Object attach) {
-        if(StringUtils.isEmpty(key)){
-            log.error("key is empty!");
-        }
+    public void setAttribute(AttributeEnum key, Object attach) {
         attribute.put(key,attach);
     }
 
     @Override
-    public <T> T getAttribute(String key) {
-        if(StringUtils.isEmpty(key)){
-            log.error("key is empty!");
-        }
+    public <T> T getAttribute(AttributeEnum key) {
         return (T)attribute.get(key);
     }
 
     @Override
     public void send(Object msg,int msgId) {
-        HttpServerRequest request = getAttribute(AttributeEnum.link.name());
+        HttpServerRequest request = getAttribute(AttributeEnum.link);
         request.response().end(msgId+String.valueOf(msg));
     }
 }

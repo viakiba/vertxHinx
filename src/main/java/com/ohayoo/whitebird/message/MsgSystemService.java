@@ -17,8 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MsgSystemService implements SystemServiceImpl {
 
-    public static MsgHandler msgHandler ;
-    public static EventExecutorGroupUtil eventExecutorGroupUtil ;
+    public MsgHandler msgHandler ;
 
     @Override
     public void start() {
@@ -30,22 +29,18 @@ public class MsgSystemService implements SystemServiceImpl {
             msgHandler = new ProtoMsgHandler();
         }
         msgHandler.init();
-        eventExecutorGroupUtil = new EventExecutorGroupUtil(10);
     }
 
     public void handler(IPlayer player, Integer msgId, byte[] body) {
-        EventExecutor eventExecutor = eventExecutorGroupUtil.getEventExecutor(player.getAttribute(AttributeEnum.id.name()));
-        eventExecutor.execute(()->{
-            try {
-                msgHandler.handler(player,msgId,body);
-            } catch (Exception e) {
-                if(e instanceof CustomException){
-                    log.error("未知异常",((CustomException) e).getStatusCode());
-                    return;
-                }else{
-                    log.error("未知异常",e);
-                }
+        try {
+            msgHandler.handler(player,msgId,body);
+        } catch (Exception e) {
+            if(e instanceof CustomException){
+                log.error("未知异常",((CustomException) e).getStatusCode());
+                return;
+            }else{
+                log.error("未知异常",e);
             }
-        });
+        }
     }
 }

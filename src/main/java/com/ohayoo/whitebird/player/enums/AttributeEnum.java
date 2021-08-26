@@ -9,5 +9,6 @@ public enum AttributeEnum {
     link,
     key,
     id,
+    coroutine,
 
 }

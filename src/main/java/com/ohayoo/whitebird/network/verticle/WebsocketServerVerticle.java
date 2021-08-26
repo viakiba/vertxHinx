@@ -31,7 +31,7 @@ public class WebsocketServerVerticle extends AbstractVerticle implements BaseSer
     private void handler(ServerWebSocket webSocket) {
         PlayerSystemService playerSystemService = GlobalContext.getSystemService(PlayerSystemService.class);
         WebsocketPlayer websocketPlayer = new WebsocketPlayer();
-        websocketPlayer.setAttribute(AttributeEnum.link.name(),webSocket);
+        websocketPlayer.setAttribute(AttributeEnum.link,webSocket);
         webSocket.handler(buffer -> {
             playerSystemService.websocketHandle(buffer,websocketPlayer);
         });

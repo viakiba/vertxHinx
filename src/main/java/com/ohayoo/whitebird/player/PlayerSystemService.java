@@ -3,6 +3,7 @@ package com.ohayoo.whitebird.player;
 import cn.hutool.core.lang.Tuple;
 import com.ohayoo.whitebird.boot.GlobalContext;
 import com.ohayoo.whitebird.boot.SystemServiceImpl;
+import com.ohayoo.whitebird.compoent.KTCoroutineHelp;
 import com.ohayoo.whitebird.enums.NetType;
 import com.ohayoo.whitebird.message.MsgSystemService;
 import com.ohayoo.whitebird.player.enums.AttributeEnum;
@@ -44,7 +45,7 @@ public class PlayerSystemService implements SystemServiceImpl {
     }
 
     public void addPlayer(IPlayer player){
-        playerMap.put( player.getAttribute(AttributeEnum.key.name()),player);
+        playerMap.put( player.getAttribute(AttributeEnum.key),player);
     }
 
     public static Tuple readMessageInfo(Buffer buffer) {
@@ -86,18 +87,33 @@ public class PlayerSystemService implements SystemServiceImpl {
 
     public void tcpHandle(Buffer data, TcpPlayer tcpPlayer) {
         Tuple tuple = readMessageInfo(data);
-        handle(tcpPlayer,tuple.get(0),tuple.get(1));
+        KTCoroutineHelp ktCoroutineHelp = tcpPlayer.getAttribute(AttributeEnum.coroutine);
+        if(ktCoroutineHelp != null){
+            MsgSystemService msgSystemService = GlobalContext.getSystemService(MsgSystemService.class);
+            ktCoroutineHelp.addTask(tuple.get(0),tuple.get(1),msgSystemService.msgHandler);
+        }else{
+            KTCoroutineHelp.Companion.runDefault(tcpPlayer,tuple.get(0),tuple.get(1));
+        }
     }
 
     public void websocketHandle(Buffer data, WebsocketPlayer websocketPlayer) {
         int msgId = data.getInt(0);
         byte[] body = data.getBytes(4, data.length());
-        handle(websocketPlayer,msgId,body);
+        KTCoroutineHelp ktCoroutineHelp = websocketPlayer.getAttribute(AttributeEnum.coroutine);
+        if(ktCoroutineHelp != null){
+            MsgSystemService msgSystemService = GlobalContext.getSystemService(MsgSystemService.class);
+            ktCoroutineHelp.addTask(msgId,body,msgSystemService.msgHandler);
+        }else{
+            KTCoroutineHelp.Companion.runDefault(websocketPlayer,msgId,body);
+        }
     }
 
     public void httpHandle(HttpServerRequest req, Buffer buffer, HttpPlayer httpPlayer) {
         int msgId = Integer.parseInt(req.getHeader("header_message_id"));
         byte[] bytes = buffer.getBytes();
-        handle(httpPlayer,msgId,bytes);
+        // http服务 使用 worker线程
+        GlobalContext.getVertx().executeBlocking(h -> {
+            handle(httpPlayer,msgId,bytes);
+        });
     }
 }
