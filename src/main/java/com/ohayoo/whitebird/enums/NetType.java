@@ -9,6 +9,7 @@ public enum NetType {
     http,
     tcp,
     udp,
+    kcp,
     websocket;
 
 }

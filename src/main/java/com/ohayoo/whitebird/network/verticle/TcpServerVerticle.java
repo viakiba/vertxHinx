@@ -1,7 +1,6 @@
 package com.ohayoo.whitebird.network.verticle;
 
 import com.ohayoo.whitebird.boot.GlobalContext;
-import com.ohayoo.whitebird.compoent.KTCoroutineHelp;
 import com.ohayoo.whitebird.enums.NetType;
 import com.ohayoo.whitebird.player.PlayerSystemService;
 import com.ohayoo.whitebird.player.enums.AttributeEnum;
@@ -46,7 +45,7 @@ public class TcpServerVerticle extends AbstractVerticle implements BaseServerVer
 
         LengthFieldBasedFrameDecoder decoder ;
         if(GlobalContext.serverConfig().isByteOrder()) {
-            decoder = new LengthFieldBasedFrameDecoder(ByteOrder.LITTLE_ENDIAN, 262144,
+            decoder = new LengthFieldBasedFrameDecoder(ByteOrder.LITTLE_ENDIAN, Integer.MAX_VALUE,
                     0, 4, -4, 0, true) {
                 /**
                  * 小端  最大长度不限
@@ -102,11 +101,9 @@ public class TcpServerVerticle extends AbstractVerticle implements BaseServerVer
             }
         });
         TcpPlayer tcpPlayer = new TcpPlayer();
-        tcpPlayer.setAttribute(AttributeEnum.id,1);
-        KTCoroutineHelp.Companion.createKTCoroutine(tcpPlayer);
         netSocket.handler(buffer -> {
             PlayerSystemService systemService = GlobalContext.getSystemService(PlayerSystemService.class);
-            tcpPlayer.setAttribute(AttributeEnum.link,netSocket);
+            tcpPlayer.setAttribute(AttributeEnum.link.name(),netSocket);
             systemService.tcpHandle(buffer, tcpPlayer);
         });
 
@@ -115,7 +112,7 @@ public class TcpServerVerticle extends AbstractVerticle implements BaseServerVer
         });
 
         netSocket.exceptionHandler(e -> {
-            e.printStackTrace();
+            log.info("连接异常断开 ",e);
         });
 
     }

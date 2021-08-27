@@ -1,0 +1,22 @@
+{
+  "port": 8081,
+  "host": "10.79.19.90",
+  "interval": 10,
+  "nodelay": true,
+  "fastresend": 2,
+  "nocwnd": true,
+  "sndwnd": 300,
+  "rcvwnd": 300,
+  "mtu": 512,
+  "ackNoDelay": true,
+  "timeoutMillis": 10000,
+  "crc32Check": false,
+
+  "ackMaskSize": 0,
+  "conv": 0,
+  "fastFlush": true,
+  "readBufferSize": -1,
+  "stream": false,
+  "useConvChannel": true,
+  "writeBufferSize": 1000
+}
