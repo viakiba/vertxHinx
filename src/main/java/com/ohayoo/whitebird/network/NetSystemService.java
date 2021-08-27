@@ -34,6 +34,9 @@ public class NetSystemService implements SystemServiceImpl {
             if(netType == NetType.kcp){
                 GlobalContext.getVertx().deployVerticle(new KcpServerVerticle());
             }
+            if(netType == NetType.quic){
+                GlobalContext.getVertx().deployVerticle(new QuicServerVerticle());
+            }
         }
     }
 }

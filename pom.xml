@@ -53,6 +53,8 @@
         <maven.compiler.target>11</maven.compiler.target>
         <vertx.version>4.1.2</vertx.version>
         <kotlin.version>1.5.30-RC</kotlin.version>
+        <!--linux:linux-x86_64  mac:osx-x86_64 windows:windows-x86_64-->
+        <quic.classifier>windows-x86_64</quic.classifier>
     </properties>
 
     <dependencies>
@@ -210,21 +212,47 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <!-- https://github.com/l42111996/java-Kcp -->
+        <!-- KCP  https://github.com/l42111996/java-Kcp -->
         <dependency>
             <groupId>com.github.l42111996</groupId>
             <artifactId>kcp-base</artifactId>
             <version>1.6</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-simple</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.github.l42111996</groupId>
             <artifactId>kcp-lockStepSynchronization</artifactId>
             <version>1.6</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-simple</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.github.l42111996</groupId>
             <artifactId>kcp-fec</artifactId>
             <version>1.6</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-simple</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--  QUIC    区分操作系统  -->
+        <dependency>
+            <groupId>io.netty.incubator</groupId>
+            <artifactId>netty-incubator-codec-quic</artifactId>
+            <version>0.0.17.Final</version>
+            <classifier>${quic.classifier}</classifier>
         </dependency>
 
 <!--        <dependency>-->

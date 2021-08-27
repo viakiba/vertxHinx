@@ -10,6 +10,7 @@ public enum NetType {
     tcp,
     udp,
     kcp,
+    quic,
     websocket;
 
 }
