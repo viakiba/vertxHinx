@@ -24,8 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class KcpServerVerticle extends AbstractVerticle implements BaseServerVerticle, KcpListener {
 
-    private DatagramSocket socket;
-
     /**
      * @throws Exception
      */

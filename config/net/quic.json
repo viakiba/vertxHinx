@@ -1,0 +1,9 @@
+{
+  "port": 8081,
+  "host": "10.79.19.90",
+  "eventLoopThreadNum": 3,
+  "idleTimeoutMs": 3000,
+  "maxData": 100000,
+  "maxStreamDataBidirectional": 100000,
+  "maxStreamsBidirectional": 100
+}
