@@ -112,7 +112,7 @@ public class TcpServerVerticle extends AbstractVerticle implements BaseServerVer
         });
 
         netSocket.exceptionHandler(e -> {
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+            log.info("连接异常断开 ",e);
         });
 
     }

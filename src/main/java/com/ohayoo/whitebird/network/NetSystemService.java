@@ -3,10 +3,7 @@ package com.ohayoo.whitebird.network;
 import com.ohayoo.whitebird.boot.GlobalContext;
 import com.ohayoo.whitebird.boot.SystemServiceImpl;
 import com.ohayoo.whitebird.enums.NetType;
-import com.ohayoo.whitebird.network.verticle.HttpServerVerticle;
-import com.ohayoo.whitebird.network.verticle.TcpServerVerticle;
-import com.ohayoo.whitebird.network.verticle.UdpServerVerticle;
-import com.ohayoo.whitebird.network.verticle.WebsocketServerVerticle;
+import com.ohayoo.whitebird.network.verticle.*;
 
 /**
  * @author huangpeng.12@bytedance.com
@@ -33,6 +30,9 @@ public class NetSystemService implements SystemServiceImpl {
             }
             if(netType == NetType.udp){
                 GlobalContext.getVertx().deployVerticle(new UdpServerVerticle());
+            }
+            if(netType == NetType.kcp){
+                GlobalContext.getVertx().deployVerticle(new KcpServerVerticle());
             }
         }
     }
