@@ -1,6 +1,7 @@
 package com.ohayoo.whitebird.network.verticle;
 
 import com.ohayoo.whitebird.boot.GlobalContext;
+import com.ohayoo.whitebird.compoent.KTCoroutineHelp;
 import com.ohayoo.whitebird.enums.NetType;
 import com.ohayoo.whitebird.player.PlayerSystemService;
 import com.ohayoo.whitebird.player.enums.AttributeEnum;
@@ -101,6 +102,8 @@ public class TcpServerVerticle extends AbstractVerticle implements BaseServerVer
             }
         });
         TcpPlayer tcpPlayer = new TcpPlayer();
+        tcpPlayer.setAttribute(AttributeEnum.id,1);
+        KTCoroutineHelp.Companion.createKTCoroutine(tcpPlayer);
         netSocket.handler(buffer -> {
             PlayerSystemService systemService = GlobalContext.getSystemService(PlayerSystemService.class);
             tcpPlayer.setAttribute(AttributeEnum.link,netSocket);

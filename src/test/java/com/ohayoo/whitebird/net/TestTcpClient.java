@@ -11,6 +11,7 @@ import io.vertx.core.net.NetSocket;
 import org.testng.annotations.Test;
 
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author huangpeng.12@bytedance.com
@@ -20,6 +21,7 @@ public class TestTcpClient extends TestBase {
 
     @Test
     public void test0() throws InterruptedException {
+        AtomicInteger atomicInteger = new AtomicInteger();
         Vertx vertx = Vertx.vertx();
         NetClient netClient = vertx.createNetClient();
         netClient.connect(8080,"10.79.19.90",x ->{
@@ -28,10 +30,10 @@ public class TestTcpClient extends TestBase {
                Tuple tuple = PlayerSystemService.readMessageInfo(buffer);
                System.out.println(new String(tuple.get(1),StandardCharsets.UTF_8));
             });
-            vertx.setPeriodic(1,handler -> {
+            vertx.setPeriodic(100,handler -> {
                 Buffer buffer = Buffer.buffer();
-                byte[] data = "{\"xx\":\"111\"}".getBytes(StandardCharsets.UTF_8);
-                PlayerSystemService.writeMessageInfo(buffer,data,10100);
+                byte[] data = ("{\"xx\":\""+atomicInteger.incrementAndGet()+"\"}").getBytes(StandardCharsets.UTF_8);
+                PlayerSystemService.writeMessageInfo(buffer,data,10000);
                 result.write(buffer);
             });
         }

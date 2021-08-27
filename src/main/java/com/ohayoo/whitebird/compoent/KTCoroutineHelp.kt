@@ -26,7 +26,7 @@ class KTCoroutineHelp {
     private var channel: Channel<MsgData>
     private var player: IPlayer
     private lateinit var job: Job
-    private lateinit var coroutineContextPlayer: CoroutineContext
+    public lateinit var coroutineContextPlayer: CoroutineContext
 
     constructor(channel: Channel<MsgData>,  player: IPlayer) {
         this.channel = channel
@@ -49,6 +49,7 @@ class KTCoroutineHelp {
             var ktCoroutineHelp = KTCoroutineHelp(Channel(30),player)
             coroutineMap[player.getAttribute(AttributeEnum.id)] = ktCoroutineHelp
             ktCoroutineHelp.start()
+            player.setAttribute(AttributeEnum.coroutine,ktCoroutineHelp)
         }
 
     }
