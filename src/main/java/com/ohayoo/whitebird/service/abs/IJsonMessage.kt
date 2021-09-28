@@ -9,6 +9,9 @@ import java.lang.Exception
  */
 interface IJsonMessage : IMessage {
     /**
+     * https://vertx.io/docs/vertx-core/kotlin/
+     * https://vertx.io/docs/vertx-lang-kotlin-coroutines/kotlin/
+     *
      * @param messageId
      * @param message
      * @param player
@@ -18,7 +21,7 @@ interface IJsonMessage : IMessage {
      * @author huangpeng.12@bytedance.com
      */
     suspend fun handlerJson(messageId: Int, message: Any, player: IPlayer) {
-        throw Exception("")
+        throw Exception("IProtoMessage#handlerJson 此方法为实现")
     }
 
     /**

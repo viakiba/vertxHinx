@@ -13,7 +13,7 @@ public class MatchSystemService implements SystemServiceImpl {
      * https://vertx.io/docs/apidocs/io/vertx/core/VertxOptions.html
      */
     @Override
-    public void start() {
+    public void startService() {
 
     }
 

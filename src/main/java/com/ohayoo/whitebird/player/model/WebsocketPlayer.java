@@ -6,7 +6,6 @@ import com.ohayoo.whitebird.player.enums.AttributeEnum;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.ServerWebSocket;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -40,5 +39,4 @@ public class WebsocketPlayer implements IPlayer {
         }
         o.write(buffer);
     }
-
 }

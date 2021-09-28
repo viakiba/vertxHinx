@@ -9,7 +9,7 @@ import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 public class TimeUtil {
-	public static TimeZone TIME_ZONE ;
+	private static final TimeZone TIME_ZONE ;
 
 	public static final int MinutesPerHour = 60;// 每小时分钟数
 	public static final int MillisecondsPerMinute = 60000;// 每分钟毫秒数
@@ -90,7 +90,7 @@ public class TimeUtil {
 		Calendar cal = Calendar.getInstance();
 		TimeZone timeZone = cal.getTimeZone();
 		long time = System.currentTimeMillis() + timeZone.getRawOffset() - hour * 3600000;
-		double dayNum = Math.ceil(time / ((cdTime * MillisecondsPerSeconds)));
+		double dayNum = Math.ceil( (double)(time / (( (double)cdTime * (double)MillisecondsPerSeconds) )));
 		return (int) dayNum;
 	}
 
@@ -98,7 +98,7 @@ public class TimeUtil {
 		Calendar cal = Calendar.getInstance();
 		TimeZone timeZone = cal.getTimeZone();
 		long timeTemp = time + timeZone.getRawOffset() - hour * 3600000;
-		double dayNum = Math.ceil(timeTemp / ((cdTime * MillisecondsPerSeconds)));
+		double dayNum = Math.ceil( ((double)timeTemp / (((double)cdTime * (double)MillisecondsPerSeconds))));
 		return (int) dayNum;
 	}
 
@@ -180,8 +180,8 @@ public class TimeUtil {
 	public static long getTaskTime(String strs) {
 		String[] taskTimes = strs.split(" ");
 		long taskTime = 0;
-		taskTime = (Integer.parseInt(taskTimes[0]) + Integer.parseInt(taskTimes[1]) * 60
-				+ Integer.parseInt(taskTimes[0]) * 3600) * MillisecondsPerSeconds;
+		taskTime = (Long.parseLong(taskTimes[0]) + Long.parseLong(taskTimes[1]) * 60
+				+ Long.parseLong(taskTimes[0]) * 3600L) * (long)MillisecondsPerSeconds;
 		return taskTime;
 	}
 

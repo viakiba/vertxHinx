@@ -1,6 +1,5 @@
 package com.ohayoo.whitebird.player.model;
 
-import com.google.protobuf.Message;
 import com.ohayoo.whitebird.player.enums.AttributeEnum;
 
 /**
@@ -15,4 +14,11 @@ public interface IPlayer {
 
     void send(Object msg,int msgId);
 
+    default void sendError(int msgCode,int msgId){
+        throw new RuntimeException("未实现");
+    };
+
+    default <T> T  getData(){
+        return getAttribute(AttributeEnum.data);
+    }
 }

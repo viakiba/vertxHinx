@@ -8,15 +8,15 @@ import com.ohayoo.whitebird.player.model.WebsocketPlayer;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.*;
 import io.vertx.core.json.JsonObject;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author huangpeng.12@bytedance.com
  * @createTime 2021-07-23
  */
-@Slf4j
 public class WebsocketServerVerticle extends AbstractVerticle implements BaseServerVerticle {
-
+    private static Logger log = LoggerFactory.getLogger(WebsocketServerVerticle.class);
     private HttpServer server;
 
     @Override

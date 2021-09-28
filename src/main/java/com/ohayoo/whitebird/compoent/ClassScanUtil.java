@@ -60,7 +60,7 @@ public class ClassScanUtil {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("扫描业务包异常 ",e);
         }
         return classes;
     }

@@ -2,18 +2,15 @@ package com.ohayoo.whitebird.network.verticle;
 
 import com.alibaba.fastjson.JSONObject;
 import com.backblaze.erasure.fec.Snmp;
-import com.ohayoo.whitebird.boot.GlobalContext;
 import com.ohayoo.whitebird.enums.NetType;
-import com.ohayoo.whitebird.player.PlayerSystemService;
-import com.ohayoo.whitebird.player.enums.AttributeEnum;
 import io.netty.buffer.ByteBuf;
 import io.vertx.core.AbstractVerticle;
-import io.vertx.core.datagram.DatagramSocket;
 import kcp.ChannelConfig;
 import kcp.KcpListener;
 import kcp.KcpServer;
 import kcp.Ukcp;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *  依赖实现:  https://github.com/l42111996/java-Kcp
@@ -21,9 +18,8 @@ import lombok.extern.slf4j.Slf4j;
  * @author huangpeng.12@bytedance.com
  * @createTime 2021-07-23
  */
-@Slf4j
 public class KcpServerVerticle extends AbstractVerticle implements BaseServerVerticle, KcpListener {
-
+    private static Logger log = LoggerFactory.getLogger(KcpServerVerticle.class);
     /**
      * @throws Exception
      */

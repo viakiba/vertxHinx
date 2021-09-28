@@ -1,9 +1,9 @@
 package com.ohayoo.whitebird.network;
 
-import com.ohayoo.whitebird.boot.GlobalContext;
-import com.ohayoo.whitebird.boot.SystemServiceImpl;
 import com.ohayoo.whitebird.enums.NetType;
 import com.ohayoo.whitebird.network.verticle.*;
+import com.ohayoo.whitebird.boot.GlobalContext;
+import com.ohayoo.whitebird.boot.SystemServiceImpl;
 
 /**
  * @author huangpeng.12@bytedance.com
@@ -16,7 +16,7 @@ public class NetSystemService implements SystemServiceImpl {
      * https://vertx.io/docs/apidocs/io/vertx/core/VertxOptions.html
      */
     @Override
-    public void start() {
+    public void startService() {
         NetType[] netTypes = GlobalContext.serverConfig().getNetType();
         for (NetType netType: netTypes) {
             if(netType == NetType.http){

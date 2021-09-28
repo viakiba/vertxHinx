@@ -1,7 +1,6 @@
 package com.ohayoo.whitebird.service.abs
 
 import com.google.protobuf.Message
-import com.ohayoo.whitebird.service.abs.IMessage
 import kotlin.Throws
 import com.ohayoo.whitebird.player.model.IPlayer
 import java.lang.Exception
@@ -21,7 +20,7 @@ interface IProtoMessage : IMessage {
      * @author huangpeng.12@bytedance.com
      */
     @Throws(Exception::class)
-    fun handlerProto(messageId: Int, message: Message, player: IPlayer) {
+    suspend fun handlerProto(messageId: Int, message: Message, player: IPlayer) {
         throw Exception("IProtoMessage#handler 此方法为实现 ")
     }
 

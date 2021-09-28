@@ -12,7 +12,8 @@ import io.netty.incubator.codec.quic.*;
 import io.netty.util.CharsetUtil;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.json.JsonObject;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;
@@ -26,8 +27,9 @@ import java.util.concurrent.TimeUnit;
  * @author huangpeng.12@bytedance.com
  * @createTime 2021-07-23
  */
-@Slf4j
 public class QuicServerVerticle extends AbstractVerticle implements BaseServerVerticle {
+    private static Logger log = LoggerFactory.getLogger(QuicServerVerticle.class);
+
     NioEventLoopGroup group ;
     /**
      * @throws Exception

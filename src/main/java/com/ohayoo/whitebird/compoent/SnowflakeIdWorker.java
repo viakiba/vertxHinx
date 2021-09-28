@@ -1,13 +1,14 @@
 package com.ohayoo.whitebird.compoent;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author huangpeng.12@bytedance.com
  * @createTime 2021-08-10
  */
-@Slf4j
 public class SnowflakeIdWorker {
+    private static Logger log = LoggerFactory.getLogger(SnowflakeIdWorker.class);
     // 开始时间截 (从2015-01-01起)
     private static final long START_TIME = 1420041600000L;
     // 机器ID所占位数

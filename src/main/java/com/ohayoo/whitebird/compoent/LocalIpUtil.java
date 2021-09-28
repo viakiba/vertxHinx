@@ -2,7 +2,8 @@ package com.ohayoo.whitebird.compoent;
 
 import cn.hutool.core.lang.Filter;
 import cn.hutool.core.net.NetUtil;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
 import java.util.LinkedHashSet;
@@ -11,8 +12,9 @@ import java.util.LinkedHashSet;
  * @author huangpeng.12@bytedance.com
  * @createTime 2021-08-06
  */
-@Slf4j
 public class LocalIpUtil {
+    private static Logger log = LoggerFactory.getLogger(LocalIpUtil.class);
+
     public static String get10BeginIp(){
         LinkedHashSet<String> hostAddress = NetUtil.toIpList(NetUtil.localAddressList(new Filter<InetAddress>() {
             @Override

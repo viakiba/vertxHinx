@@ -5,7 +5,6 @@ import com.ohayoo.whitebird.message.MsgHandler
 import com.ohayoo.whitebird.message.MsgSystemService
 import com.ohayoo.whitebird.player.enums.AttributeEnum
 import com.ohayoo.whitebird.player.model.IPlayer
-import io.vertx.kotlin.coroutines.dispatcher
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import org.slf4j.Logger
@@ -28,7 +27,7 @@ class KTCoroutineHelp {
     private lateinit var job: Job
     public lateinit var coroutineContextPlayer: CoroutineContext
 
-    constructor(channel: Channel<MsgData>,  player: IPlayer) {
+    constructor(channel: Channel<MsgData>, player: IPlayer) {
         this.channel = channel
         this.player = player
     }
@@ -38,10 +37,10 @@ class KTCoroutineHelp {
         val coroutineMap = ConcurrentHashMap<String, KTCoroutineHelp>()
 
 
-        fun runDefault( player : IPlayer,  msgId: Int, data: ByteArray){
+        fun runDefault(player : IPlayer, msgId: Int, data: ByteArray){
             GlobalScope.async(newSingleThreadContext) {
                 val msgSystemService = GlobalContext.getSystemService<MsgSystemService>(MsgSystemService::class.java)
-                msgSystemService.handler(player,msgId,data)
+                msgSystemService.handler(player,msgId,data,false)
             }
         }
 
@@ -66,7 +65,7 @@ class KTCoroutineHelp {
 
     fun start() {
         // 启动一个协程
-        job = GlobalScope.async(GlobalContext.getVertx().dispatcher()) {
+        job = GlobalScope.launch (Dispatchers.Default) {
             coroutineContextPlayer = coroutineContext
             for (t in channel) {
                 //管道接收

@@ -1,5 +1,6 @@
 package com.ohayoo.whitebird.data.client;
 
+import com.ohayoo.whitebird.compoent.LoggerUtil;
 import com.ohayoo.whitebird.data.IDBService;
 import io.vertx.core.Handler;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,7 @@ public class RxHibernateService implements IDBService {
             factory = createEntityManagerFactory( "mysql" )
                             .unwrap(Stage.SessionFactory.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerUtil.error(e.getMessage());
             throw new RuntimeException("mysql init fail!");
         }
     }

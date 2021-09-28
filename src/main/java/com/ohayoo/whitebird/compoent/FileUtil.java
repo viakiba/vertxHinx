@@ -27,14 +27,13 @@ enum FileSuffixType {
 public class FileUtil {
     private static Logger logger = LoggerFactory.getLogger(FileUtil.class);
 
-    public static String separator = File.separator;
-
     public static Collection<byte[]> readBytesLinesFromFile(File file) {
         List<byte[]> strs = new LinkedList<byte[]>();
 
         DataInputStream dis = null;
+        BufferedInputStream bis = null;
         try {
-            BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+            bis = new BufferedInputStream(new FileInputStream(file));
 
             dis = new DataInputStream(bis);
             int size = dis.readInt();
@@ -45,10 +44,16 @@ public class FileUtil {
                 dis.read(new byte["\n".getBytes().length]);
                 strs.add(bytes);
             }
-
         } catch (Exception e) {
             logger.error("", e);
         } finally {
+            if (bis != null) {
+                try {
+                    bis.close();
+                } catch (IOException e) {
+                    logger.error("", e);
+                }
+            }
             if (dis != null) {
                 try {
                     dis.close();
@@ -65,7 +70,7 @@ public class FileUtil {
     }
 
     public static void writeString2File(String fileName, FileSuffixType suffix, String content, String path) {
-        DataOutputStream dos = null;
+        BufferedWriter out = null;
         try {
             if (fileName.contains(".")) {
                 fileName = fileName.substring(0, fileName.indexOf("."));
@@ -76,15 +81,14 @@ public class FileUtil {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            BufferedWriter out = new BufferedWriter(new FileWriter(file));
+            out = new BufferedWriter(new FileWriter(file));
             out.write(content);
-            out.close();
         } catch (IOException e) {
             logger.error("", e);
         } finally {
-            if (dos != null) {
+            if (out != null) {
                 try {
-                    dos.close();
+                    out.close();
                 } catch (IOException e) {
                     logger.error("", e);
                 }
@@ -94,6 +98,8 @@ public class FileUtil {
 
     public static void writeBytesLines2File(String fileName, String suffix, Collection<byte[]> lines, String path) {
         DataOutputStream dos = null;
+        BufferedOutputStream bos = null;
+
         try {
             if (fileName.contains(".")) {
                 fileName = fileName.substring(0, fileName.indexOf("."));
@@ -105,7 +111,7 @@ public class FileUtil {
                 file.createNewFile();
             }
 
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file, true));
+            bos = new BufferedOutputStream(new FileOutputStream(file, true));
             dos = new DataOutputStream(bos);
             dos.writeInt(lines.size());
             for (Iterator<byte[]> it = lines.iterator(); it.hasNext(); ) {
@@ -118,6 +124,13 @@ public class FileUtil {
         } catch (IOException e) {
             logger.error("", e);
         } finally {
+            if (bos != null) {
+                try {
+                    bos.close();
+                } catch (IOException e) {
+                    logger.error("", e);
+                }
+            }
             if (dos != null) {
                 try {
                     dos.close();
@@ -403,17 +416,31 @@ public class FileUtil {
         return workspacePath;
     }
 
-    public static void writeFileContext(List<String>  strings, String path) throws Exception {
-        File file = new File(path);
-        //如果没有文件就创建
-        if (!file.isFile()) {
-            file.createNewFile();
+    public static void writeFileContext(List<String>  strings, String path) throws IOException {
+        BufferedWriter writer = null;
+        try {
+            File file = new File(path);
+            //如果没有文件就创建
+            if (!file.isFile()) {
+                file.createNewFile();
+            }
+            writer = new BufferedWriter(new FileWriter(path));
+            for (String l : strings) {
+                writer.write(l + "\r\n");
+            }
+        }catch (Exception e){
+            logger.error("",e);
+            throw e;
+        }finally {
+            if(writer !=null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    logger.error("",e);
+                }
+            }
         }
-        BufferedWriter writer = new BufferedWriter(new FileWriter(path));
-        for (String l:strings){
-            writer.write(l + "\r\n");
-        }
-        writer.close();
+
     }
 
     public static void main(String[] args) throws Exception {

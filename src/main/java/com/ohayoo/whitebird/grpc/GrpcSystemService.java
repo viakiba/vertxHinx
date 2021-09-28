@@ -1,18 +1,15 @@
 package com.ohayoo.whitebird.grpc;
 
-import com.ohayoo.whitebird.annotate.BizServiceAnnotate;
 import com.ohayoo.whitebird.annotate.GrpcServiceAnnotate;
 import com.ohayoo.whitebird.boot.GlobalContext;
 import com.ohayoo.whitebird.boot.SystemServiceImpl;
+import com.ohayoo.whitebird.compoent.ClassScanUtil;
 import com.ohayoo.whitebird.compoent.LocalIpUtil;
-import com.ohayoo.whitebird.generate.grpc.HelloReply;
-import com.ohayoo.whitebird.generate.grpc.HelloRequest;
-import com.ohayoo.whitebird.generate.grpc.HelloServiceGrpc;
-import com.ohayoo.whitebird.service.abs.BaseService;
-import io.grpc.stub.StreamObserver;
 import io.vertx.core.Vertx;
 import io.vertx.grpc.VertxServer;
 import io.vertx.grpc.VertxServerBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Set;
@@ -24,11 +21,11 @@ import static com.ohayoo.whitebird.compoent.ClassScanUtil.getClzFromPkg;
  * @createTime 2021-08-02
  */
 public class GrpcSystemService implements SystemServiceImpl {
-
+    private static Logger log = LoggerFactory.getLogger(GrpcSystemService.class);
     private VertxServer rpcServer;
 
     @Override
-    public void start() throws IOException {
+    public void startService() throws IOException {
         int grpcPort = GlobalContext.serverConfig().getGrpcPort();
         if(grpcPort == 0){
             return;
@@ -46,7 +43,7 @@ public class GrpcSystemService implements SystemServiceImpl {
             return;
         }
         for(String path : bizServicePkgPath) {
-            Set<Class<?>> glazes = getClzFromPkg(path, GrpcServiceAnnotate.class);
+            Set<Class<?>> glazes = ClassScanUtil.getClzFromPkg(path, GrpcServiceAnnotate.class);
             try {
                 for (Class<?> c : glazes) {
                     Object bizService = c.getDeclaredConstructor().newInstance();
@@ -54,14 +51,14 @@ public class GrpcSystemService implements SystemServiceImpl {
                     iGrpcService.init(vertxServer);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
                 throw new RuntimeException("biz service init fail");
             }
         }
     }
 
     @Override
-    public void stop() {
+    public void stopService() {
         rpcServer.shutdown();
     }
 }

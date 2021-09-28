@@ -2,7 +2,6 @@ package com.ohayoo.whitebird.compoent
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.bson.json.JsonWriterSettings
-import org.bson.json.StrictJsonWriter
 import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.core.type.TypeReference
 import java.lang.RuntimeException
@@ -27,6 +26,7 @@ object JsonUtil {
         }
     }
 
+    @JvmStatic
     fun <T> str2Obj(jsonStr: String, valueType: Class<T>): T {
         return try {
             jackson.readValue(jsonStr, valueType)

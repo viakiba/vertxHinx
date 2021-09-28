@@ -31,8 +31,8 @@ public final class Options {
     java.lang.String[] descriptorData = {
       "\n\roptions.proto\032 google/protobuf/descrip" +
       "tor.proto:/\n\005msgId\022\037.google.protobuf.Mes" +
-      "sageOptions\030\350\007 \001(\005B0\n%com.ohayoo.whitebi" +
-      "rd.generate.messageB\007Options"
+      "sageOptions\030\350\007 \001(\005B-\n\"com.ohayoo.dogwar." +
+      "generate.messageB\007Options"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

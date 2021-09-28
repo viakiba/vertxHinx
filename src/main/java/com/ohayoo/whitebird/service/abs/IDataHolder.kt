@@ -7,9 +7,10 @@ import com.ohayoo.whitebird.data.model.GameData
  * @createTime 2021-05-12
  */
 interface IDataHolder {
-    suspend fun checkNullAndInit(gameData: GameData?) {}
-    suspend fun dailyReset(gameData: GameData?) {}
-    suspend fun checkEveryRequest(gameData: GameData?) {}
-    suspend fun checkEveryRequestAll(gameData: GameData?) {}
-    suspend fun checkNullAndInitAll(gameData: GameData?) {}
+    suspend fun checkNullAndInit(gameData: GameData) {}
+
+    suspend fun dailyReset(gameData: GameData) {}
+
+    suspend fun checkEveryRequest(gameData: GameData) {}
+
 }

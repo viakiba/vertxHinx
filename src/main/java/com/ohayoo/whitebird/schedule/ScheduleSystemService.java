@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ScheduleSystemService implements IScheduleService, SystemServiceImpl {
 
-    public ScheduledExecutorService scheduledExecutorService ;
+    private static ScheduledExecutorService scheduledExecutorService ;
 
     @Override
     public ScheduleTask scheduleOnce(ScheduleTask scheduleTask, Date d) {
@@ -44,12 +44,12 @@ public class ScheduleSystemService implements IScheduleService, SystemServiceImp
 
 
     @Override
-    public void start() throws IOException {
+    public void startService() throws IOException {
         scheduledExecutorService =  Executors.newScheduledThreadPool(1);
     }
 
     @Override
-    public void stop() {
+    public void stopService() {
         if(scheduledExecutorService != null){
             scheduledExecutorService.shutdown();
         }

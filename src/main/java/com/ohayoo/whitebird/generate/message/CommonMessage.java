@@ -14,13 +14,13 @@ public final class CommonMessage {
   public enum ErrorCode
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>NULL = 0;</code>
+     * <code>SUCCESS = 0;</code>
      *
      * <pre>
-     * 无服务可用
+     * 正常状态
      * </pre>
      */
-    NULL(0, 0),
+    SUCCESS(0, 0),
     /**
      * <code>NoLogicServer = 1;</code>
      *
@@ -38,21 +38,21 @@ public final class CommonMessage {
      */
     SessionLoginInvalid(2, 2),
     /**
-     * <code>PrototypeDataError = 3;</code>
+     * <code>ExcelDataError = 3;</code>
      *
      * <pre>
      * 策划表数据错误
      * </pre>
      */
-    PrototypeDataError(3, 3),
+    ExcelDataError(3, 3),
     /**
-     * <code>ServerException = 4;</code>
+     * <code>ServerInnerException = 4;</code>
      *
      * <pre>
      * 服务器异常错误
      * </pre>
      */
-    ServerException(4, 4),
+    ServerInnerException(4, 4),
     /**
      * <code>MsgNotFoundException = 5;</code>
      *
@@ -61,16 +61,96 @@ public final class CommonMessage {
      * </pre>
      */
     MsgNotFoundException(5, 5),
+    /**
+     * <code>ParamErrorException = 6;</code>
+     *
+     * <pre>
+     * 基础参数错误
+     * </pre>
+     */
+    ParamErrorException(6, 6),
+    /**
+     * <code>TokenErrorException = 7;</code>
+     *
+     * <pre>
+     * token失效
+     * </pre>
+     */
+    TokenErrorException(7, 7),
+    /**
+     * <code>RenameCdErrorException = 8;</code>
+     *
+     * <pre>
+     * 改名cd还没到
+     * </pre>
+     */
+    RenameCdErrorException(8, 8),
+    /**
+     * <code>Energy_No_Enough_Exception = 1001;</code>
+     *
+     * <pre>
+     *chapter
+     * </pre>
+     */
+    Energy_No_Enough_Exception(9, 1001),
+    /**
+     * <code>Function_No_Open_Exception = 1102;</code>
+     *
+     * <pre>
+     *开关
+     * </pre>
+     */
+    Function_No_Open_Exception(10, 1102),
+    /**
+     * <code>COIN_NO_ENOUGH = 1103;</code>
+     *
+     * <pre>
+     * 金币不足
+     * </pre>
+     */
+    COIN_NO_ENOUGH(11, 1103),
+    /**
+     * <code>BAO_SHI_NO_ENOUGH = 1104;</code>
+     *
+     * <pre>
+     * 宝石不足
+     * </pre>
+     */
+    BAO_SHI_NO_ENOUGH(12, 1104),
+    /**
+     * <code>CARD_PRICE_NO_ENOUGH = 1105;</code>
+     *
+     * <pre>
+     * 卡牌碎片不足
+     * </pre>
+     */
+    CARD_PRICE_NO_ENOUGH(13, 1105),
+    /**
+     * <code>SKILL_PRICE_NO_ENOUGH = 1106;</code>
+     *
+     * <pre>
+     * 主技能碎片不足
+     * </pre>
+     */
+    SKILL_PRICE_NO_ENOUGH(14, 1106),
+    /**
+     * <code>BONUS_ALREADY_GIVE = 1107;</code>
+     *
+     * <pre>
+     * 奖励已经领取
+     * </pre>
+     */
+    BONUS_ALREADY_GIVE(15, 1107),
     ;
 
     /**
-     * <code>NULL = 0;</code>
+     * <code>SUCCESS = 0;</code>
      *
      * <pre>
-     * 无服务可用
+     * 正常状态
      * </pre>
      */
-    public static final int NULL_VALUE = 0;
+    public static final int SUCCESS_VALUE = 0;
     /**
      * <code>NoLogicServer = 1;</code>
      *
@@ -88,21 +168,21 @@ public final class CommonMessage {
      */
     public static final int SessionLoginInvalid_VALUE = 2;
     /**
-     * <code>PrototypeDataError = 3;</code>
+     * <code>ExcelDataError = 3;</code>
      *
      * <pre>
      * 策划表数据错误
      * </pre>
      */
-    public static final int PrototypeDataError_VALUE = 3;
+    public static final int ExcelDataError_VALUE = 3;
     /**
-     * <code>ServerException = 4;</code>
+     * <code>ServerInnerException = 4;</code>
      *
      * <pre>
      * 服务器异常错误
      * </pre>
      */
-    public static final int ServerException_VALUE = 4;
+    public static final int ServerInnerException_VALUE = 4;
     /**
      * <code>MsgNotFoundException = 5;</code>
      *
@@ -111,18 +191,108 @@ public final class CommonMessage {
      * </pre>
      */
     public static final int MsgNotFoundException_VALUE = 5;
+    /**
+     * <code>ParamErrorException = 6;</code>
+     *
+     * <pre>
+     * 基础参数错误
+     * </pre>
+     */
+    public static final int ParamErrorException_VALUE = 6;
+    /**
+     * <code>TokenErrorException = 7;</code>
+     *
+     * <pre>
+     * token失效
+     * </pre>
+     */
+    public static final int TokenErrorException_VALUE = 7;
+    /**
+     * <code>RenameCdErrorException = 8;</code>
+     *
+     * <pre>
+     * 改名cd还没到
+     * </pre>
+     */
+    public static final int RenameCdErrorException_VALUE = 8;
+    /**
+     * <code>Energy_No_Enough_Exception = 1001;</code>
+     *
+     * <pre>
+     *chapter
+     * </pre>
+     */
+    public static final int Energy_No_Enough_Exception_VALUE = 1001;
+    /**
+     * <code>Function_No_Open_Exception = 1102;</code>
+     *
+     * <pre>
+     *开关
+     * </pre>
+     */
+    public static final int Function_No_Open_Exception_VALUE = 1102;
+    /**
+     * <code>COIN_NO_ENOUGH = 1103;</code>
+     *
+     * <pre>
+     * 金币不足
+     * </pre>
+     */
+    public static final int COIN_NO_ENOUGH_VALUE = 1103;
+    /**
+     * <code>BAO_SHI_NO_ENOUGH = 1104;</code>
+     *
+     * <pre>
+     * 宝石不足
+     * </pre>
+     */
+    public static final int BAO_SHI_NO_ENOUGH_VALUE = 1104;
+    /**
+     * <code>CARD_PRICE_NO_ENOUGH = 1105;</code>
+     *
+     * <pre>
+     * 卡牌碎片不足
+     * </pre>
+     */
+    public static final int CARD_PRICE_NO_ENOUGH_VALUE = 1105;
+    /**
+     * <code>SKILL_PRICE_NO_ENOUGH = 1106;</code>
+     *
+     * <pre>
+     * 主技能碎片不足
+     * </pre>
+     */
+    public static final int SKILL_PRICE_NO_ENOUGH_VALUE = 1106;
+    /**
+     * <code>BONUS_ALREADY_GIVE = 1107;</code>
+     *
+     * <pre>
+     * 奖励已经领取
+     * </pre>
+     */
+    public static final int BONUS_ALREADY_GIVE_VALUE = 1107;
 
 
     public final int getNumber() { return value; }
 
     public static ErrorCode valueOf(int value) {
       switch (value) {
-        case 0: return NULL;
+        case 0: return SUCCESS;
         case 1: return NoLogicServer;
         case 2: return SessionLoginInvalid;
-        case 3: return PrototypeDataError;
-        case 4: return ServerException;
+        case 3: return ExcelDataError;
+        case 4: return ServerInnerException;
         case 5: return MsgNotFoundException;
+        case 6: return ParamErrorException;
+        case 7: return TokenErrorException;
+        case 8: return RenameCdErrorException;
+        case 1001: return Energy_No_Enough_Exception;
+        case 1102: return Function_No_Open_Exception;
+        case 1103: return COIN_NO_ENOUGH;
+        case 1104: return BAO_SHI_NO_ENOUGH;
+        case 1105: return CARD_PRICE_NO_ENOUGH;
+        case 1106: return SKILL_PRICE_NO_ENOUGH;
+        case 1107: return BONUS_ALREADY_GIVE;
         default: return null;
       }
     }
@@ -172,6 +342,172 @@ public final class CommonMessage {
     }
 
     // @@protoc_insertion_point(enum_scope:ErrorCode)
+  }
+
+  /**
+   * Protobuf enum {@code HeaderType}
+   */
+  public enum HeaderType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>token = 0;</code>
+     *
+     * <pre>
+     * 正常状态
+     * </pre>
+     */
+    token(0, 0),
+    /**
+     * <code>message_id = 1;</code>
+     *
+     * <pre>
+     * 请求的消息ID 、 回传客户端请求的消息ID
+     * </pre>
+     */
+    message_id(1, 1),
+    /**
+     * <code>response_message_id = 2;</code>
+     *
+     * <pre>
+     * 下发的消息ID
+     * </pre>
+     */
+    response_message_id(2, 2),
+    /**
+     * <code>status_code = 3;</code>
+     *
+     * <pre>
+     * 响应状态码
+     * </pre>
+     */
+    status_code(3, 3),
+    /**
+     * <code>response_server_time = 4;</code>
+     *
+     * <pre>
+     * 服务器响应时间戳
+     * </pre>
+     */
+    response_server_time(4, 4),
+    /**
+     * <code>collect_time = 5;</code>
+     *
+     * <pre>
+     * 服务器处理耗时
+     * </pre>
+     */
+    collect_time(5, 5),
+    ;
+
+    /**
+     * <code>token = 0;</code>
+     *
+     * <pre>
+     * 正常状态
+     * </pre>
+     */
+    public static final int token_VALUE = 0;
+    /**
+     * <code>message_id = 1;</code>
+     *
+     * <pre>
+     * 请求的消息ID 、 回传客户端请求的消息ID
+     * </pre>
+     */
+    public static final int message_id_VALUE = 1;
+    /**
+     * <code>response_message_id = 2;</code>
+     *
+     * <pre>
+     * 下发的消息ID
+     * </pre>
+     */
+    public static final int response_message_id_VALUE = 2;
+    /**
+     * <code>status_code = 3;</code>
+     *
+     * <pre>
+     * 响应状态码
+     * </pre>
+     */
+    public static final int status_code_VALUE = 3;
+    /**
+     * <code>response_server_time = 4;</code>
+     *
+     * <pre>
+     * 服务器响应时间戳
+     * </pre>
+     */
+    public static final int response_server_time_VALUE = 4;
+    /**
+     * <code>collect_time = 5;</code>
+     *
+     * <pre>
+     * 服务器处理耗时
+     * </pre>
+     */
+    public static final int collect_time_VALUE = 5;
+
+
+    public final int getNumber() { return value; }
+
+    public static HeaderType valueOf(int value) {
+      switch (value) {
+        case 0: return token;
+        case 1: return message_id;
+        case 2: return response_message_id;
+        case 3: return status_code;
+        case 4: return response_server_time;
+        case 5: return collect_time;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<HeaderType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<HeaderType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<HeaderType>() {
+            public HeaderType findValueByNumber(int number) {
+              return HeaderType.valueOf(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.ohayoo.whitebird.generate.message.CommonMessage.getDescriptor().getEnumTypes().get(1);
+    }
+
+    private static final HeaderType[] VALUES = values();
+
+    public static HeaderType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int index;
+    private final int value;
+
+    private HeaderType(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:HeaderType)
   }
 
   public interface PBErrorDownOrBuilder extends
@@ -559,7 +895,7 @@ public final class CommonMessage {
                 com.ohayoo.whitebird.generate.message.CommonMessage.PBErrorDown.class, com.ohayoo.whitebird.generate.message.CommonMessage.PBErrorDown.Builder.class);
       }
 
-      // Construct using com.ohayoo.whitebird.generate.message.CommonMessage.PBErrorDown.newBuilder()
+      // Construct using com.ohayoo.dogwar.generate.message.CommonMessage.PBErrorDown.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -851,32 +1187,15 @@ public final class CommonMessage {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 cmd = 1;</code>
-     *
-     * <pre>
-     *1:给钱(ModifyCurrency)
-     * </pre>
-     */
-    boolean hasCmd();
-    /**
-     * <code>optional int32 cmd = 1;</code>
-     *
-     * <pre>
-     *1:给钱(ModifyCurrency)
-     * </pre>
-     */
-    int getCmd();
-
-    /**
-     * <code>optional string param = 2;</code>
+     * <code>optional string param = 1;</code>
      */
     boolean hasParam();
     /**
-     * <code>optional string param = 2;</code>
+     * <code>optional string param = 1;</code>
      */
     java.lang.String getParam();
     /**
-     * <code>optional string param = 2;</code>
+     * <code>optional string param = 1;</code>
      */
     com.google.protobuf.ByteString
         getParamBytes();
@@ -933,14 +1252,9 @@ public final class CommonMessage {
               }
               break;
             }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              cmd_ = input.readInt32();
-              break;
-            }
-            case 18: {
+            case 10: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000001;
               param_ = bs;
               break;
             }
@@ -984,39 +1298,16 @@ public final class CommonMessage {
     }
 
     private int bitField0_;
-    public static final int CMD_FIELD_NUMBER = 1;
-    private int cmd_;
+    public static final int PARAM_FIELD_NUMBER = 1;
+    private java.lang.Object param_;
     /**
-     * <code>optional int32 cmd = 1;</code>
-     *
-     * <pre>
-     *1:给钱(ModifyCurrency)
-     * </pre>
+     * <code>optional string param = 1;</code>
      */
-    public boolean hasCmd() {
+    public boolean hasParam() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 cmd = 1;</code>
-     *
-     * <pre>
-     *1:给钱(ModifyCurrency)
-     * </pre>
-     */
-    public int getCmd() {
-      return cmd_;
-    }
-
-    public static final int PARAM_FIELD_NUMBER = 2;
-    private java.lang.Object param_;
-    /**
-     * <code>optional string param = 2;</code>
-     */
-    public boolean hasParam() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional string param = 2;</code>
+     * <code>optional string param = 1;</code>
      */
     public java.lang.String getParam() {
       java.lang.Object ref = param_;
@@ -1033,7 +1324,7 @@ public final class CommonMessage {
       }
     }
     /**
-     * <code>optional string param = 2;</code>
+     * <code>optional string param = 1;</code>
      */
     public com.google.protobuf.ByteString
         getParamBytes() {
@@ -1050,7 +1341,6 @@ public final class CommonMessage {
     }
 
     private void initFields() {
-      cmd_ = 0;
       param_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -1067,10 +1357,7 @@ public final class CommonMessage {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, cmd_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getParamBytes());
+        output.writeBytes(1, getParamBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1083,11 +1370,7 @@ public final class CommonMessage {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, cmd_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getParamBytes());
+          .computeBytesSize(1, getParamBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1186,7 +1469,7 @@ public final class CommonMessage {
                 com.ohayoo.whitebird.generate.message.CommonMessage.PBGmCmdUp.class, com.ohayoo.whitebird.generate.message.CommonMessage.PBGmCmdUp.Builder.class);
       }
 
-      // Construct using com.ohayoo.whitebird.generate.message.CommonMessage.PBGmCmdUp.newBuilder()
+      // Construct using com.ohayoo.dogwar.generate.message.CommonMessage.PBGmCmdUp.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1206,10 +1489,8 @@ public final class CommonMessage {
 
       public Builder clear() {
         super.clear();
-        cmd_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
         param_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -1241,10 +1522,6 @@ public final class CommonMessage {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.cmd_ = cmd_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
         result.param_ = param_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1262,11 +1539,8 @@ public final class CommonMessage {
 
       public Builder mergeFrom(com.ohayoo.whitebird.generate.message.CommonMessage.PBGmCmdUp other) {
         if (other == com.ohayoo.whitebird.generate.message.CommonMessage.PBGmCmdUp.getDefaultInstance()) return this;
-        if (other.hasCmd()) {
-          setCmd(other.getCmd());
-        }
         if (other.hasParam()) {
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000001;
           param_ = other.param_;
           onChanged();
         }
@@ -1297,63 +1571,15 @@ public final class CommonMessage {
       }
       private int bitField0_;
 
-      private int cmd_ ;
+      private java.lang.Object param_ = "";
       /**
-       * <code>optional int32 cmd = 1;</code>
-       *
-       * <pre>
-       *1:给钱(ModifyCurrency)
-       * </pre>
+       * <code>optional string param = 1;</code>
        */
-      public boolean hasCmd() {
+      public boolean hasParam() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 cmd = 1;</code>
-       *
-       * <pre>
-       *1:给钱(ModifyCurrency)
-       * </pre>
-       */
-      public int getCmd() {
-        return cmd_;
-      }
-      /**
-       * <code>optional int32 cmd = 1;</code>
-       *
-       * <pre>
-       *1:给钱(ModifyCurrency)
-       * </pre>
-       */
-      public Builder setCmd(int value) {
-        bitField0_ |= 0x00000001;
-        cmd_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 cmd = 1;</code>
-       *
-       * <pre>
-       *1:给钱(ModifyCurrency)
-       * </pre>
-       */
-      public Builder clearCmd() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        cmd_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object param_ = "";
-      /**
-       * <code>optional string param = 2;</code>
-       */
-      public boolean hasParam() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional string param = 2;</code>
+       * <code>optional string param = 1;</code>
        */
       public java.lang.String getParam() {
         java.lang.Object ref = param_;
@@ -1370,7 +1596,7 @@ public final class CommonMessage {
         }
       }
       /**
-       * <code>optional string param = 2;</code>
+       * <code>optional string param = 1;</code>
        */
       public com.google.protobuf.ByteString
           getParamBytes() {
@@ -1386,36 +1612,36 @@ public final class CommonMessage {
         }
       }
       /**
-       * <code>optional string param = 2;</code>
+       * <code>optional string param = 1;</code>
        */
       public Builder setParam(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000001;
         param_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string param = 2;</code>
+       * <code>optional string param = 1;</code>
        */
       public Builder clearParam() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         param_ = getDefaultInstance().getParam();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string param = 2;</code>
+       * <code>optional string param = 1;</code>
        */
       public Builder setParamBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000001;
         param_ = value;
         onChanged();
         return this;
@@ -1702,7 +1928,7 @@ public final class CommonMessage {
                 com.ohayoo.whitebird.generate.message.CommonMessage.PBGmCmdDown.class, com.ohayoo.whitebird.generate.message.CommonMessage.PBGmCmdDown.Builder.class);
       }
 
-      // Construct using com.ohayoo.whitebird.generate.message.CommonMessage.PBGmCmdDown.newBuilder()
+      // Construct using com.ohayoo.dogwar.generate.message.CommonMessage.PBGmCmdDown.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1887,14 +2113,24 @@ public final class CommonMessage {
     java.lang.String[] descriptorData = {
       "\n\026msg_common_10000.proto\032\roptions.proto\"" +
       "J\n\013PBErrorDown\022\021\n\tcommandId\030\001 \001(\005\022\021\n\terr" +
-      "orCode\030\002 \001(\005\022\017\n\007message\030\003 \001(\t:\004\300>\220N\"-\n\tP" +
-      "BGmCmdUp\022\013\n\003cmd\030\001 \001(\005\022\r\n\005param\030\002 \001(\t:\004\300>" +
-      "\221N\"#\n\013PBGmCmdDown\022\016\n\006result\030\001 \001(\010:\004\300>\222N*" +
-      "\210\001\n\tErrorCode\022\010\n\004NULL\020\000\022\021\n\rNoLogicServer" +
-      "\020\001\022\027\n\023SessionLoginInvalid\020\002\022\026\n\022Prototype" +
-      "DataError\020\003\022\023\n\017ServerException\020\004\022\030\n\024MsgN" +
-      "otFoundException\020\005B8\n%com.ohayoo.whitebi" +
-      "rd.generate.messageB\rCommonMessageH\001"
+      "orCode\030\002 \001(\005\022\017\n\007message\030\003 \001(\t:\004\300>\220N\" \n\tP" +
+      "BGmCmdUp\022\r\n\005param\030\001 \001(\t:\004\300>\221N\"#\n\013PBGmCmd" +
+      "Down\022\016\n\006result\030\001 \001(\010:\004\300>\222N*\231\003\n\tErrorCode" +
+      "\022\013\n\007SUCCESS\020\000\022\021\n\rNoLogicServer\020\001\022\027\n\023Sess" +
+      "ionLoginInvalid\020\002\022\022\n\016ExcelDataError\020\003\022\030\n" +
+      "\024ServerInnerException\020\004\022\030\n\024MsgNotFoundEx" +
+      "ception\020\005\022\027\n\023ParamErrorException\020\006\022\027\n\023To" +
+      "kenErrorException\020\007\022\032\n\026RenameCdErrorExce",
+      "ption\020\010\022\037\n\032Energy_No_Enough_Exception\020\351\007" +
+      "\022\037\n\032Function_No_Open_Exception\020\316\010\022\023\n\016COI" +
+      "N_NO_ENOUGH\020\317\010\022\026\n\021BAO_SHI_NO_ENOUGH\020\320\010\022\031" +
+      "\n\024CARD_PRICE_NO_ENOUGH\020\321\010\022\032\n\025SKILL_PRICE" +
+      "_NO_ENOUGH\020\322\010\022\027\n\022BONUS_ALREADY_GIVE\020\323\010*}" +
+      "\n\nHeaderType\022\t\n\005token\020\000\022\016\n\nmessage_id\020\001\022" +
+      "\027\n\023response_message_id\020\002\022\017\n\013status_code\020" +
+      "\003\022\030\n\024response_server_time\020\004\022\020\n\014collect_t" +
+      "ime\020\005B5\n\"com.ohayoo.dogwar.generate.mess" +
+      "ageB\rCommonMessageH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1920,7 +2156,7 @@ public final class CommonMessage {
     internal_static_PBGmCmdUp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_PBGmCmdUp_descriptor,
-        new java.lang.String[] { "Cmd", "Param", });
+        new java.lang.String[] { "Param", });
     internal_static_PBGmCmdDown_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_PBGmCmdDown_fieldAccessorTable = new

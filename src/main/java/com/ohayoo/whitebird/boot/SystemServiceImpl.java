@@ -8,8 +8,8 @@ import java.io.IOException;
  */
 public interface SystemServiceImpl {
 
-    void start() throws IOException;
+    void startService() throws IOException;
 
-    default void stop(){}
+    default void stopService(){}
 
 }

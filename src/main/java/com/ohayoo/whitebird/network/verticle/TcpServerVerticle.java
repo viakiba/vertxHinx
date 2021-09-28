@@ -1,9 +1,9 @@
 package com.ohayoo.whitebird.network.verticle;
 
-import com.ohayoo.whitebird.boot.GlobalContext;
-import com.ohayoo.whitebird.compoent.KTCoroutineHelp;
 import com.ohayoo.whitebird.enums.NetType;
 import com.ohayoo.whitebird.player.PlayerSystemService;
+import com.ohayoo.whitebird.boot.GlobalContext;
+import com.ohayoo.whitebird.compoent.KTCoroutineHelp;
 import com.ohayoo.whitebird.player.enums.AttributeEnum;
 import com.ohayoo.whitebird.player.model.TcpPlayer;
 import io.netty.buffer.ByteBuf;
@@ -18,7 +18,8 @@ import io.vertx.core.net.NetServer;
 import io.vertx.core.net.NetServerOptions;
 import io.vertx.core.net.NetSocket;
 import io.vertx.core.net.impl.NetSocketInternal;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.ByteOrder;
 
@@ -26,9 +27,8 @@ import java.nio.ByteOrder;
  * @author huangpeng.12@bytedance.com
  * @createTime 2021-07-23
  */
-@Slf4j
 public class TcpServerVerticle extends AbstractVerticle implements BaseServerVerticle {
-
+    private static Logger log = LoggerFactory.getLogger(TcpServerVerticle.class);
     private NetServer server;
 
     @Override

@@ -1,23 +1,31 @@
 package com.ohayoo.whitebird.player
 
 import cn.hutool.core.lang.Tuple
-import com.ohayoo.whitebird.compoent.KTCoroutineHelp.Companion.runDefault
-import com.ohayoo.whitebird.boot.SystemServiceImpl
-import com.ohayoo.whitebird.player.model.IPlayer
-import com.ohayoo.whitebird.enums.NetType
+import com.google.protobuf.GeneratedMessage
+import com.google.protobuf.Message
+import com.googlecode.protobuf.format.JsonFormat
 import com.ohayoo.whitebird.boot.GlobalContext
-import com.ohayoo.whitebird.player.enums.AttributeEnum
-import com.ohayoo.whitebird.message.MsgSystemService
-import com.ohayoo.whitebird.player.model.TcpPlayer
+import com.ohayoo.whitebird.boot.SystemServiceImpl
 import com.ohayoo.whitebird.compoent.KTCoroutineHelp
-import com.ohayoo.whitebird.player.model.WebsocketPlayer
+import com.ohayoo.whitebird.compoent.KTCoroutineHelp.Companion.runDefault
+import com.ohayoo.whitebird.compoent.TimeUtil
+import com.ohayoo.whitebird.enums.NetType
+import com.ohayoo.whitebird.exception.CustomException
+import com.ohayoo.whitebird.generate.message.CommonMessage
+import com.ohayoo.whitebird.message.MsgSystemService
+import com.ohayoo.whitebird.player.enums.AttributeEnum
 import com.ohayoo.whitebird.player.model.HttpPlayer
-import io.vertx.core.Promise
+import com.ohayoo.whitebird.player.model.IPlayer
+import com.ohayoo.whitebird.player.model.TcpPlayer
+import com.ohayoo.whitebird.player.model.WebsocketPlayer
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.HttpServerRequest
+import io.vertx.kotlin.coroutines.CoroutineVerticle
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import lombok.extern.slf4j.Slf4j
+import org.slf4j.LoggerFactory
 import java.util.concurrent.ConcurrentHashMap
 
 /**
@@ -25,9 +33,11 @@ import java.util.concurrent.ConcurrentHashMap
  * @createTime 2021-07-23
  */
 @Slf4j
-class PlayerSystemService : SystemServiceImpl {
+class PlayerSystemService : SystemServiceImpl,CoroutineVerticle() {
+    private val log = LoggerFactory.getLogger(this::class.java)
     lateinit var playerMap: MutableMap<Long, IPlayer>
-    override fun start() {
+
+    override fun startService() {
         val netType = GlobalContext.serverConfig().netType
         for (i in netType.indices) {
             if (netType[i] != NetType.http) {
@@ -36,20 +46,13 @@ class PlayerSystemService : SystemServiceImpl {
         }
     }
 
-    override fun stop() {
+    override fun stopService() {
         if (playerMap != null) {
         }
     }
 
     fun addPlayer(player: IPlayer) {
         playerMap!![player.getAttribute(AttributeEnum.key)] = player
-    }
-
-    private fun handle(player: IPlayer, msgId: Int, data: ByteArray) {
-        val msgSystemService = GlobalContext.getSystemService<MsgSystemService>(MsgSystemService::class.java)
-        GlobalScope.launch {
-            msgSystemService.handler(player, msgId, data);
-        }
     }
 
     fun tcpHandle(data: Buffer, tcpPlayer: TcpPlayer) {
@@ -80,18 +83,44 @@ class PlayerSystemService : SystemServiceImpl {
     }
 
     fun httpHandle(req: HttpServerRequest, buffer: Buffer, httpPlayer: HttpPlayer) {
-        val msgId = req.getHeader("header_message_id").toInt()
+        var msgIdStr = req.getHeader(CommonMessage.HeaderType.message_id.name)
+        if (msgIdStr == null){
+            throw CustomException(CommonMessage.ErrorCode.ServerInnerException)
+        }
+        val msgId = msgIdStr.toInt()
+        req.response().putHeader(CommonMessage.HeaderType.message_id.name,msgId.toString());
+        var curTimeBeginDo = TimeUtil.currentSystemTime().toString()
+        req.response().putHeader(CommonMessage.HeaderType.response_server_time.name, curTimeBeginDo);
+        req.response().putHeader(CommonMessage.HeaderType.collect_time.name, curTimeBeginDo);
+        req.response().putHeader(CommonMessage.HeaderType.status_code.name, CommonMessage.ErrorCode.SUCCESS.number.toString());
+        //预处理完成
         val bytes = buffer.bytes
         // http服务 使用 worker线程
-        GlobalContext.getVertx().executeBlocking { h: Promise<Any?>? -> handle(httpPlayer, msgId, bytes) }
+        val msgSystemService = GlobalContext.getSystemService<MsgSystemService>(MsgSystemService::class.java)
+        GlobalScope.launch(Dispatchers.IO) {
+            msgSystemService.handler(httpPlayer, msgId, bytes,true);
+        }
     }
 
     companion object {
+        private val log = LoggerFactory.getLogger(this::class.java)
+        private val jsonFormat = JsonFormat()
+
+        @JvmStatic
+        fun getMsgId(cls: GeneratedMessage): Int {
+            val values: Collection<Any> = cls.descriptorForType.toProto().options.allFields.values
+            val iterator = values.stream().iterator()
+            while (iterator.hasNext()) {
+                return iterator.next() as Int
+            }
+            return 0
+        }
+
         @JvmStatic
         fun readMessageInfo(buffer: Buffer): Tuple {
             val allLength: Int
             val msgId: Int
-            if (GlobalContext.serverConfig().byteOrder) {
+            if (GlobalContext.serverConfig().isByteOrder) {
                 //小端模式
                 allLength = buffer.getIntLE(0)
                 msgId = buffer.getIntLE(4)
@@ -108,7 +137,7 @@ class PlayerSystemService : SystemServiceImpl {
         fun writeMessageInfo(buffer: Buffer, data: ByteArray, msgId: Int) {
             //长度数据 4字节 + 消息ID 4字节 ++ 数据内容长度
             val length = 4 + 4 + data.size
-            if (GlobalContext.serverConfig().byteOrder) {
+            if (GlobalContext.serverConfig().isByteOrder) {
                 //小端模式
                 buffer.appendIntLE(length)
                 buffer.appendIntLE(msgId)
@@ -118,6 +147,13 @@ class PlayerSystemService : SystemServiceImpl {
                 buffer.appendInt(msgId)
             }
             buffer.appendBytes(data)
+        }
+
+        @JvmStatic
+        fun printMessage(message: Any) {
+            if (GlobalContext.serverConfig().isDebug) {
+                log.info("消息 " + message.javaClass.simpleName + " " + jsonFormat.printToString(message as Message))
+            }
         }
     }
 }

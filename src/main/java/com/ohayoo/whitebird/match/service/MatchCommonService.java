@@ -5,8 +5,9 @@ import com.ohayoo.whitebird.match.IMatchService;
 import com.ohayoo.whitebird.match.model.MatchPlayer;
 import com.ohayoo.whitebird.schedule.ScheduleSystemService;
 import com.ohayoo.whitebird.schedule.ScheduleTask;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.list.TreeList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,17 +16,17 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author huangpeng.12@bytedance.com
  * @createTime 2021-08-10
  */
-@Slf4j
 public class MatchCommonService implements IMatchService {
+    private static Logger log = LoggerFactory.getLogger(MatchCommonService.class);
 
     //按照分数分段的匹配池  分数段 -> (玩家ID, 玩家数据)
-    private static ConcurrentHashMap<Integer,ConcurrentHashMap<Long,MatchPlayer>> playerPool = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<Integer,ConcurrentHashMap<Long, MatchPlayer>> playerPool = new ConcurrentHashMap<>();
 
     private static List<Integer> segmentSortList = new TreeList<>();
 
     private static int NEED_MATCH_PLAYER_COUNT = 1;
 
-    public static boolean stop = false;
+    private static boolean stop = false;
 
     public void addPlayer(MatchPlayer matchPlayer){
         //TODO 算出此人分段 放入对应 map

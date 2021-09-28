@@ -9,6 +9,7 @@ import java.lang.RuntimeException
 import kotlin.Throws
 import com.ohayoo.whitebird.exception.CustomException
 import com.ohayoo.whitebird.generate.message.CommonMessage
+import com.ohayoo.whitebird.player.PlayerSystemService
 import com.ohayoo.whitebird.player.model.IPlayer
 import java.lang.Exception
 import java.util.concurrent.ConcurrentHashMap
@@ -42,6 +43,7 @@ class JsonMsgHandler : MsgHandler {
     @Throws(Exception::class)
     override suspend fun handler(player: IPlayer, msgId: Int, body: ByteArray) {
         val msg = recognizedMsg(msgId, body)
+        PlayerSystemService.printMessage(msg)
         val baseService = recognizedBizService(msgId)
         baseService!!.handlerJson(msgId, msg, player)
     }

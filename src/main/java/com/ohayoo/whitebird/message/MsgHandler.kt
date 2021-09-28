@@ -3,10 +3,9 @@ package com.ohayoo.whitebird.message
 import kotlin.Throws
 import com.ohayoo.whitebird.player.model.IPlayer
 import com.ohayoo.whitebird.exception.CustomException
-import com.ohayoo.whitebird.service.abs.BaseService
 import com.ohayoo.whitebird.generate.message.CommonMessage
+import com.ohayoo.whitebird.service.abs.BaseService
 import java.lang.Exception
-import java.util.concurrent.ConcurrentHashMap
 
 interface MsgHandler {
     fun init()

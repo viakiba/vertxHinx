@@ -1,40 +1,25 @@
 package com.ohayoo.whitebird.network.verticle;
 
-import com.ohayoo.whitebird.boot.GlobalContext;
-import com.ohayoo.whitebird.compoent.LocalIpUtil;
 import com.ohayoo.whitebird.enums.NetType;
-import com.ohayoo.whitebird.player.PlayerSystemService;
-import com.ohayoo.whitebird.player.enums.AttributeEnum;
-import com.ohayoo.whitebird.player.model.TcpPlayer;
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelPipeline;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
-import io.netty.handler.timeout.IdleStateHandler;
+import com.ohayoo.whitebird.compoent.LocalIpUtil;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.datagram.DatagramSocket;
 import io.vertx.core.datagram.DatagramSocketOptions;
 import io.vertx.core.json.JsonObject;
-import io.vertx.core.net.NetServer;
-import io.vertx.core.net.NetServerOptions;
-import io.vertx.core.net.NetSocket;
 import io.vertx.core.net.SocketAddress;
-import io.vertx.core.net.impl.NetSocketInternal;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.nio.ByteOrder;
 import java.util.Random;
 
 /**
  * @author huangpeng.12@bytedance.com
  * @createTime 2021-07-23
  */
-@Slf4j
 public class UdpServerVerticle extends AbstractVerticle implements BaseServerVerticle {
-
+    private static Logger log = LoggerFactory.getLogger(UdpServerVerticle.class);
     private DatagramSocket socket;
 
     /**

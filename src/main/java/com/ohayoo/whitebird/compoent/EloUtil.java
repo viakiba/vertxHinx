@@ -20,7 +20,7 @@ public class EloUtil {
 
     private static double CalculateExpectedScore(int rA, int rB) {
         double expectedScore;
-        expectedScore = rB - rA;
+        expectedScore = (double) rB - rA;
         expectedScore = expectedScore / 400;
         expectedScore = Math.pow(10, expectedScore);
         expectedScore = 1 / (1 + expectedScore);
