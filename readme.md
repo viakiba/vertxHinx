@@ -3,15 +3,15 @@
     基于Vertx的异步非阻塞服务端脚手架
     example/kotlin 分支是基于kotlin实现的协程分支
 
-    ```text
-      关于 kotlin及其协程以及vertx与kotlin的深度结合：
-        https://www.kotlincn.net/docs/tutorials/getting-started.html
-        https://www.kotlincn.net/docs/tutorials/coroutines/async-programming.html
-        https://vertx.io/docs/vertx-lang-kotlin-coroutines/kotlin/
-        https://vertx.io/docs/vertx-core/kotlin/
-      在 example/kotlin 分支的 test 下 ，有关于 kotlin的代码示例。
-      玩家消息的处理基于 channel 保证串行 线程安全
-    ```
+```text
+  关于 kotlin及其协程以及vertx与kotlin的深度结合：
+    https://www.kotlincn.net/docs/tutorials/getting-started.html
+    https://www.kotlincn.net/docs/tutorials/coroutines/async-programming.html
+    https://vertx.io/docs/vertx-lang-kotlin-coroutines/kotlin/
+    https://vertx.io/docs/vertx-core/kotlin/
+  在 example/kotlin 分支的 test 下 ，有关于 kotlin的代码示例。
+  玩家消息的处理基于 channel 保证串行 线程安全
+```
 
 ## 简介
 
