@@ -6,7 +6,7 @@
     <persistence-unit name="postgresql">
         <provider>org.hibernate.reactive.provider.ReactivePersistenceProvider</provider>
 
-        <class>com.ohayoo.whitebird.data.model.GameData</class>
+        <class>io.github.viakiba.hinx.data.model.GameData</class>
 
         <properties>
             <!-- PostgreSQL -->
@@ -28,7 +28,7 @@
 
     <persistence-unit name="mysql">
         <provider>org.hibernate.reactive.provider.ReactivePersistenceProvider</provider>
-        <class>com.ohayoo.whitebird.data.model.GameData</class>
+        <class>io.github.viakiba.hinx.data.model.GameData</class>
         <properties>
             <!-- MySQL -->
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/test"/>
