@@ -11,7 +11,7 @@ import io.github.viakiba.hinx.player.PlayerSystemService;
 import io.github.viakiba.hinx.schedule.ScheduleSystemService;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-23
  */
 public class Start {

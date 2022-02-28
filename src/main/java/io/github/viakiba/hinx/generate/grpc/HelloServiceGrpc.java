@@ -8,8 +8,9 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
  * </pre>
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.39.0)",
+    value = "by gRPC proto compiler (version 1.44.1)",
     comments = "Source: demo.proto")
+@io.grpc.stub.annotations.GrpcGenerated
 public final class HelloServiceGrpc {
 
   private HelloServiceGrpc() {}
@@ -17,29 +18,29 @@ public final class HelloServiceGrpc {
   public static final String SERVICE_NAME = "helloworld.HelloService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<HelloRequest,
-          HelloReply> getSayHelloMethod;
+  private static volatile io.grpc.MethodDescriptor<io.github.viakiba.hinx.generate.grpc.HelloRequest,
+      io.github.viakiba.hinx.generate.grpc.HelloReply> getSayHelloMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "SayHello",
-      requestType = HelloRequest.class,
-      responseType = HelloReply.class,
+      requestType = io.github.viakiba.hinx.generate.grpc.HelloRequest.class,
+      responseType = io.github.viakiba.hinx.generate.grpc.HelloReply.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<HelloRequest,
-          HelloReply> getSayHelloMethod() {
-    io.grpc.MethodDescriptor<HelloRequest, HelloReply> getSayHelloMethod;
+  public static io.grpc.MethodDescriptor<io.github.viakiba.hinx.generate.grpc.HelloRequest,
+      io.github.viakiba.hinx.generate.grpc.HelloReply> getSayHelloMethod() {
+    io.grpc.MethodDescriptor<io.github.viakiba.hinx.generate.grpc.HelloRequest, io.github.viakiba.hinx.generate.grpc.HelloReply> getSayHelloMethod;
     if ((getSayHelloMethod = HelloServiceGrpc.getSayHelloMethod) == null) {
       synchronized (HelloServiceGrpc.class) {
         if ((getSayHelloMethod = HelloServiceGrpc.getSayHelloMethod) == null) {
           HelloServiceGrpc.getSayHelloMethod = getSayHelloMethod =
-              io.grpc.MethodDescriptor.<HelloRequest, HelloReply>newBuilder()
+              io.grpc.MethodDescriptor.<io.github.viakiba.hinx.generate.grpc.HelloRequest, io.github.viakiba.hinx.generate.grpc.HelloReply>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SayHello"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  HelloRequest.getDefaultInstance()))
+                  io.github.viakiba.hinx.generate.grpc.HelloRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  HelloReply.getDefaultInstance()))
+                  io.github.viakiba.hinx.generate.grpc.HelloReply.getDefaultInstance()))
               .setSchemaDescriptor(new HelloServiceMethodDescriptorSupplier("SayHello"))
               .build();
         }
@@ -104,8 +105,8 @@ public final class HelloServiceGrpc {
      * Sends a greeting
      * </pre>
      */
-    public void sayHello(HelloRequest request,
-                         io.grpc.stub.StreamObserver<HelloReply> responseObserver) {
+    public void sayHello(io.github.viakiba.hinx.generate.grpc.HelloRequest request,
+        io.grpc.stub.StreamObserver<io.github.viakiba.hinx.generate.grpc.HelloReply> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSayHelloMethod(), responseObserver);
     }
 
@@ -115,8 +116,8 @@ public final class HelloServiceGrpc {
             getSayHelloMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                      HelloRequest,
-                      HelloReply>(
+                io.github.viakiba.hinx.generate.grpc.HelloRequest,
+                io.github.viakiba.hinx.generate.grpc.HelloReply>(
                   this, METHODID_SAY_HELLO)))
           .build();
     }
@@ -144,8 +145,8 @@ public final class HelloServiceGrpc {
      * Sends a greeting
      * </pre>
      */
-    public void sayHello(HelloRequest request,
-                         io.grpc.stub.StreamObserver<HelloReply> responseObserver) {
+    public void sayHello(io.github.viakiba.hinx.generate.grpc.HelloRequest request,
+        io.grpc.stub.StreamObserver<io.github.viakiba.hinx.generate.grpc.HelloReply> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getSayHelloMethod(), getCallOptions()), request, responseObserver);
     }
@@ -173,7 +174,7 @@ public final class HelloServiceGrpc {
      * Sends a greeting
      * </pre>
      */
-    public HelloReply sayHello(HelloRequest request) {
+    public io.github.viakiba.hinx.generate.grpc.HelloReply sayHello(io.github.viakiba.hinx.generate.grpc.HelloRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSayHelloMethod(), getCallOptions(), request);
     }
@@ -201,8 +202,8 @@ public final class HelloServiceGrpc {
      * Sends a greeting
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<HelloReply> sayHello(
-        HelloRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<io.github.viakiba.hinx.generate.grpc.HelloReply> sayHello(
+        io.github.viakiba.hinx.generate.grpc.HelloRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getSayHelloMethod(), getCallOptions()), request);
     }
@@ -228,8 +229,8 @@ public final class HelloServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_SAY_HELLO:
-          serviceImpl.sayHello((HelloRequest) request,
-              (io.grpc.stub.StreamObserver<HelloReply>) responseObserver);
+          serviceImpl.sayHello((io.github.viakiba.hinx.generate.grpc.HelloRequest) request,
+              (io.grpc.stub.StreamObserver<io.github.viakiba.hinx.generate.grpc.HelloReply>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -253,7 +254,7 @@ public final class HelloServiceGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return GreetingService.getDescriptor();
+      return io.github.viakiba.hinx.generate.grpc.GreetingService.getDescriptor();
     }
 
     @java.lang.Override

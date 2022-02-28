@@ -4,7 +4,7 @@ import io.github.viakiba.hinx.generate.message.CommonMessage;
 
 /**
  * @description CustomException
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  */
 public class CustomException extends Exception {
 

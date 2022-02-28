@@ -5,7 +5,7 @@ import io.github.viakiba.hinx.config.ServerSystemConfig;
 import org.testng.annotations.BeforeClass;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-28
  */
 public abstract class TestBase {

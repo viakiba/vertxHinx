@@ -6,7 +6,13 @@ package io.github.viakiba.hinx.generate.message;
 public final class CommonMessage {
   private CommonMessage() {}
   public static void registerAllExtensions(
+      com.google.protobuf.ExtensionRegistryLite registry) {
+  }
+
+  public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
+    registerAllExtensions(
+        (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   /**
    * Protobuf enum {@code ErrorCode}
@@ -14,108 +20,129 @@ public final class CommonMessage {
   public enum ErrorCode
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
+     * <pre>
+     * 无服务可用
+     * </pre>
+     *
      * <code>NULL = 0;</code>
-     *
+     */
+    NULL(0),
+    /**
      * <pre>
      * 无服务可用
      * </pre>
-     */
-    NULL(0, 0),
-    /**
+     *
      * <code>NoLogicServer = 1;</code>
-     *
-     * <pre>
-     * 无服务可用
-     * </pre>
      */
-    NoLogicServer(1, 1),
+    NoLogicServer(1),
     /**
-     * <code>SessionLoginInvalid = 2;</code>
-     *
      * <pre>
      * session登录失效
      * </pre>
-     */
-    SessionLoginInvalid(2, 2),
-    /**
-     * <code>PrototypeDataError = 3;</code>
      *
+     * <code>SessionLoginInvalid = 2;</code>
+     */
+    SessionLoginInvalid(2),
+    /**
      * <pre>
      * 策划表数据错误
      * </pre>
-     */
-    PrototypeDataError(3, 3),
-    /**
-     * <code>ServerException = 4;</code>
      *
+     * <code>PrototypeDataError = 3;</code>
+     */
+    PrototypeDataError(3),
+    /**
      * <pre>
      * 服务器异常错误
      * </pre>
-     */
-    ServerException(4, 4),
-    /**
-     * <code>MsgNotFoundException = 5;</code>
      *
+     * <code>ServerException = 4;</code>
+     */
+    ServerException(4),
+    /**
      * <pre>
      * 消息未注册
      * </pre>
+     *
+     * <code>MsgNotFoundException = 5;</code>
      */
-    MsgNotFoundException(5, 5),
+    MsgNotFoundException(5),
+    UNRECOGNIZED(-1),
     ;
 
     /**
-     * <code>NULL = 0;</code>
-     *
      * <pre>
      * 无服务可用
      * </pre>
+     *
+     * <code>NULL = 0;</code>
      */
     public static final int NULL_VALUE = 0;
     /**
-     * <code>NoLogicServer = 1;</code>
-     *
      * <pre>
      * 无服务可用
      * </pre>
+     *
+     * <code>NoLogicServer = 1;</code>
      */
     public static final int NoLogicServer_VALUE = 1;
     /**
-     * <code>SessionLoginInvalid = 2;</code>
-     *
      * <pre>
      * session登录失效
      * </pre>
+     *
+     * <code>SessionLoginInvalid = 2;</code>
      */
     public static final int SessionLoginInvalid_VALUE = 2;
     /**
-     * <code>PrototypeDataError = 3;</code>
-     *
      * <pre>
      * 策划表数据错误
      * </pre>
+     *
+     * <code>PrototypeDataError = 3;</code>
      */
     public static final int PrototypeDataError_VALUE = 3;
     /**
-     * <code>ServerException = 4;</code>
-     *
      * <pre>
      * 服务器异常错误
      * </pre>
+     *
+     * <code>ServerException = 4;</code>
      */
     public static final int ServerException_VALUE = 4;
     /**
-     * <code>MsgNotFoundException = 5;</code>
-     *
      * <pre>
      * 消息未注册
      * </pre>
+     *
+     * <code>MsgNotFoundException = 5;</code>
      */
     public static final int MsgNotFoundException_VALUE = 5;
 
 
-    public final int getNumber() { return value; }
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
 
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
     public static ErrorCode valueOf(int value) {
+      return forNumber(value);
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
+    public static ErrorCode forNumber(int value) {
       switch (value) {
         case 0: return NULL;
         case 1: return NoLogicServer;
@@ -131,17 +158,21 @@ public final class CommonMessage {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<ErrorCode>
-        internalValueMap =
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        ErrorCode> internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<ErrorCode>() {
             public ErrorCode findValueByNumber(int number) {
-              return ErrorCode.valueOf(number);
+              return ErrorCode.forNumber(number);
             }
           };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalStateException(
+            "Can't get the descriptor of an unrecognized enum value.");
+      }
+      return getDescriptor().getValues().get(ordinal());
     }
     public final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptorForType() {
@@ -149,7 +180,7 @@ public final class CommonMessage {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return CommonMessage.getDescriptor().getEnumTypes().get(0);
+      return io.github.viakiba.hinx.generate.message.CommonMessage.getDescriptor().getEnumTypes().get(0);
     }
 
     private static final ErrorCode[] VALUES = values();
@@ -160,14 +191,15 @@ public final class CommonMessage {
         throw new java.lang.IllegalArgumentException(
           "EnumValueDescriptor is not for this type.");
       }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
       return VALUES[desc.getIndex()];
     }
 
-    private final int index;
     private final int value;
 
-    private ErrorCode(int index, int value) {
-      this.index = index;
+    private ErrorCode(int value) {
       this.value = value;
     }
 
@@ -179,83 +211,92 @@ public final class CommonMessage {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 commandId = 1;</code>
-     *
      * <pre>
      *返回请求的指令
      * </pre>
+     *
+     * <code>optional int32 commandId = 1;</code>
+     * @return Whether the commandId field is set.
      */
     boolean hasCommandId();
     /**
-     * <code>optional int32 commandId = 1;</code>
-     *
      * <pre>
      *返回请求的指令
      * </pre>
+     *
+     * <code>optional int32 commandId = 1;</code>
+     * @return The commandId.
      */
     int getCommandId();
 
     /**
      * <code>optional int32 errorCode = 2;</code>
+     * @return Whether the errorCode field is set.
      */
     boolean hasErrorCode();
     /**
      * <code>optional int32 errorCode = 2;</code>
+     * @return The errorCode.
      */
     int getErrorCode();
 
     /**
      * <code>optional string message = 3;</code>
+     * @return Whether the message field is set.
      */
     boolean hasMessage();
     /**
      * <code>optional string message = 3;</code>
+     * @return The message.
      */
     java.lang.String getMessage();
     /**
      * <code>optional string message = 3;</code>
+     * @return The bytes for message.
      */
     com.google.protobuf.ByteString
         getMessageBytes();
   }
   /**
-   * Protobuf type {@code PBErrorDown}
-   *
    * <pre>
    * 错误回复
    * </pre>
+   *
+   * Protobuf type {@code PBErrorDown}
    */
   public static final class PBErrorDown extends
-      com.google.protobuf.GeneratedMessage implements
+      com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:PBErrorDown)
       PBErrorDownOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use PBErrorDown.newBuilder() to construct.
-    private PBErrorDown(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private PBErrorDown(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
-      this.unknownFields = builder.getUnknownFields();
     }
-    private PBErrorDown(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final PBErrorDown defaultInstance;
-    public static PBErrorDown getDefaultInstance() {
-      return defaultInstance;
+    private PBErrorDown() {
+      message_ = "";
     }
 
-    public PBErrorDown getDefaultInstanceForType() {
-      return defaultInstance;
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new PBErrorDown();
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private PBErrorDown(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -267,13 +308,6 @@ public final class CommonMessage {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               bitField0_ |= 0x00000001;
               commandId_ = input.readInt32();
@@ -285,9 +319,16 @@ public final class CommonMessage {
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+              java.lang.String s = input.readStringRequireUtf8();
               bitField0_ |= 0x00000004;
-              message_ = bs;
+              message_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -296,7 +337,7 @@ public final class CommonMessage {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+            e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -304,51 +345,41 @@ public final class CommonMessage {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return CommonMessage.internal_static_PBErrorDown_descriptor;
+      return io.github.viakiba.hinx.generate.message.CommonMessage.internal_static_PBErrorDown_descriptor;
     }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CommonMessage.internal_static_PBErrorDown_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              CommonMessage.PBErrorDown.class, CommonMessage.PBErrorDown.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<PBErrorDown> PARSER =
-        new com.google.protobuf.AbstractParser<PBErrorDown>() {
-      public PBErrorDown parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PBErrorDown(input, extensionRegistry);
-      }
-    };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<PBErrorDown> getParserForType() {
-      return PARSER;
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return io.github.viakiba.hinx.generate.message.CommonMessage.internal_static_PBErrorDown_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown.class, io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown.Builder.class);
     }
 
     private int bitField0_;
     public static final int COMMANDID_FIELD_NUMBER = 1;
     private int commandId_;
     /**
-     * <code>optional int32 commandId = 1;</code>
-     *
      * <pre>
      *返回请求的指令
      * </pre>
+     *
+     * <code>optional int32 commandId = 1;</code>
+     * @return Whether the commandId field is set.
      */
+    @java.lang.Override
     public boolean hasCommandId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>optional int32 commandId = 1;</code>
-     *
      * <pre>
      *返回请求的指令
      * </pre>
+     *
+     * <code>optional int32 commandId = 1;</code>
+     * @return The commandId.
      */
+    @java.lang.Override
     public int getCommandId() {
       return commandId_;
     }
@@ -357,28 +388,36 @@ public final class CommonMessage {
     private int errorCode_;
     /**
      * <code>optional int32 errorCode = 2;</code>
+     * @return Whether the errorCode field is set.
      */
+    @java.lang.Override
     public boolean hasErrorCode() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000002) != 0);
     }
     /**
      * <code>optional int32 errorCode = 2;</code>
+     * @return The errorCode.
      */
+    @java.lang.Override
     public int getErrorCode() {
       return errorCode_;
     }
 
     public static final int MESSAGE_FIELD_NUMBER = 3;
-    private java.lang.Object message_;
+    private volatile java.lang.Object message_;
     /**
      * <code>optional string message = 3;</code>
+     * @return Whether the message field is set.
      */
+    @java.lang.Override
     public boolean hasMessage() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000004) != 0);
     }
     /**
      * <code>optional string message = 3;</code>
+     * @return The message.
      */
+    @java.lang.Override
     public java.lang.String getMessage() {
       java.lang.Object ref = message_;
       if (ref instanceof java.lang.String) {
@@ -387,15 +426,15 @@ public final class CommonMessage {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          message_ = s;
-        }
+        message_ = s;
         return s;
       }
     }
     /**
      * <code>optional string message = 3;</code>
+     * @return The bytes for message.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getMessageBytes() {
       java.lang.Object ref = message_;
@@ -410,12 +449,8 @@ public final class CommonMessage {
       }
     }
 
-    private void initFields() {
-      commandId_ = 0;
-      errorCode_ = 0;
-      message_ = "";
-    }
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -425,158 +460,226 @@ public final class CommonMessage {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x00000001) != 0)) {
         output.writeInt32(1, commandId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000002) != 0)) {
         output.writeInt32(2, errorCode_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getMessageBytes());
+      if (((bitField0_ & 0x00000004) != 0)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, message_);
       }
-      getUnknownFields().writeTo(output);
+      unknownFields.writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    @java.lang.Override
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, commandId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, errorCode_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getMessageBytes());
+      if (((bitField0_ & 0x00000004) != 0)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, message_);
       }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown)) {
+        return super.equals(obj);
+      }
+      io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown other = (io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown) obj;
+
+      if (hasCommandId() != other.hasCommandId()) return false;
+      if (hasCommandId()) {
+        if (getCommandId()
+            != other.getCommandId()) return false;
+      }
+      if (hasErrorCode() != other.hasErrorCode()) return false;
+      if (hasErrorCode()) {
+        if (getErrorCode()
+            != other.getErrorCode()) return false;
+      }
+      if (hasMessage() != other.hasMessage()) return false;
+      if (hasMessage()) {
+        if (!getMessage()
+            .equals(other.getMessage())) return false;
+      }
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
-    public static CommonMessage.PBErrorDown parseFrom(
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasCommandId()) {
+        hash = (37 * hash) + COMMANDID_FIELD_NUMBER;
+        hash = (53 * hash) + getCommandId();
+      }
+      if (hasErrorCode()) {
+        hash = (37 * hash) + ERRORCODE_FIELD_NUMBER;
+        hash = (53 * hash) + getErrorCode();
+      }
+      if (hasMessage()) {
+        hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
+        hash = (53 * hash) + getMessage().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static CommonMessage.PBErrorDown parseFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static CommonMessage.PBErrorDown parseFrom(byte[] data)
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static CommonMessage.PBErrorDown parseFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static CommonMessage.PBErrorDown parseFrom(java.io.InputStream input)
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
-    public static CommonMessage.PBErrorDown parseFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static CommonMessage.PBErrorDown parseDelimitedFrom(java.io.InputStream input)
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
-    public static CommonMessage.PBErrorDown parseDelimitedFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static CommonMessage.PBErrorDown parseFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
-    public static CommonMessage.PBErrorDown parseFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(CommonMessage.PBErrorDown prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
     /**
-     * Protobuf type {@code PBErrorDown}
-     *
      * <pre>
      * 错误回复
      * </pre>
+     *
+     * Protobuf type {@code PBErrorDown}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:PBErrorDown)
-        CommonMessage.PBErrorDownOrBuilder {
+        io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDownOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return CommonMessage.internal_static_PBErrorDown_descriptor;
+        return io.github.viakiba.hinx.generate.message.CommonMessage.internal_static_PBErrorDown_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return CommonMessage.internal_static_PBErrorDown_fieldAccessorTable
+        return io.github.viakiba.hinx.generate.message.CommonMessage.internal_static_PBErrorDown_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                CommonMessage.PBErrorDown.class, CommonMessage.PBErrorDown.Builder.class);
+                io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown.class, io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown.Builder.class);
       }
 
-      // Construct using com.ohayoo.whitebird.generate.message.CommonMessage.PBErrorDown.newBuilder()
+      // Construct using io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
-        return new Builder();
-      }
-
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         commandId_ = 0;
@@ -588,40 +691,40 @@ public final class CommonMessage {
         return this;
       }
 
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return CommonMessage.internal_static_PBErrorDown_descriptor;
+        return io.github.viakiba.hinx.generate.message.CommonMessage.internal_static_PBErrorDown_descriptor;
       }
 
-      public CommonMessage.PBErrorDown getDefaultInstanceForType() {
-        return CommonMessage.PBErrorDown.getDefaultInstance();
+      @java.lang.Override
+      public io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown getDefaultInstanceForType() {
+        return io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown.getDefaultInstance();
       }
 
-      public CommonMessage.PBErrorDown build() {
-        CommonMessage.PBErrorDown result = buildPartial();
+      @java.lang.Override
+      public io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown build() {
+        io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public CommonMessage.PBErrorDown buildPartial() {
-        CommonMessage.PBErrorDown result = new CommonMessage.PBErrorDown(this);
+      @java.lang.Override
+      public io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown buildPartial() {
+        io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown result = new io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.commandId_ = commandId_;
           to_bitField0_ |= 0x00000001;
         }
-        result.commandId_ = commandId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.errorCode_ = errorCode_;
           to_bitField0_ |= 0x00000002;
         }
-        result.errorCode_ = errorCode_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((from_bitField0_ & 0x00000004) != 0)) {
           to_bitField0_ |= 0x00000004;
         }
         result.message_ = message_;
@@ -630,17 +733,50 @@ public final class CommonMessage {
         return result;
       }
 
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof CommonMessage.PBErrorDown) {
-          return mergeFrom((CommonMessage.PBErrorDown)other);
+        if (other instanceof io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown) {
+          return mergeFrom((io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(CommonMessage.PBErrorDown other) {
-        if (other == CommonMessage.PBErrorDown.getDefaultInstance()) return this;
+      public Builder mergeFrom(io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown other) {
+        if (other == io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown.getDefaultInstance()) return this;
         if (other.hasCommandId()) {
           setCommandId(other.getCommandId());
         }
@@ -652,24 +788,27 @@ public final class CommonMessage {
           message_ = other.message_;
           onChanged();
         }
-        this.mergeUnknownFields(other.getUnknownFields());
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        CommonMessage.PBErrorDown parsedMessage = null;
+        io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (CommonMessage.PBErrorDown) e.getUnfinishedMessage();
-          throw e;
+          parsedMessage = (io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -681,31 +820,37 @@ public final class CommonMessage {
 
       private int commandId_ ;
       /**
-       * <code>optional int32 commandId = 1;</code>
-       *
        * <pre>
        *返回请求的指令
        * </pre>
+       *
+       * <code>optional int32 commandId = 1;</code>
+       * @return Whether the commandId field is set.
        */
+      @java.lang.Override
       public boolean hasCommandId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+        return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>optional int32 commandId = 1;</code>
-       *
        * <pre>
        *返回请求的指令
        * </pre>
+       *
+       * <code>optional int32 commandId = 1;</code>
+       * @return The commandId.
        */
+      @java.lang.Override
       public int getCommandId() {
         return commandId_;
       }
       /**
-       * <code>optional int32 commandId = 1;</code>
-       *
        * <pre>
        *返回请求的指令
        * </pre>
+       *
+       * <code>optional int32 commandId = 1;</code>
+       * @param value The commandId to set.
+       * @return This builder for chaining.
        */
       public Builder setCommandId(int value) {
         bitField0_ |= 0x00000001;
@@ -714,11 +859,12 @@ public final class CommonMessage {
         return this;
       }
       /**
-       * <code>optional int32 commandId = 1;</code>
-       *
        * <pre>
        *返回请求的指令
        * </pre>
+       *
+       * <code>optional int32 commandId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearCommandId() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -730,18 +876,24 @@ public final class CommonMessage {
       private int errorCode_ ;
       /**
        * <code>optional int32 errorCode = 2;</code>
+       * @return Whether the errorCode field is set.
        */
+      @java.lang.Override
       public boolean hasErrorCode() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000002) != 0);
       }
       /**
        * <code>optional int32 errorCode = 2;</code>
+       * @return The errorCode.
        */
+      @java.lang.Override
       public int getErrorCode() {
         return errorCode_;
       }
       /**
        * <code>optional int32 errorCode = 2;</code>
+       * @param value The errorCode to set.
+       * @return This builder for chaining.
        */
       public Builder setErrorCode(int value) {
         bitField0_ |= 0x00000002;
@@ -751,6 +903,7 @@ public final class CommonMessage {
       }
       /**
        * <code>optional int32 errorCode = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearErrorCode() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -762,12 +915,14 @@ public final class CommonMessage {
       private java.lang.Object message_ = "";
       /**
        * <code>optional string message = 3;</code>
+       * @return Whether the message field is set.
        */
       public boolean hasMessage() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000004) != 0);
       }
       /**
        * <code>optional string message = 3;</code>
+       * @return The message.
        */
       public java.lang.String getMessage() {
         java.lang.Object ref = message_;
@@ -775,9 +930,7 @@ public final class CommonMessage {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            message_ = s;
-          }
+          message_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -785,6 +938,7 @@ public final class CommonMessage {
       }
       /**
        * <code>optional string message = 3;</code>
+       * @return The bytes for message.
        */
       public com.google.protobuf.ByteString
           getMessageBytes() {
@@ -801,6 +955,8 @@ public final class CommonMessage {
       }
       /**
        * <code>optional string message = 3;</code>
+       * @param value The message to set.
+       * @return This builder for chaining.
        */
       public Builder setMessage(
           java.lang.String value) {
@@ -814,6 +970,7 @@ public final class CommonMessage {
       }
       /**
        * <code>optional string message = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearMessage() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -823,27 +980,71 @@ public final class CommonMessage {
       }
       /**
        * <code>optional string message = 3;</code>
+       * @param value The bytes for message to set.
+       * @return This builder for chaining.
        */
       public Builder setMessageBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  checkByteStringIsUtf8(value);
+        bitField0_ |= 0x00000004;
         message_ = value;
         onChanged();
         return this;
       }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
 
       // @@protoc_insertion_point(builder_scope:PBErrorDown)
     }
 
+    // @@protoc_insertion_point(class_scope:PBErrorDown)
+    private static final io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown DEFAULT_INSTANCE;
     static {
-      defaultInstance = new PBErrorDown(true);
-      defaultInstance.initFields();
+      DEFAULT_INSTANCE = new io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown();
     }
 
-    // @@protoc_insertion_point(class_scope:PBErrorDown)
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<PBErrorDown>
+        PARSER = new com.google.protobuf.AbstractParser<PBErrorDown>() {
+      @java.lang.Override
+      public PBErrorDown parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PBErrorDown(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<PBErrorDown> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PBErrorDown> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public io.github.viakiba.hinx.generate.message.CommonMessage.PBErrorDown getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
   }
 
   public interface PBGmCmdUpOrBuilder extends
@@ -851,32 +1052,37 @@ public final class CommonMessage {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 cmd = 1;</code>
-     *
      * <pre>
      *1:给钱(ModifyCurrency)
      * </pre>
+     *
+     * <code>optional int32 cmd = 1;</code>
+     * @return Whether the cmd field is set.
      */
     boolean hasCmd();
     /**
-     * <code>optional int32 cmd = 1;</code>
-     *
      * <pre>
      *1:给钱(ModifyCurrency)
      * </pre>
+     *
+     * <code>optional int32 cmd = 1;</code>
+     * @return The cmd.
      */
     int getCmd();
 
     /**
      * <code>optional string param = 2;</code>
+     * @return Whether the param field is set.
      */
     boolean hasParam();
     /**
      * <code>optional string param = 2;</code>
+     * @return The param.
      */
     java.lang.String getParam();
     /**
      * <code>optional string param = 2;</code>
+     * @return The bytes for param.
      */
     com.google.protobuf.ByteString
         getParamBytes();
@@ -885,36 +1091,38 @@ public final class CommonMessage {
    * Protobuf type {@code PBGmCmdUp}
    */
   public static final class PBGmCmdUp extends
-      com.google.protobuf.GeneratedMessage implements
+      com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:PBGmCmdUp)
       PBGmCmdUpOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use PBGmCmdUp.newBuilder() to construct.
-    private PBGmCmdUp(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private PBGmCmdUp(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
-      this.unknownFields = builder.getUnknownFields();
     }
-    private PBGmCmdUp(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final PBGmCmdUp defaultInstance;
-    public static PBGmCmdUp getDefaultInstance() {
-      return defaultInstance;
+    private PBGmCmdUp() {
+      param_ = "";
     }
 
-    public PBGmCmdUp getDefaultInstanceForType() {
-      return defaultInstance;
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new PBGmCmdUp();
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private PBGmCmdUp(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -926,22 +1134,22 @@ public final class CommonMessage {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               bitField0_ |= 0x00000001;
               cmd_ = input.readInt32();
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+              java.lang.String s = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
-              param_ = bs;
+              param_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -950,7 +1158,7 @@ public final class CommonMessage {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+            e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -958,66 +1166,60 @@ public final class CommonMessage {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return CommonMessage.internal_static_PBGmCmdUp_descriptor;
+      return io.github.viakiba.hinx.generate.message.CommonMessage.internal_static_PBGmCmdUp_descriptor;
     }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CommonMessage.internal_static_PBGmCmdUp_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              CommonMessage.PBGmCmdUp.class, CommonMessage.PBGmCmdUp.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<PBGmCmdUp> PARSER =
-        new com.google.protobuf.AbstractParser<PBGmCmdUp>() {
-      public PBGmCmdUp parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PBGmCmdUp(input, extensionRegistry);
-      }
-    };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<PBGmCmdUp> getParserForType() {
-      return PARSER;
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return io.github.viakiba.hinx.generate.message.CommonMessage.internal_static_PBGmCmdUp_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp.class, io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp.Builder.class);
     }
 
     private int bitField0_;
     public static final int CMD_FIELD_NUMBER = 1;
     private int cmd_;
     /**
-     * <code>optional int32 cmd = 1;</code>
-     *
      * <pre>
      *1:给钱(ModifyCurrency)
      * </pre>
+     *
+     * <code>optional int32 cmd = 1;</code>
+     * @return Whether the cmd field is set.
      */
+    @java.lang.Override
     public boolean hasCmd() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>optional int32 cmd = 1;</code>
-     *
      * <pre>
      *1:给钱(ModifyCurrency)
      * </pre>
+     *
+     * <code>optional int32 cmd = 1;</code>
+     * @return The cmd.
      */
+    @java.lang.Override
     public int getCmd() {
       return cmd_;
     }
 
     public static final int PARAM_FIELD_NUMBER = 2;
-    private java.lang.Object param_;
+    private volatile java.lang.Object param_;
     /**
      * <code>optional string param = 2;</code>
+     * @return Whether the param field is set.
      */
+    @java.lang.Override
     public boolean hasParam() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000002) != 0);
     }
     /**
      * <code>optional string param = 2;</code>
+     * @return The param.
      */
+    @java.lang.Override
     public java.lang.String getParam() {
       java.lang.Object ref = param_;
       if (ref instanceof java.lang.String) {
@@ -1026,15 +1228,15 @@ public final class CommonMessage {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          param_ = s;
-        }
+        param_ = s;
         return s;
       }
     }
     /**
      * <code>optional string param = 2;</code>
+     * @return The bytes for param.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getParamBytes() {
       java.lang.Object ref = param_;
@@ -1049,11 +1251,8 @@ public final class CommonMessage {
       }
     }
 
-    private void initFields() {
-      cmd_ = 0;
-      param_ = "";
-    }
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -1063,107 +1262,167 @@ public final class CommonMessage {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x00000001) != 0)) {
         output.writeInt32(1, cmd_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getParamBytes());
+      if (((bitField0_ & 0x00000002) != 0)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, param_);
       }
-      getUnknownFields().writeTo(output);
+      unknownFields.writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    @java.lang.Override
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, cmd_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getParamBytes());
+      if (((bitField0_ & 0x00000002) != 0)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, param_);
       }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp)) {
+        return super.equals(obj);
+      }
+      io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp other = (io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp) obj;
+
+      if (hasCmd() != other.hasCmd()) return false;
+      if (hasCmd()) {
+        if (getCmd()
+            != other.getCmd()) return false;
+      }
+      if (hasParam() != other.hasParam()) return false;
+      if (hasParam()) {
+        if (!getParam()
+            .equals(other.getParam())) return false;
+      }
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
-    public static CommonMessage.PBGmCmdUp parseFrom(
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasCmd()) {
+        hash = (37 * hash) + CMD_FIELD_NUMBER;
+        hash = (53 * hash) + getCmd();
+      }
+      if (hasParam()) {
+        hash = (37 * hash) + PARAM_FIELD_NUMBER;
+        hash = (53 * hash) + getParam().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static CommonMessage.PBGmCmdUp parseFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static CommonMessage.PBGmCmdUp parseFrom(byte[] data)
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static CommonMessage.PBGmCmdUp parseFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static CommonMessage.PBGmCmdUp parseFrom(java.io.InputStream input)
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
-    public static CommonMessage.PBGmCmdUp parseFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static CommonMessage.PBGmCmdUp parseDelimitedFrom(java.io.InputStream input)
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
-    public static CommonMessage.PBGmCmdUp parseDelimitedFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static CommonMessage.PBGmCmdUp parseFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
-    public static CommonMessage.PBGmCmdUp parseFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(CommonMessage.PBGmCmdUp prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1171,39 +1430,38 @@ public final class CommonMessage {
      * Protobuf type {@code PBGmCmdUp}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:PBGmCmdUp)
-        CommonMessage.PBGmCmdUpOrBuilder {
+        io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUpOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return CommonMessage.internal_static_PBGmCmdUp_descriptor;
+        return io.github.viakiba.hinx.generate.message.CommonMessage.internal_static_PBGmCmdUp_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return CommonMessage.internal_static_PBGmCmdUp_fieldAccessorTable
+        return io.github.viakiba.hinx.generate.message.CommonMessage.internal_static_PBGmCmdUp_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                CommonMessage.PBGmCmdUp.class, CommonMessage.PBGmCmdUp.Builder.class);
+                io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp.class, io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp.Builder.class);
       }
 
-      // Construct using com.ohayoo.whitebird.generate.message.CommonMessage.PBGmCmdUp.newBuilder()
+      // Construct using io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
-        return new Builder();
-      }
-
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         cmd_ = 0;
@@ -1213,36 +1471,36 @@ public final class CommonMessage {
         return this;
       }
 
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return CommonMessage.internal_static_PBGmCmdUp_descriptor;
+        return io.github.viakiba.hinx.generate.message.CommonMessage.internal_static_PBGmCmdUp_descriptor;
       }
 
-      public CommonMessage.PBGmCmdUp getDefaultInstanceForType() {
-        return CommonMessage.PBGmCmdUp.getDefaultInstance();
+      @java.lang.Override
+      public io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp getDefaultInstanceForType() {
+        return io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp.getDefaultInstance();
       }
 
-      public CommonMessage.PBGmCmdUp build() {
-        CommonMessage.PBGmCmdUp result = buildPartial();
+      @java.lang.Override
+      public io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp build() {
+        io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public CommonMessage.PBGmCmdUp buildPartial() {
-        CommonMessage.PBGmCmdUp result = new CommonMessage.PBGmCmdUp(this);
+      @java.lang.Override
+      public io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp buildPartial() {
+        io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp result = new io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.cmd_ = cmd_;
           to_bitField0_ |= 0x00000001;
         }
-        result.cmd_ = cmd_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((from_bitField0_ & 0x00000002) != 0)) {
           to_bitField0_ |= 0x00000002;
         }
         result.param_ = param_;
@@ -1251,17 +1509,50 @@ public final class CommonMessage {
         return result;
       }
 
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof CommonMessage.PBGmCmdUp) {
-          return mergeFrom((CommonMessage.PBGmCmdUp)other);
+        if (other instanceof io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp) {
+          return mergeFrom((io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(CommonMessage.PBGmCmdUp other) {
-        if (other == CommonMessage.PBGmCmdUp.getDefaultInstance()) return this;
+      public Builder mergeFrom(io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp other) {
+        if (other == io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp.getDefaultInstance()) return this;
         if (other.hasCmd()) {
           setCmd(other.getCmd());
         }
@@ -1270,24 +1561,27 @@ public final class CommonMessage {
           param_ = other.param_;
           onChanged();
         }
-        this.mergeUnknownFields(other.getUnknownFields());
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        CommonMessage.PBGmCmdUp parsedMessage = null;
+        io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (CommonMessage.PBGmCmdUp) e.getUnfinishedMessage();
-          throw e;
+          parsedMessage = (io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -1299,31 +1593,37 @@ public final class CommonMessage {
 
       private int cmd_ ;
       /**
-       * <code>optional int32 cmd = 1;</code>
-       *
        * <pre>
        *1:给钱(ModifyCurrency)
        * </pre>
+       *
+       * <code>optional int32 cmd = 1;</code>
+       * @return Whether the cmd field is set.
        */
+      @java.lang.Override
       public boolean hasCmd() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+        return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>optional int32 cmd = 1;</code>
-       *
        * <pre>
        *1:给钱(ModifyCurrency)
        * </pre>
+       *
+       * <code>optional int32 cmd = 1;</code>
+       * @return The cmd.
        */
+      @java.lang.Override
       public int getCmd() {
         return cmd_;
       }
       /**
-       * <code>optional int32 cmd = 1;</code>
-       *
        * <pre>
        *1:给钱(ModifyCurrency)
        * </pre>
+       *
+       * <code>optional int32 cmd = 1;</code>
+       * @param value The cmd to set.
+       * @return This builder for chaining.
        */
       public Builder setCmd(int value) {
         bitField0_ |= 0x00000001;
@@ -1332,11 +1632,12 @@ public final class CommonMessage {
         return this;
       }
       /**
-       * <code>optional int32 cmd = 1;</code>
-       *
        * <pre>
        *1:给钱(ModifyCurrency)
        * </pre>
+       *
+       * <code>optional int32 cmd = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearCmd() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -1348,12 +1649,14 @@ public final class CommonMessage {
       private java.lang.Object param_ = "";
       /**
        * <code>optional string param = 2;</code>
+       * @return Whether the param field is set.
        */
       public boolean hasParam() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000002) != 0);
       }
       /**
        * <code>optional string param = 2;</code>
+       * @return The param.
        */
       public java.lang.String getParam() {
         java.lang.Object ref = param_;
@@ -1361,9 +1664,7 @@ public final class CommonMessage {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            param_ = s;
-          }
+          param_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1371,6 +1672,7 @@ public final class CommonMessage {
       }
       /**
        * <code>optional string param = 2;</code>
+       * @return The bytes for param.
        */
       public com.google.protobuf.ByteString
           getParamBytes() {
@@ -1387,6 +1689,8 @@ public final class CommonMessage {
       }
       /**
        * <code>optional string param = 2;</code>
+       * @param value The param to set.
+       * @return This builder for chaining.
        */
       public Builder setParam(
           java.lang.String value) {
@@ -1400,6 +1704,7 @@ public final class CommonMessage {
       }
       /**
        * <code>optional string param = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearParam() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -1409,27 +1714,71 @@ public final class CommonMessage {
       }
       /**
        * <code>optional string param = 2;</code>
+       * @param value The bytes for param to set.
+       * @return This builder for chaining.
        */
       public Builder setParamBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  checkByteStringIsUtf8(value);
+        bitField0_ |= 0x00000002;
         param_ = value;
         onChanged();
         return this;
       }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
 
       // @@protoc_insertion_point(builder_scope:PBGmCmdUp)
     }
 
+    // @@protoc_insertion_point(class_scope:PBGmCmdUp)
+    private static final io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp DEFAULT_INSTANCE;
     static {
-      defaultInstance = new PBGmCmdUp(true);
-      defaultInstance.initFields();
+      DEFAULT_INSTANCE = new io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp();
     }
 
-    // @@protoc_insertion_point(class_scope:PBGmCmdUp)
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<PBGmCmdUp>
+        PARSER = new com.google.protobuf.AbstractParser<PBGmCmdUp>() {
+      @java.lang.Override
+      public PBGmCmdUp parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PBGmCmdUp(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<PBGmCmdUp> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PBGmCmdUp> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdUp getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
   }
 
   public interface PBGmCmdDownOrBuilder extends
@@ -1437,19 +1786,21 @@ public final class CommonMessage {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional bool result = 1;</code>
-     *
      * <pre>
      * true(成功) false(失败)
      * </pre>
+     *
+     * <code>optional bool result = 1;</code>
+     * @return Whether the result field is set.
      */
     boolean hasResult();
     /**
-     * <code>optional bool result = 1;</code>
-     *
      * <pre>
      * true(成功) false(失败)
      * </pre>
+     *
+     * <code>optional bool result = 1;</code>
+     * @return The result.
      */
     boolean getResult();
   }
@@ -1457,36 +1808,37 @@ public final class CommonMessage {
    * Protobuf type {@code PBGmCmdDown}
    */
   public static final class PBGmCmdDown extends
-      com.google.protobuf.GeneratedMessage implements
+      com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:PBGmCmdDown)
       PBGmCmdDownOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use PBGmCmdDown.newBuilder() to construct.
-    private PBGmCmdDown(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private PBGmCmdDown(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
-      this.unknownFields = builder.getUnknownFields();
     }
-    private PBGmCmdDown(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final PBGmCmdDown defaultInstance;
-    public static PBGmCmdDown getDefaultInstance() {
-      return defaultInstance;
+    private PBGmCmdDown() {
     }
 
-    public PBGmCmdDown getDefaultInstanceForType() {
-      return defaultInstance;
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new PBGmCmdDown();
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private PBGmCmdDown(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -1498,16 +1850,16 @@ public final class CommonMessage {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               bitField0_ |= 0x00000001;
               result_ = input.readBool();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -1516,7 +1868,7 @@ public final class CommonMessage {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+            e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1524,59 +1876,47 @@ public final class CommonMessage {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return CommonMessage.internal_static_PBGmCmdDown_descriptor;
+      return io.github.viakiba.hinx.generate.message.CommonMessage.internal_static_PBGmCmdDown_descriptor;
     }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return CommonMessage.internal_static_PBGmCmdDown_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              CommonMessage.PBGmCmdDown.class, CommonMessage.PBGmCmdDown.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<PBGmCmdDown> PARSER =
-        new com.google.protobuf.AbstractParser<PBGmCmdDown>() {
-      public PBGmCmdDown parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PBGmCmdDown(input, extensionRegistry);
-      }
-    };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<PBGmCmdDown> getParserForType() {
-      return PARSER;
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return io.github.viakiba.hinx.generate.message.CommonMessage.internal_static_PBGmCmdDown_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown.class, io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown.Builder.class);
     }
 
     private int bitField0_;
     public static final int RESULT_FIELD_NUMBER = 1;
     private boolean result_;
     /**
-     * <code>optional bool result = 1;</code>
-     *
      * <pre>
      * true(成功) false(失败)
      * </pre>
+     *
+     * <code>optional bool result = 1;</code>
+     * @return Whether the result field is set.
      */
+    @java.lang.Override
     public boolean hasResult() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>optional bool result = 1;</code>
-     *
      * <pre>
      * true(成功) false(失败)
      * </pre>
+     *
+     * <code>optional bool result = 1;</code>
+     * @return The result.
      */
+    @java.lang.Override
     public boolean getResult() {
       return result_;
     }
 
-    private void initFields() {
-      result_ = false;
-    }
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -1586,100 +1926,153 @@ public final class CommonMessage {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x00000001) != 0)) {
         output.writeBool(1, result_);
       }
-      getUnknownFields().writeTo(output);
+      unknownFields.writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    @java.lang.Override
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(1, result_);
       }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown)) {
+        return super.equals(obj);
+      }
+      io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown other = (io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown) obj;
+
+      if (hasResult() != other.hasResult()) return false;
+      if (hasResult()) {
+        if (getResult()
+            != other.getResult()) return false;
+      }
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
-    public static CommonMessage.PBGmCmdDown parseFrom(
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasResult()) {
+        hash = (37 * hash) + RESULT_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+            getResult());
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static CommonMessage.PBGmCmdDown parseFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static CommonMessage.PBGmCmdDown parseFrom(byte[] data)
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static CommonMessage.PBGmCmdDown parseFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static CommonMessage.PBGmCmdDown parseFrom(java.io.InputStream input)
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
-    public static CommonMessage.PBGmCmdDown parseFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static CommonMessage.PBGmCmdDown parseDelimitedFrom(java.io.InputStream input)
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
-    public static CommonMessage.PBGmCmdDown parseDelimitedFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static CommonMessage.PBGmCmdDown parseFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
-    public static CommonMessage.PBGmCmdDown parseFrom(
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(CommonMessage.PBGmCmdDown prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1687,39 +2080,38 @@ public final class CommonMessage {
      * Protobuf type {@code PBGmCmdDown}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:PBGmCmdDown)
-        CommonMessage.PBGmCmdDownOrBuilder {
+        io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDownOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return CommonMessage.internal_static_PBGmCmdDown_descriptor;
+        return io.github.viakiba.hinx.generate.message.CommonMessage.internal_static_PBGmCmdDown_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return CommonMessage.internal_static_PBGmCmdDown_fieldAccessorTable
+        return io.github.viakiba.hinx.generate.message.CommonMessage.internal_static_PBGmCmdDown_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                CommonMessage.PBGmCmdDown.class, CommonMessage.PBGmCmdDown.Builder.class);
+                io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown.class, io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown.Builder.class);
       }
 
-      // Construct using com.ohayoo.whitebird.generate.message.CommonMessage.PBGmCmdDown.newBuilder()
+      // Construct using io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
-        return new Builder();
-      }
-
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         result_ = false;
@@ -1727,72 +2119,108 @@ public final class CommonMessage {
         return this;
       }
 
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return CommonMessage.internal_static_PBGmCmdDown_descriptor;
+        return io.github.viakiba.hinx.generate.message.CommonMessage.internal_static_PBGmCmdDown_descriptor;
       }
 
-      public CommonMessage.PBGmCmdDown getDefaultInstanceForType() {
-        return CommonMessage.PBGmCmdDown.getDefaultInstance();
+      @java.lang.Override
+      public io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown getDefaultInstanceForType() {
+        return io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown.getDefaultInstance();
       }
 
-      public CommonMessage.PBGmCmdDown build() {
-        CommonMessage.PBGmCmdDown result = buildPartial();
+      @java.lang.Override
+      public io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown build() {
+        io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public CommonMessage.PBGmCmdDown buildPartial() {
-        CommonMessage.PBGmCmdDown result = new CommonMessage.PBGmCmdDown(this);
+      @java.lang.Override
+      public io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown buildPartial() {
+        io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown result = new io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.result_ = result_;
           to_bitField0_ |= 0x00000001;
         }
-        result.result_ = result_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof CommonMessage.PBGmCmdDown) {
-          return mergeFrom((CommonMessage.PBGmCmdDown)other);
+        if (other instanceof io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown) {
+          return mergeFrom((io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(CommonMessage.PBGmCmdDown other) {
-        if (other == CommonMessage.PBGmCmdDown.getDefaultInstance()) return this;
+      public Builder mergeFrom(io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown other) {
+        if (other == io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown.getDefaultInstance()) return this;
         if (other.hasResult()) {
           setResult(other.getResult());
         }
-        this.mergeUnknownFields(other.getUnknownFields());
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        CommonMessage.PBGmCmdDown parsedMessage = null;
+        io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (CommonMessage.PBGmCmdDown) e.getUnfinishedMessage();
-          throw e;
+          parsedMessage = (io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -1804,31 +2232,37 @@ public final class CommonMessage {
 
       private boolean result_ ;
       /**
-       * <code>optional bool result = 1;</code>
-       *
        * <pre>
        * true(成功) false(失败)
        * </pre>
+       *
+       * <code>optional bool result = 1;</code>
+       * @return Whether the result field is set.
        */
+      @java.lang.Override
       public boolean hasResult() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+        return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>optional bool result = 1;</code>
-       *
        * <pre>
        * true(成功) false(失败)
        * </pre>
+       *
+       * <code>optional bool result = 1;</code>
+       * @return The result.
        */
+      @java.lang.Override
       public boolean getResult() {
         return result_;
       }
       /**
-       * <code>optional bool result = 1;</code>
-       *
        * <pre>
        * true(成功) false(失败)
        * </pre>
+       *
+       * <code>optional bool result = 1;</code>
+       * @param value The result to set.
+       * @return This builder for chaining.
        */
       public Builder setResult(boolean value) {
         bitField0_ |= 0x00000001;
@@ -1837,11 +2271,12 @@ public final class CommonMessage {
         return this;
       }
       /**
-       * <code>optional bool result = 1;</code>
-       *
        * <pre>
        * true(成功) false(失败)
        * </pre>
+       *
+       * <code>optional bool result = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResult() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -1849,92 +2284,126 @@ public final class CommonMessage {
         onChanged();
         return this;
       }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
 
       // @@protoc_insertion_point(builder_scope:PBGmCmdDown)
     }
 
+    // @@protoc_insertion_point(class_scope:PBGmCmdDown)
+    private static final io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown DEFAULT_INSTANCE;
     static {
-      defaultInstance = new PBGmCmdDown(true);
-      defaultInstance.initFields();
+      DEFAULT_INSTANCE = new io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown();
     }
 
-    // @@protoc_insertion_point(class_scope:PBGmCmdDown)
+    public static io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<PBGmCmdDown>
+        PARSER = new com.google.protobuf.AbstractParser<PBGmCmdDown>() {
+      @java.lang.Override
+      public PBGmCmdDown parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PBGmCmdDown(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<PBGmCmdDown> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PBGmCmdDown> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public io.github.viakiba.hinx.generate.message.CommonMessage.PBGmCmdDown getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_PBErrorDown_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_PBErrorDown_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_PBGmCmdUp_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_PBGmCmdUp_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_PBGmCmdDown_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_PBGmCmdDown_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
   }
-  private static com.google.protobuf.Descriptors.FileDescriptor
+  private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
       "\n\026msg_common_10000.proto\032\roptions.proto\"" +
-      "J\n\013PBErrorDown\022\021\n\tcommandId\030\001 \001(\005\022\021\n\terr" +
-      "orCode\030\002 \001(\005\022\017\n\007message\030\003 \001(\t:\004\300>\220N\"-\n\tP" +
-      "BGmCmdUp\022\013\n\003cmd\030\001 \001(\005\022\r\n\005param\030\002 \001(\t:\004\300>" +
-      "\221N\"#\n\013PBGmCmdDown\022\016\n\006result\030\001 \001(\010:\004\300>\222N*" +
-      "\210\001\n\tErrorCode\022\010\n\004NULL\020\000\022\021\n\rNoLogicServer" +
-      "\020\001\022\027\n\023SessionLoginInvalid\020\002\022\026\n\022Prototype" +
-      "DataError\020\003\022\023\n\017ServerException\020\004\022\030\n\024MsgN" +
-      "otFoundException\020\005B8\n%com.ohayoo.whitebi" +
-      "rd.generate.messageB\rCommonMessageH\001"
+      "\202\001\n\013PBErrorDown\022\026\n\tcommandId\030\001 \001(\005H\000\210\001\001\022" +
+      "\026\n\terrorCode\030\002 \001(\005H\001\210\001\001\022\024\n\007message\030\003 \001(\t" +
+      "H\002\210\001\001:\005\210\303\032\220NB\014\n\n_commandIdB\014\n\n_errorCode" +
+      "B\n\n\010_message\"J\n\tPBGmCmdUp\022\020\n\003cmd\030\001 \001(\005H\000" +
+      "\210\001\001\022\022\n\005param\030\002 \001(\tH\001\210\001\001:\005\210\303\032\221NB\006\n\004_cmdB\010" +
+      "\n\006_param\"4\n\013PBGmCmdDown\022\023\n\006result\030\001 \001(\010H" +
+      "\000\210\001\001:\005\210\303\032\222NB\t\n\007_result*\210\001\n\tErrorCode\022\010\n\004" +
+      "NULL\020\000\022\021\n\rNoLogicServer\020\001\022\027\n\023SessionLogi" +
+      "nInvalid\020\002\022\026\n\022PrototypeDataError\020\003\022\023\n\017Se" +
+      "rverException\020\004\022\030\n\024MsgNotFoundException\020" +
+      "\005B:\n\'io.github.viakiba.hinx.generate.mes" +
+      "sageB\rCommonMessageH\001b\006proto3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          Options.getDescriptor(),
-        }, assigner);
+          io.github.viakiba.hinx.generate.message.Options.getDescriptor(),
+        });
     internal_static_PBErrorDown_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_PBErrorDown_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_PBErrorDown_descriptor,
-        new java.lang.String[] { "CommandId", "ErrorCode", "Message", });
+        new java.lang.String[] { "CommandId", "ErrorCode", "Message", "CommandId", "ErrorCode", "Message", });
     internal_static_PBGmCmdUp_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_PBGmCmdUp_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_PBGmCmdUp_descriptor,
-        new java.lang.String[] { "Cmd", "Param", });
+        new java.lang.String[] { "Cmd", "Param", "Cmd", "Param", });
     internal_static_PBGmCmdDown_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_PBGmCmdDown_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_PBGmCmdDown_descriptor,
-        new java.lang.String[] { "Result", });
+        new java.lang.String[] { "Result", "Result", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
-    registry.add(Options.msgId);
-    registry.add(Options.msgId);
-    registry.add(Options.msgId);
+    registry.add(io.github.viakiba.hinx.generate.message.Options.msgId);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
-    Options.getDescriptor();
+    io.github.viakiba.hinx.generate.message.Options.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

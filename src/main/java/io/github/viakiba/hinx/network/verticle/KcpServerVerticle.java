@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  *  依赖实现:  https://github.com/l42111996/java-Kcp
  *  KCP 介绍: https://zhuanlan.zhihu.com/p/11244234
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-23
  */
 @Slf4j

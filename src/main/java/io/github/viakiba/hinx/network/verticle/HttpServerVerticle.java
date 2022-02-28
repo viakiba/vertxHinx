@@ -14,7 +14,7 @@ import io.vertx.ext.web.Router;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-23
  */
 @Slf4j

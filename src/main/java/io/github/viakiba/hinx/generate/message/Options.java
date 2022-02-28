@@ -6,10 +6,16 @@ package io.github.viakiba.hinx.generate.message;
 public final class Options {
   private Options() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
-    registry.add(Options.msgId);
+      com.google.protobuf.ExtensionRegistryLite registry) {
+    registry.add(io.github.viakiba.hinx.generate.message.Options.msgId);
   }
-  public static final int MSGID_FIELD_NUMBER = 1000;
+
+  public static void registerAllExtensions(
+      com.google.protobuf.ExtensionRegistry registry) {
+    registerAllExtensions(
+        (com.google.protobuf.ExtensionRegistryLite) registry);
+  }
+  public static final int MSGID_FIELD_NUMBER = 54321;
   /**
    * <code>extend .google.protobuf.MessageOptions { ... }</code>
    */
@@ -25,28 +31,20 @@ public final class Options {
       getDescriptor() {
     return descriptor;
   }
-  private static com.google.protobuf.Descriptors.FileDescriptor
+  private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
       "\n\roptions.proto\032 google/protobuf/descrip" +
-      "tor.proto:/\n\005msgId\022\037.google.protobuf.Mes" +
-      "sageOptions\030\350\007 \001(\005B0\n%com.ohayoo.whitebi" +
-      "rd.generate.messageB\007Options"
+      "tor.proto:0\n\005msgId\022\037.google.protobuf.Mes" +
+      "sageOptions\030\261\250\003 \001(\005B2\n\'io.github.viakiba" +
+      ".hinx.generate.messageB\007Options"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.DescriptorProtos.getDescriptor(),
-        }, assigner);
+        });
     msgId.internalInit(descriptor.getExtensions().get(0));
     com.google.protobuf.DescriptorProtos.getDescriptor();
   }

@@ -7,7 +7,7 @@ GC_CONFIG="-XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:SurvivorRatio=8 -XX
 MEMORY_CONFIG=" -Xms256m -Xmx256m -Xss512k -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
 JAVA="java -cp \"hinx-1.0-SNAPSHOT.jar;libs/*\" -server "
 # -javaagent:/software/lib/hotfix.jar
-APP_MAIN="com.ohayoo.whitebird.Start"
+APP_MAIN="io.github.viakiba.hinx.Start"
 
 getTradeProtalPID(){
     javaps=`$JAVA_HOME/bin/jps -l | grep $APP_MAIN`

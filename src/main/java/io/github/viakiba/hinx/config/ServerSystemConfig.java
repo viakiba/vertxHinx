@@ -9,7 +9,7 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-23
  */
 @Slf4j

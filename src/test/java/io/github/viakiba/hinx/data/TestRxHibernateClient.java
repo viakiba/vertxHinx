@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import static javax.persistence.Persistence.createEntityManagerFactory;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-28
  */
 @Slf4j

@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import static io.github.viakiba.hinx.player.PlayerSystemService.writeMessageInfo;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-26
  */
 @Slf4j

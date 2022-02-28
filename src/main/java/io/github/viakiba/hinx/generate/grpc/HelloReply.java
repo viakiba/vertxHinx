@@ -80,15 +80,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return GreetingService.internal_static_helloworld_HelloReply_descriptor;
+    return io.github.viakiba.hinx.generate.grpc.GreetingService.internal_static_helloworld_HelloReply_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return GreetingService.internal_static_helloworld_HelloReply_fieldAccessorTable
+    return io.github.viakiba.hinx.generate.grpc.GreetingService.internal_static_helloworld_HelloReply_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            HelloReply.class, HelloReply.Builder.class);
+            io.github.viakiba.hinx.generate.grpc.HelloReply.class, io.github.viakiba.hinx.generate.grpc.HelloReply.Builder.class);
   }
 
   public static final int MESSAGE_FIELD_NUMBER = 1;
@@ -143,7 +143,7 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getMessageBytes().isEmpty()) {
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, message_);
     }
     unknownFields.writeTo(output);
@@ -155,7 +155,7 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getMessageBytes().isEmpty()) {
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, message_);
     }
     size += unknownFields.getSerializedSize();
@@ -168,10 +168,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof HelloReply)) {
+    if (!(obj instanceof io.github.viakiba.hinx.generate.grpc.HelloReply)) {
       return super.equals(obj);
     }
-    HelloReply other = (HelloReply) obj;
+    io.github.viakiba.hinx.generate.grpc.HelloReply other = (io.github.viakiba.hinx.generate.grpc.HelloReply) obj;
 
     if (!getMessage()
         .equals(other.getMessage())) return false;
@@ -193,69 +193,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static HelloReply parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloReply parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static HelloReply parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloReply parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static HelloReply parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloReply parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static HelloReply parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloReply parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static HelloReply parseFrom(byte[] data)
+  public static io.github.viakiba.hinx.generate.grpc.HelloReply parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static HelloReply parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloReply parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static HelloReply parseFrom(java.io.InputStream input)
+  public static io.github.viakiba.hinx.generate.grpc.HelloReply parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static HelloReply parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloReply parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static HelloReply parseDelimitedFrom(java.io.InputStream input)
+  public static io.github.viakiba.hinx.generate.grpc.HelloReply parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static HelloReply parseDelimitedFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloReply parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static HelloReply parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloReply parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static HelloReply parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloReply parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -268,7 +268,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(HelloReply prototype) {
+  public static Builder newBuilder(io.github.viakiba.hinx.generate.grpc.HelloReply prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -293,21 +293,21 @@ private static final long serialVersionUID = 0L;
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:helloworld.HelloReply)
-          HelloReplyOrBuilder {
+      io.github.viakiba.hinx.generate.grpc.HelloReplyOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return GreetingService.internal_static_helloworld_HelloReply_descriptor;
+      return io.github.viakiba.hinx.generate.grpc.GreetingService.internal_static_helloworld_HelloReply_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return GreetingService.internal_static_helloworld_HelloReply_fieldAccessorTable
+      return io.github.viakiba.hinx.generate.grpc.GreetingService.internal_static_helloworld_HelloReply_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              HelloReply.class, HelloReply.Builder.class);
+              io.github.viakiba.hinx.generate.grpc.HelloReply.class, io.github.viakiba.hinx.generate.grpc.HelloReply.Builder.class);
     }
 
-    // Construct using com.ohayoo.whitebird.generate.grpc.HelloReply.newBuilder()
+    // Construct using io.github.viakiba.hinx.generate.grpc.HelloReply.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -333,17 +333,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return GreetingService.internal_static_helloworld_HelloReply_descriptor;
+      return io.github.viakiba.hinx.generate.grpc.GreetingService.internal_static_helloworld_HelloReply_descriptor;
     }
 
     @java.lang.Override
-    public HelloReply getDefaultInstanceForType() {
-      return HelloReply.getDefaultInstance();
+    public io.github.viakiba.hinx.generate.grpc.HelloReply getDefaultInstanceForType() {
+      return io.github.viakiba.hinx.generate.grpc.HelloReply.getDefaultInstance();
     }
 
     @java.lang.Override
-    public HelloReply build() {
-      HelloReply result = buildPartial();
+    public io.github.viakiba.hinx.generate.grpc.HelloReply build() {
+      io.github.viakiba.hinx.generate.grpc.HelloReply result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -351,8 +351,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public HelloReply buildPartial() {
-      HelloReply result = new HelloReply(this);
+    public io.github.viakiba.hinx.generate.grpc.HelloReply buildPartial() {
+      io.github.viakiba.hinx.generate.grpc.HelloReply result = new io.github.viakiba.hinx.generate.grpc.HelloReply(this);
       result.message_ = message_;
       onBuilt();
       return result;
@@ -392,16 +392,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof HelloReply) {
-        return mergeFrom((HelloReply)other);
+      if (other instanceof io.github.viakiba.hinx.generate.grpc.HelloReply) {
+        return mergeFrom((io.github.viakiba.hinx.generate.grpc.HelloReply)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(HelloReply other) {
-      if (other == HelloReply.getDefaultInstance()) return this;
+    public Builder mergeFrom(io.github.viakiba.hinx.generate.grpc.HelloReply other) {
+      if (other == io.github.viakiba.hinx.generate.grpc.HelloReply.getDefaultInstance()) return this;
       if (!other.getMessage().isEmpty()) {
         message_ = other.message_;
         onChanged();
@@ -421,11 +421,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      HelloReply parsedMessage = null;
+      io.github.viakiba.hinx.generate.grpc.HelloReply parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (HelloReply) e.getUnfinishedMessage();
+        parsedMessage = (io.github.viakiba.hinx.generate.grpc.HelloReply) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -527,12 +527,12 @@ private static final long serialVersionUID = 0L;
   }
 
   // @@protoc_insertion_point(class_scope:helloworld.HelloReply)
-  private static final HelloReply DEFAULT_INSTANCE;
+  private static final io.github.viakiba.hinx.generate.grpc.HelloReply DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new HelloReply();
+    DEFAULT_INSTANCE = new io.github.viakiba.hinx.generate.grpc.HelloReply();
   }
 
-  public static HelloReply getDefaultInstance() {
+  public static io.github.viakiba.hinx.generate.grpc.HelloReply getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
@@ -557,7 +557,7 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
-  public HelloReply getDefaultInstanceForType() {
+  public io.github.viakiba.hinx.generate.grpc.HelloReply getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

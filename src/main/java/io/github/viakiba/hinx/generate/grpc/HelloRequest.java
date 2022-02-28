@@ -80,15 +80,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return GreetingService.internal_static_helloworld_HelloRequest_descriptor;
+    return io.github.viakiba.hinx.generate.grpc.GreetingService.internal_static_helloworld_HelloRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return GreetingService.internal_static_helloworld_HelloRequest_fieldAccessorTable
+    return io.github.viakiba.hinx.generate.grpc.GreetingService.internal_static_helloworld_HelloRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            HelloRequest.class, HelloRequest.Builder.class);
+            io.github.viakiba.hinx.generate.grpc.HelloRequest.class, io.github.viakiba.hinx.generate.grpc.HelloRequest.Builder.class);
   }
 
   public static final int NAME_FIELD_NUMBER = 1;
@@ -143,7 +143,7 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getNameBytes().isEmpty()) {
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
     }
     unknownFields.writeTo(output);
@@ -155,7 +155,7 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getNameBytes().isEmpty()) {
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
     }
     size += unknownFields.getSerializedSize();
@@ -168,10 +168,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof HelloRequest)) {
+    if (!(obj instanceof io.github.viakiba.hinx.generate.grpc.HelloRequest)) {
       return super.equals(obj);
     }
-    HelloRequest other = (HelloRequest) obj;
+    io.github.viakiba.hinx.generate.grpc.HelloRequest other = (io.github.viakiba.hinx.generate.grpc.HelloRequest) obj;
 
     if (!getName()
         .equals(other.getName())) return false;
@@ -193,69 +193,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static HelloRequest parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static HelloRequest parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static HelloRequest parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static HelloRequest parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static HelloRequest parseFrom(byte[] data)
+  public static io.github.viakiba.hinx.generate.grpc.HelloRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static HelloRequest parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static HelloRequest parseFrom(java.io.InputStream input)
+  public static io.github.viakiba.hinx.generate.grpc.HelloRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static HelloRequest parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static HelloRequest parseDelimitedFrom(java.io.InputStream input)
+  public static io.github.viakiba.hinx.generate.grpc.HelloRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static HelloRequest parseDelimitedFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static HelloRequest parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static HelloRequest parseFrom(
+  public static io.github.viakiba.hinx.generate.grpc.HelloRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -268,7 +268,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(HelloRequest prototype) {
+  public static Builder newBuilder(io.github.viakiba.hinx.generate.grpc.HelloRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -293,21 +293,21 @@ private static final long serialVersionUID = 0L;
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:helloworld.HelloRequest)
-          HelloRequestOrBuilder {
+      io.github.viakiba.hinx.generate.grpc.HelloRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return GreetingService.internal_static_helloworld_HelloRequest_descriptor;
+      return io.github.viakiba.hinx.generate.grpc.GreetingService.internal_static_helloworld_HelloRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return GreetingService.internal_static_helloworld_HelloRequest_fieldAccessorTable
+      return io.github.viakiba.hinx.generate.grpc.GreetingService.internal_static_helloworld_HelloRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              HelloRequest.class, HelloRequest.Builder.class);
+              io.github.viakiba.hinx.generate.grpc.HelloRequest.class, io.github.viakiba.hinx.generate.grpc.HelloRequest.Builder.class);
     }
 
-    // Construct using com.ohayoo.whitebird.generate.grpc.HelloRequest.newBuilder()
+    // Construct using io.github.viakiba.hinx.generate.grpc.HelloRequest.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -333,17 +333,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return GreetingService.internal_static_helloworld_HelloRequest_descriptor;
+      return io.github.viakiba.hinx.generate.grpc.GreetingService.internal_static_helloworld_HelloRequest_descriptor;
     }
 
     @java.lang.Override
-    public HelloRequest getDefaultInstanceForType() {
-      return HelloRequest.getDefaultInstance();
+    public io.github.viakiba.hinx.generate.grpc.HelloRequest getDefaultInstanceForType() {
+      return io.github.viakiba.hinx.generate.grpc.HelloRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public HelloRequest build() {
-      HelloRequest result = buildPartial();
+    public io.github.viakiba.hinx.generate.grpc.HelloRequest build() {
+      io.github.viakiba.hinx.generate.grpc.HelloRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -351,8 +351,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public HelloRequest buildPartial() {
-      HelloRequest result = new HelloRequest(this);
+    public io.github.viakiba.hinx.generate.grpc.HelloRequest buildPartial() {
+      io.github.viakiba.hinx.generate.grpc.HelloRequest result = new io.github.viakiba.hinx.generate.grpc.HelloRequest(this);
       result.name_ = name_;
       onBuilt();
       return result;
@@ -392,16 +392,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof HelloRequest) {
-        return mergeFrom((HelloRequest)other);
+      if (other instanceof io.github.viakiba.hinx.generate.grpc.HelloRequest) {
+        return mergeFrom((io.github.viakiba.hinx.generate.grpc.HelloRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(HelloRequest other) {
-      if (other == HelloRequest.getDefaultInstance()) return this;
+    public Builder mergeFrom(io.github.viakiba.hinx.generate.grpc.HelloRequest other) {
+      if (other == io.github.viakiba.hinx.generate.grpc.HelloRequest.getDefaultInstance()) return this;
       if (!other.getName().isEmpty()) {
         name_ = other.name_;
         onChanged();
@@ -421,11 +421,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      HelloRequest parsedMessage = null;
+      io.github.viakiba.hinx.generate.grpc.HelloRequest parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (HelloRequest) e.getUnfinishedMessage();
+        parsedMessage = (io.github.viakiba.hinx.generate.grpc.HelloRequest) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -527,12 +527,12 @@ private static final long serialVersionUID = 0L;
   }
 
   // @@protoc_insertion_point(class_scope:helloworld.HelloRequest)
-  private static final HelloRequest DEFAULT_INSTANCE;
+  private static final io.github.viakiba.hinx.generate.grpc.HelloRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new HelloRequest();
+    DEFAULT_INSTANCE = new io.github.viakiba.hinx.generate.grpc.HelloRequest();
   }
 
-  public static HelloRequest getDefaultInstance() {
+  public static io.github.viakiba.hinx.generate.grpc.HelloRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
@@ -557,7 +557,7 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
-  public HelloRequest getDefaultInstanceForType() {
+  public io.github.viakiba.hinx.generate.grpc.HelloRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

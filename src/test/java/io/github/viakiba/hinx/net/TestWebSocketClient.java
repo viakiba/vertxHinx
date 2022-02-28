@@ -8,7 +8,7 @@ import io.vertx.core.http.WebSocket;
 import org.testng.annotations.Test;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-27
  */
 public class TestWebSocketClient{

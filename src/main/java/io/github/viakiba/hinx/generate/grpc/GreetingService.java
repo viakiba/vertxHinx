@@ -37,8 +37,8 @@ public final class GreetingService {
       "\022\014\n\004name\030\001 \001(\t\"\035\n\nHelloReply\022\017\n\007message\030" +
       "\001 \001(\t2N\n\014HelloService\022>\n\010SayHello\022\030.hell" +
       "oworld.HelloRequest\032\026.helloworld.HelloRe" +
-      "ply\"\000B7\n\"com.ohayoo.whitebird.generate.g" +
-      "rpcB\017GreetingServiceP\001b\006proto3"
+      "ply\"\000B9\n$io.github.viakiba.hinx.generate" +
+      ".grpcB\017GreetingServiceP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

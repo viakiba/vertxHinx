@@ -9,7 +9,7 @@ import io.github.viakiba.hinx.data.client.RedisService;
 import io.github.viakiba.hinx.enums.DataType;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-23
  */
 public class DataSystemService implements SystemServiceImpl {

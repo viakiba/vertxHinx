@@ -1,7 +1,7 @@
 package io.github.viakiba.hinx.player.enums;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-26
  */
 public enum AttributeEnum {

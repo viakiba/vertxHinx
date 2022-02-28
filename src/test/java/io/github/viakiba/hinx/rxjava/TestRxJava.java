@@ -7,7 +7,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import org.testng.annotations.Test;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-28
  */
 public class TestRxJava {

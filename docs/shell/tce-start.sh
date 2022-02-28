@@ -1,3 +1,0 @@
-#!/bin/sh
-cd /opt/tiger/hinx/
-java -cp "hinx-1.0-SNAPSHOT.jar:libs/*" -Dconfig=config/server.properties -Dvertx.zookeeper.config=./config/cluster/zookeeper.json -Dfile.encoding=UTF8 -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:SurvivorRatio=8 -XX:MaxGCPauseMillis=100 -XX:ParallelGCThreads=8 -XX:G1NewSizePercent=60 -XX:G1MaxNewSizePercent=90 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/opt/tiger/hinx/dump -Xms256m -Xmx256m -Xss512k -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m -server com.ohayoo.whitebird.Start

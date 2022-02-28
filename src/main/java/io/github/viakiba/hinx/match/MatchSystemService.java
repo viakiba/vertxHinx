@@ -3,7 +3,7 @@ package io.github.viakiba.hinx.match;
 import io.github.viakiba.hinx.boot.SystemServiceImpl;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-23
  */
 public class MatchSystemService implements SystemServiceImpl {

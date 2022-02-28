@@ -13,3 +13,13 @@ into '/usr/local/include/'.
 
 Please refer to our official github site for more installation instructions:
   https://github.com/protocolbuffers/protobuf
+
+https://github.com/protocolbuffers/protobuf/releases
+
+
+./protoc -I=. --java_out=../../src/main/java *.proto
+./protoc --plugin=protoc-gen-grpc-java=protoc-gen-grpc-java-1.44.1-osx-x86_64 --grpc-java_out=../../src/main/java *.proto
+
+https://github.com/grpc/grpc-java/blob/master/compiler/README.md
+
+protoc.exe --plugin=protoc-gen-grpc-java=protocGenGrpcJava1.39.0-64.exe --grpc-java_out=../../src/main/java *.proto

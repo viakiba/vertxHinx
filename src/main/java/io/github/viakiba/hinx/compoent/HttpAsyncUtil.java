@@ -16,7 +16,7 @@ import java.util.Set;
  * 基于 vertx 的 http 异步请求客户端
  * 同步请求
  * @see cn.hutool.http.HttpUtil
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-08-10
  */
 public class HttpAsyncUtil {

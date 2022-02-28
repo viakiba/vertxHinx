@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 /**
  *  依赖实现:  https://github.com/netty/netty-incubator-codec-quic
  *  QUIC 介绍: https://zh.wikipedia.org/wiki/QUIC
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-23
  */
 @Slf4j

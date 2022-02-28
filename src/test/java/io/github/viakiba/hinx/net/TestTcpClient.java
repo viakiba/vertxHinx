@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-27
  */
 public class TestTcpClient {

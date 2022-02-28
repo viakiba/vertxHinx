@@ -25,7 +25,7 @@ import io.netty.util.NetUtil;
 import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-08-27
  */
 @Slf4j

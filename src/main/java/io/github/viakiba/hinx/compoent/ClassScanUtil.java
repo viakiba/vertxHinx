@@ -18,15 +18,15 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-26
  */
 public class ClassScanUtil {
     private static Logger logger = LoggerFactory.getLogger(ClassScanUtil.class);
 
     public static void main(String[] args){
-        Set<Class<?>> clses= getClzFromPkg("com.ohayoo", BizServiceAnnotate.class);
-        System.out.println(clses);
+        Set<Class<?>> clses= getClzFromPkg("io.github.viakiba.hinx", BizServiceAnnotate.class);
+        logger.debug( JsonUtil.obj2Str(clses) );
     }
 
     public static Set<Class<?>> getClzFromPkg(String pkg,Class anClazz) {

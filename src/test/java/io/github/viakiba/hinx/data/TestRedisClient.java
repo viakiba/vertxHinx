@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-28
  */
 @Slf4j

@@ -4,12 +4,12 @@
 		templatesPath = "src\main\resources\"
 		excelRootPath = "src\main\resources\"
 		genBeanPath = "src\main\resources\"
-		packageName = "com.ohayoo.heromaster.excel.model"
-		afterReadDoPackage = "com.ohayoo.heromaster.excel.AfterReadDo"
-		convertPackage = "com.ohayoo.heromaster.excel.convert.*"
+		packageName = "io.github.viakiba.hinx.excel.model"
+		afterReadDoPackage = "org.viakiba.exceltool.AfterReadDo"
+		convertPackage = "org.viakiba.exceltool.convert.*"
 		firstColsData = "1"
 >
 	<file name="DataExcel.xlsx">
-		<sheet class="com.ohayoo.common.excel.model.DataExcel" genOver="0"/>
+		<sheet class="io.github.viakiba.hinx.excel.model.DataExcel" genOver="0"/>
 	</file>
 </scripts>

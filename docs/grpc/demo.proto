@@ -3,7 +3,7 @@ package helloworld;
 
 option java_multiple_files = true;
 
-option java_package = "com.ohayoo.whitebird.generate.grpc.service";
+option java_package = "io.github.viakiba.hinx.generate.grpc";
 option java_outer_classname = "GreetingService";
 
 // The greeting service definition.

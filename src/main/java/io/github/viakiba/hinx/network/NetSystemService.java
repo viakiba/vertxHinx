@@ -6,7 +6,7 @@ import io.github.viakiba.hinx.enums.NetType;
 import io.github.viakiba.hinx.network.verticle.*;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-23
  */
 public class NetSystemService implements SystemServiceImpl {

@@ -8,7 +8,7 @@ import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-26
  */
 public interface IDBService {

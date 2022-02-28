@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import static io.github.viakiba.hinx.compoent.ClassScanUtil.getClzFromPkg;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-27
  */
 @Slf4j

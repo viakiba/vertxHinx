@@ -3,7 +3,7 @@ package io.github.viakiba.hinx.compoent;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-08-10
  */
 @Slf4j

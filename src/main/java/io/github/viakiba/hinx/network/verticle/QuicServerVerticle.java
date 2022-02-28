@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
  *  QUIC 介绍: https://zh.wikipedia.org/wiki/QUIC
  *  例子: https://github.com/netty/netty-incubator-codec-quic/tree/main/src/test/java/io/netty/incubator/codec/quic
  *  依赖区分操作系统
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-07-23
  */
 @Slf4j

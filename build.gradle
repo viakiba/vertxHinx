@@ -50,8 +50,13 @@ dependencies {
     implementation 'com.google.guava:guava:30.1.1-jre'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.4'
     implementation 'com.fasterxml.jackson.core:jackson-core:2.12.4'
-    implementation 'com.google.protobuf:protobuf-java:3.17.3'
-    implementation 'com.google.protobuf:protobuf-java-util:3.17.3'
+//    implementation 'com.google.protobuf:protobuf-java:3.17.3'
+    // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
+    implementation group: 'com.google.protobuf', name: 'protobuf-java', version: '3.19.4'
+//    implementation 'com.google.protobuf:protobuf-java-util:3.17.3'
+    // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java-util
+    runtimeOnly group: 'com.google.protobuf', name: 'protobuf-java-util', version: '3.19.4'
+
     implementation 'com.github.l42111996:kcp-base:1.6'
     implementation 'com.github.l42111996:kcp-lockStepSynchronization:1.6'
     implementation 'com.github.l42111996:kcp-fec:1.6'
@@ -64,6 +69,11 @@ dependencies {
     implementation 'javax.annotation:javax.annotation-api:1.3.1'
 
     implementation 'io.github.viakiba:exceltool:1.0.0'
+    testImplementation group: 'org.testng', name: 'testng', version: '7.5'
+    implementation group: 'io.grpc', name: 'grpc-stub', version: '1.44.1'
+    implementation group: 'cn.hutool', name: 'hutool-core', version: '5.7.21'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+
 
     //quic  分类器依赖 https://github.com/netty/netty-incubator-codec-quic
     //implementation 'io.netty.incubator:netty-incubator-codec-quic:0.0.17.Final'

@@ -10,7 +10,7 @@ import io.vertx.grpc.VertxChannelBuilder;
 import org.testng.annotations.Test;
 
 /**
- * @author huangpeng.12@bytedance.com
+ * @author viakiba@gmail.com
  * @createTime 2021-08-02
  */
 public class TestGrpc {
