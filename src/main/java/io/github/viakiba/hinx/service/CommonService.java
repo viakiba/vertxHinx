@@ -55,6 +55,10 @@ public class CommonService extends BaseService {
             login(player);
             return ;
         }
+        if(messageId == 10001){
+            login1(player);
+            return ;
+        }
         throw new Exception("CommonService#handler 此方法为实现"+messageId);
     }
 
@@ -62,4 +66,7 @@ public class CommonService extends BaseService {
         player.send("xxxxxx",1);
     }
 
+    private void login1( IPlayer player) {
+        player.send("xxxxxx",1);
+    }
 }

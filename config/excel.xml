@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <scripts
-		templatesName = "ClassBean.ftl"
-		templatesPath = "src\main\resources\"
-		excelRootPath = "src\main\resources\"
-		genBeanPath = "src\main\resources\"
+		templatesName = "Java.ftl"
+		templatesPath = "/Users/dd/Documents/vertxHinx/src/main/resources/"
+		excelRootPath = "/Users/dd/Documents/vertxHinx/config/excel/"
+		genBeanPath = "/Users/dd/Documents/vertxHinx/src/main/java/io/github/viakiba/hinx/excel/model/"
 		packageName = "io.github.viakiba.hinx.excel.model"
 		afterReadDoPackage = "org.viakiba.exceltool.AfterReadDo"
 		convertPackage = "org.viakiba.exceltool.convert.*"

@@ -1,1 +1,1 @@
-protoc.exe -I=. --java_out=../../src/main/java *.proto
+./protoc --descriptor_set_out=../../config/message.desc -I=. --java_out=../../src/main/java *.proto

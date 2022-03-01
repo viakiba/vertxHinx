@@ -27,6 +27,7 @@ public interface IProtoMessage extends IMessage {
     /**
      * @description 消息识别路由
      */
+    @Deprecated // 可以 通过 protobuf 生成的 desc 文件 进行识别 已经实现
     default Map<Integer, Message.Builder> getProtoMessageRecognize() throws Exception {
         throw new Exception("IProtoMessage#getProtoMessageRecognize 此方法为实现 ");
     }

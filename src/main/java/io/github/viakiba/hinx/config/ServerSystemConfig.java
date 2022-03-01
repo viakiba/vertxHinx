@@ -5,6 +5,7 @@ import io.github.viakiba.hinx.boot.SystemServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 
@@ -20,7 +21,7 @@ public class ServerSystemConfig implements SystemServiceImpl {
         try {
             String serverConfigPath = System.getProperty("config");
             Properties properties = new Properties();
-            BufferedInputStream inputStreamBase = new BufferedInputStream(new FileInputStream(serverConfigPath));
+            BufferedInputStream inputStreamBase = new BufferedInputStream(new FileInputStream("config"+ File.separator+serverConfigPath));
             properties.load(inputStreamBase);
             properties.keySet().parallelStream().forEach(x ->{
                 Object o = properties.get(x);
