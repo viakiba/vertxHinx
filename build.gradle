@@ -77,6 +77,10 @@ dependencies {
 
     //quic  分类器依赖 https://github.com/netty/netty-incubator-codec-quic
     //implementation 'io.netty.incubator:netty-incubator-codec-quic:0.0.17.Final'
+
+    // https://mvnrepository.com/artifact/org.reflections/reflections
+    implementation group: 'org.reflections', name: 'reflections', version: '0.10.2'
+
 }
 
 test.useTestNG()
